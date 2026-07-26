@@ -32,6 +32,23 @@
    A null renders a visible [[FILL IN]] rather than a guess, because inventing
    market data on a licensed agent's site is not a placeholder, it is a false
    statement. Fill these from Stellar MLS and update `PRICES_AS_OF`.
+
+   ---------------------------------------------------------------------------
+   HERO PHOTOS, READ BEFORE SWAPPING ONE
+   ---------------------------------------------------------------------------
+   Every hero in PHOTOS below is a freely licensed photograph from Wikimedia
+   Commons, and the license is either CC BY or CC BY-SA. Both require the
+   author to be credited wherever the work appears. That is what the credit
+   line in the bottom left corner of each hero is, and it is not optional
+   decoration. If you replace an image, replace its PHOTOS entry in the same
+   commit or the site is out of compliance with the license.
+
+   `where` is set only on the images that are NOT of the neighborhood itself.
+   Four areas have no usable free photograph in existence, so they carry a
+   representative Florida image instead, and the credit line names the real
+   place so the page never implies the picture was taken there. Alt text on
+   those is written generically for the same reason. Replacing them with
+   Jennifer's own photography is the single biggest upgrade available here.
    ========================================================================== */
 
 'use strict';
@@ -61,6 +78,116 @@ const GROUPS = [
   { key: 'central', title: 'Central Bradenton',
     intro: 'The original city. Historic housing along the river, a working downtown, and the arts district.' },
 ];
+
+/* Hero photograph per area. `alt` describes the picture, never the people who
+   live there. `where` names the real subject on the four images that are not
+   of the neighborhood itself, and the credit line prints it. */
+const PHOTOS = {
+  'anna-maria-island': {
+    alt: 'Sea oats above white sand on Anna Maria Island, with the Gulf beyond.',
+    author: 'Ann Caron', license: 'CC BY-SA 3.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Tranquil_Anna_Maria_Island.jpg' },
+  'holmes-beach': {
+    alt: 'The sun going down over the Gulf of Mexico off Holmes Beach.',
+    author: 'Bobpinz', license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+    page: 'https://commons.wikimedia.org/wiki/File:SunsetHolmesBeachFlorida.jpg' },
+  'bradenton-beach': {
+    alt: 'The coquina rock jetty at the south end of the island, near Longboat Pass.',
+    author: 'Gregory Urbano', license: 'CC BY 2.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/2.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Coquina_Beach_Jetty_(28091850649).jpg' },
+  'longboat-key': {
+    alt: 'Open Gulf water and white sand along the beach at Longboat Key.',
+    author: 'Guspederson', license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Longboat-Key_Beach.jpg' },
+  'cortez': {
+    alt: 'A frame cottage behind a picket fence in the Cortez historic district.',
+    author: 'Ebyabe', license: 'CC BY-SA 3.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Cortez_FL_HD02.jpg' },
+  'perico-island': {
+    alt: 'Mangrove shoreline and open water at Robinson Preserve, with the Skyway on the horizon.',
+    author: 'Mark Hewitt', license: 'CC BY-SA 3.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Robinson_Perserve_-_panoramio.jpg' },
+  'palma-sola': {
+    alt: 'The lake at Palma Sola Botanical Park, ringed with trees.',
+    author: 'Jrussell55265', license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Palma_Sola_Botanical_Park_Lake_Overlook.png' },
+  'west-bradenton': {
+    alt: 'Palms along the water in Bradenton at sunset.',
+    author: 'Joseph Gage', license: 'CC BY-SA 2.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Sunset_in_Bradenton,_Florida._(53458847305).jpg' },
+  'bayshore-gardens': {
+    alt: 'Shallow water and shoreline on Sarasota Bay.',
+    where: 'Sarasota Bay from Quick Point, Longboat Key',
+    author: 'Ryan Hodnett', license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Sarasota_Bay_-_Longboat_Key,_Florida_2023-01-24.jpg' },
+  'whitfield': {
+    alt: 'A 1920s Mediterranean revival house behind a gate in Whitfield Estates.',
+    author: 'Ebyabe', license: 'CC BY-SA 3.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Sarasota_FL_Whitfield_Estate04.jpg' },
+  'lakewood-ranch': {
+    alt: 'A Florida golf community laid out around a lake, seen from the air.',
+    where: 'Lake Nona, Orlando',
+    author: 'Angiesbc', license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Lake_Nona_Golf_Course.jpg' },
+  'greyhawk-landing': {
+    alt: 'Wetland and preserve under an open Florida sky.',
+    where: 'Emerson Point Preserve, Palmetto',
+    author: 'Paul R. Burley', license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Emerson_Point_Preserve_Palmetto_Florida_2019-2541.jpg' },
+  'mill-creek': {
+    alt: 'Live oaks hung with Spanish moss along the shore of Lake Manatee.',
+    author: 'Ebyabe', license: 'CC BY-SA 3.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Lake_Manatee_SP_lake01.JPG' },
+  'waterlefe': {
+    alt: 'The lift bridge over the Manatee River, seen from the water.',
+    author: 'Paul R. Burley', license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Manatee_River_Lift_Bridge_Bradenton_Florida_2019-2569.jpg' },
+  'river-strand': {
+    alt: 'A golf course fairway and water at sunrise.',
+    where: 'Remington Golf Club, Kissimmee',
+    author: 'Chad Sparkes', license: 'CC BY 2.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/2.0',
+    page: 'https://commons.wikimedia.org/wiki/File:1st_Tee_Sunrise_(33977722393).jpg' },
+  'palmetto': {
+    alt: 'Brick storefronts along 10th Avenue in downtown Palmetto.',
+    author: 'Paul R. Burley', license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+    page: 'https://commons.wikimedia.org/wiki/File:10th_Avenue_Palmetto_Florida_2019-12019.jpg' },
+  'parrish': {
+    alt: 'The Fort Hamer Bridge over the Manatee River, seen from the boat ramp.',
+    author: 'Mykhaylovdimitriy', license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Fort_Hamer_Bridge.jpg' },
+  'ellenton': {
+    alt: 'A boardwalk over a pond, shaded by oaks, at Rocky Bluff in Ellenton.',
+    author: 'Paul R. Burley', license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Rocky_Bluff_Library_Ellenton_Florida_2019-12006.jpg' },
+  'downtown-bradenton': {
+    alt: 'Palms along the Riverwalk on the Manatee River in downtown Bradenton.',
+    author: 'Sanibel sun', license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Bradenton_Riverwalk.jpg' },
+  'riverview-boulevard': {
+    alt: 'A historic bungalow under oak canopy in Bradenton.',
+    author: 'Ebyabe', license: 'CC BY-SA 3.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/3.0',
+    page: 'https://commons.wikimedia.org/wiki/File:Bradenton_FL_Richardson_House01.jpg' },
+};
 
 const DATA = [
   /* ------------------------------------------------------------ islands -- */
@@ -679,7 +806,6 @@ function nav(prefix) {
         <a href="${prefix}buyers.html">Buyers</a>
         <a href="${prefix}sellers.html">Sellers</a>
         <a href="${prefix}neighborhoods.html" aria-current="page">Neighborhoods</a>
-        <a href="${prefix}new-construction.html">New Construction</a>
         <a href="${prefix}relocate.html">Relocating</a>
         <a href="${prefix}about.html">About</a>
         <a href="${prefix}index.html#contact">Contact</a>
@@ -700,24 +826,23 @@ function footer(prefix) {
   <footer class="footer">
     <div class="wrap">
       <div class="footer__top">
-        <div>
+        <div class="reveal" style="--d:0s">
           <p class="footer__brand-name">Jennifer [[LAST]]</p>
           <p class="footer__tagline">
             Buying and selling across Bradenton, the barrier islands, and
             Lakewood Ranch.
           </p>
         </div>
-        <div>
+        <div class="reveal" style="--d:.08s">
           <p class="footer__title">Explore</p>
           <ul class="footer__list">
             <li><a href="${prefix}buyers.html">Buyers</a></li>
             <li><a href="${prefix}sellers.html">Sellers</a></li>
             <li><a href="${prefix}neighborhoods.html">Neighborhoods</a></li>
-            <li><a href="${prefix}new-construction.html">New Construction</a></li>
             <li><a href="${prefix}relocate.html">Relocating</a></li>
           </ul>
         </div>
-        <div>
+        <div class="reveal" style="--d:.16s">
           <p class="footer__title">More</p>
           <ul class="footer__list">
             <li><a href="${prefix}about.html">About</a></li>
@@ -727,7 +852,7 @@ function footer(prefix) {
             <li><a href="${prefix}index.html#contact">Contact</a></li>
           </ul>
         </div>
-        <div class="footer__contact">
+        <div class="footer__contact reveal" style="--d:.24s">
           <p class="footer__title">Contact</p>
           <address>
             <a href="tel:[[TEL]]">[[PHONE]]</a><br />
@@ -744,7 +869,7 @@ function footer(prefix) {
       </div>
 
       <div class="footer__bottom">
-        <p class="footer__legal">
+        <p class="footer__legal reveal">
           &copy; <span class="js-year"></span> Jennifer [[LAST]], Licensed Real
           Estate Agent. Florida License [[LICENSE]]. Brokered by [[FIRM]].
           Neighborhood descriptions are general guidance about places and are
@@ -753,7 +878,7 @@ function footer(prefix) {
           change or prior sale. This site is not intended to solicit properties
           already listed with another broker.
         </p>
-        <p class="footer__legal footer__eho">
+        <p class="footer__legal footer__eho reveal" style="--d:.1s">
           <span class="eho-mark" aria-hidden="true"></span>
           <span>
             Equal Housing Opportunity. I am committed to the letter and the
@@ -780,6 +905,10 @@ function areaPage(a) {
   const description = `What to know about buying or selling in ${a.name}, ${a.county}. ` +
     `Housing styles, flood and insurance considerations, and what the area is actually like.`;
 
+  const photo = PHOTOS[a.slug];
+  if (!photo) throw new Error(`build-neighborhoods: no PHOTOS entry for "${a.slug}"`);
+  const heroSrc = `assets/neighborhoods/${a.slug}.webp`;
+
   const ld = `  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -797,7 +926,15 @@ function areaPage(a) {
         "name": "${jsonEsc(a.name)}",
         "description": "${jsonEsc(a.intro[0])}",
         "geo": { "@type": "GeoCoordinates", "latitude": ${a.lat}, "longitude": ${a.lng} },
-        "containedInPlace": { "@type": "AdministrativeArea", "name": "${jsonEsc(a.county)}, Florida" }
+        "containedInPlace": { "@type": "AdministrativeArea", "name": "${jsonEsc(a.county)}, Florida" }${photo.where ? '' : `,
+        "image": {
+          "@type": "ImageObject",
+          "contentUrl": "https://${DOMAIN}/${heroSrc}",
+          "caption": "${jsonEsc(photo.alt)}",
+          "creditText": "${jsonEsc(photo.author)}",
+          "license": "${photo.licenseUrl}",
+          "acquireLicensePage": "${photo.page}"
+        }`}
       },
       {
         "@type": "FAQPage",
@@ -822,8 +959,8 @@ ${a.faq.map(([q, ans]) => `          {
   return head({
     title, description,
     canonical: `neighborhoods/${a.slug}.html`,
-    image: 'assets/hero-neighborhoods.webp',
-    imageAlt: 'The Gulf Coast of Florida seen from above, with palms and white sand.',
+    image: heroSrc,
+    imageAlt: photo.alt,
     extraLd: ld,
   }) + `
 <body>
@@ -832,15 +969,19 @@ ${nav('../')}
   <main id="main" tabindex="-1">
 
   <section class="page-hero">
-    <img class="page-hero__img" src="../assets/hero-neighborhoods.webp"
+    <img class="page-hero__img" src="../${heroSrc}"
          width="1800" height="1013" fetchpriority="high"
-         alt="The Gulf Coast of Florida seen from above, with palms and white sand." />
+         alt="${esc(photo.alt)}" />
     <div class="page-hero__veil" aria-hidden="true"></div>
     <div class="page-hero__content">
       <p class="eyebrow reveal">${esc(group ? group.title : 'Manatee County')}</p>
       <h1 class="page-hero__title reveal" style="--d:.08s">${esc(a.name)}</h1>
       <p class="page-hero__lede reveal" style="--d:.18s">${esc(a.county)}, Florida</p>
     </div>
+    <!-- Required attribution. CC BY and CC BY-SA both oblige us to name the
+         author with the work. Do not remove it, and do not move it into a
+         page the photo does not appear on. -->
+    <p class="page-hero__credit">${photo.where ? `${esc(photo.where)} &middot; ` : ''}Photo <a href="${photo.page}" rel="noopener nofollow" target="_blank">${esc(photo.author)}</a>, via Wikimedia Commons &middot; <a href="${photo.licenseUrl}" rel="license noopener nofollow" target="_blank">${esc(photo.license)}</a></p>
   </section>
 
   <nav class="wrap" aria-label="Breadcrumb" style="padding-top:2rem">
@@ -856,7 +997,7 @@ ${nav('../')}
   <section class="section section--tight">
     <div class="wrap">
       <div class="prose">
-${a.intro.map((p, i) => `        <p class="lede-lg reveal"${i === 0 ? '' : ' hidden'} style="--d:.05s">${esc(p)}</p>`)[0]}
+        <p class="lede-lg reveal" style="--d:.05s">${esc(a.intro[0])}</p>
 ${a.intro.slice(1).map((p, i) => `        <p class="reveal" style="--d:.${12 + i * 6}s">${esc(p)}</p>`).join('\n')}
       </div>
 

@@ -43,6 +43,15 @@
   --radius: 3px;
 }
 
+/* A custom property only animates if the browser knows its type. Without this
+   registration --pz would jump between values instead of tweening, and the
+   hover scale on card imagery would snap. */
+@property --pz {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 1;
+}
+
 /* ============================================================ base ======= */
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -455,9 +464,12 @@ a:hover { color: var(--ink); }
   overflow: hidden;
   padding-top: 76px;
 }
+/* Oversized on purpose. js/reveal.js drifts this against the scroll, so it
+   needs bleed above and below or the translate would expose the edges. */
 .page-hero__img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%; object-fit: cover;
+  position: absolute; left: 0; top: -60px;
+  width: 100%; height: calc(100% + 120px);
+  object-fit: cover;
 }
 .page-hero__veil {
   position: absolute; inset: 0;
@@ -469,6 +481,47 @@ a:hover { color: var(--ink); }
   margin-inline: auto;
   text-align: center;
 }
+/* Photo credit, bottom left of the hero.
+   Every neighborhood hero is a freely licensed photograph, and CC BY and
+   CC BY-SA both require attribution to be visible with the work. Small and
+   quiet is fine; absent is a license violation. It sits on the gutter line
+   rather than hard against the edge, and it does not drift with the image,
+   so it stays legible while the hero parallaxes. */
+.page-hero__credit {
+  position: absolute; z-index: 2;
+  left: max(1.5rem, calc((100% - var(--wrap)) / 2));
+  right: max(1.5rem, calc((100% - var(--wrap)) / 2));
+  bottom: .75rem;
+  margin: 0;
+  font-family: var(--ui);
+  font-size: .6rem;
+  font-weight: 400;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: rgba(239, 238, 236, .72);
+  /* The veil cannot promise a dark pixel under this corner: some heroes are a
+     white picket fence or a sand beach right where the credit sits. The shadow
+     is what keeps required attribution readable on every one of them. */
+  text-shadow: 0 1px 3px rgba(15, 18, 17, .75);
+  text-align: left;
+  text-wrap: balance;
+}
+.page-hero__credit a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(239, 238, 236, .22);
+  transition: color .25s var(--ease), border-color .25s var(--ease);
+}
+.page-hero__credit a:hover,
+.page-hero__credit a:focus-visible {
+  color: rgba(239, 238, 236, .92);
+  border-bottom-color: rgba(239, 238, 236, .55);
+}
+@media (max-width: 640px) {
+  .page-hero__credit { font-size: .55rem; letter-spacing: .06em; }
+}
+
 .page-hero__title {
   font-size: clamp(2.1rem, 5.2vw, 3.9rem);
   max-width: 20ch; margin-inline: auto;
@@ -493,6 +546,9 @@ a:hover { color: var(--ink); }
    custom property for stagger. Adding a motion means adding a class here, not
    touching JavaScript. */
 
+/* Entrances replay by default: an element animates out as it leaves the
+   viewport and back in on return, so the page is alive scrolling either
+   direction. Add .reveal--once to anything that should settle permanently. */
 .reveal {
   opacity: 0;
   transform: translateY(26px);
@@ -501,6 +557,10 @@ a:hover { color: var(--ink); }
   will-change: opacity, transform;
 }
 .reveal.is-in { opacity: 1; transform: none; }
+
+/* Retained as a no-op so older markup keeps working. Repeat is now the
+   default, and .reveal--once is the opt out. */
+.reveal--repeat {}
 
 /* Photography wipes rather than slides. */
 .reveal--mask {
@@ -541,12 +601,29 @@ a:hover { color: var(--ink); }
 }
 .reveal--rule.is-in { transform: scaleX(1); }
 
-/* Slow drift on section imagery while it passes through the viewport.
-   js/reveal.js writes --p (0 to 1) as the element crosses. */
-.parallax { --p: .5; }
-.parallax__inner {
+/* ---- parallax ---------------------------------------------------------- */
+
+/* js/reveal.js tags these with .px and writes --py in pixels as the element
+   crosses the viewport. Everything that also scales on hover composes through
+   --pz rather than declaring its own transform, so the two never fight. */
+.px {
   will-change: transform;
-  transform: translate3d(0, calc((var(--p) - .5) * var(--parallax-range, 46px)), 0);
+  transform: translate3d(0, var(--py, 0px), 0) scale(var(--pz, 1));
+}
+
+/* ---- scroll progress --------------------------------------------------- */
+
+/* A hairline tracking read position. Cheap, and it keeps something moving
+   even through a stretch of pure text. */
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 200;
+  height: 2px;
+  background: var(--gulf-d);
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -555,7 +632,8 @@ a:hover { color: var(--ink); }
   .reveal--scale,
   .reveal--rule { opacity: 1; transform: none; clip-path: none; transition: none; }
   .reveal--lines .lines__line > span { transform: none; transition: none; }
-  .parallax__inner { transform: none; }
+  .px { transform: none; }
+  .scroll-progress { display: none; }
   .hero__scroll::after { animation: none; }
 }
 
@@ -586,11 +664,16 @@ a:hover { color: var(--ink); }
   color: inherit;
 }
 .path__media { aspect-ratio: 4 / 3; overflow: hidden; background: var(--bone-2); }
+/* Slightly oversized so the parallax drift never shows an edge. Hover scale
+   goes through --pz so it composes with the drift rather than replacing it. */
 .path__media img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform 1.1s var(--ease);
+  width: 100%; height: calc(100% + 34px);
+  margin-top: -17px;
+  object-fit: cover;
+  --pz: 1;
+  transition: --pz 1.1s var(--ease), transform 1.1s var(--ease);
 }
-.path:hover .path__media img { transform: scale(1.05); }
+.path:hover .path__media img { --pz: 1.05; }
 .path__body { padding: 1.9rem 1.7rem 2.1rem; display: flex; flex-direction: column; flex: 1; }
 .path__num {
   font-family: var(--label);
@@ -654,7 +737,12 @@ a:hover { color: var(--ink); }
   border-radius: var(--radius);
   background: var(--bone-2);
 }
-.about__photo img { width: 100%; height: 100%; object-fit: cover; }
+/* Oversized for the same reason as the page hero: it drifts. */
+.about__photo img {
+  width: 100%; height: calc(100% + 42px);
+  margin-top: -21px;
+  object-fit: cover;
+}
 .about__quote {
   font-family: var(--display);
   font-size: clamp(1.5rem, 2.6vw, 2.05rem);
@@ -979,10 +1067,13 @@ input:focus, select:focus, textarea:focus {
   overflow: hidden;
 }
 .card__media img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform 1.1s var(--ease);
+  width: 100%; height: calc(100% + 26px);
+  margin-top: -13px;
+  object-fit: cover;
+  --pz: 1;
+  transition: --pz 1.1s var(--ease), transform 1.1s var(--ease);
 }
-.card:hover .card__media img { transform: scale(1.05); }
+.card:hover .card__media img { --pz: 1.05; }
 .card__tag, .modal__tag {
   position: absolute; top: .9rem; left: .9rem;
   padding: .35rem .8rem;

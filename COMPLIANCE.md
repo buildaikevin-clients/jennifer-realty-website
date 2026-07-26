@@ -137,8 +137,8 @@ Every number the site produces is an estimate and says so.
 - The footer of every page states that cost figures anywhere on the site are
   estimates for planning only and are not a quote, a loan offer, or a commitment
   to lend
-- Buyers, Sellers, Relocate and New Construction each carry a closing disclaimer
-  directing the reader to the appropriate licensed professional
+- Buyers, Sellers and Relocate each carry a closing disclaimer directing the
+  reader to the appropriate licensed professional
 - Sellers page states plainly that an agent valuation is not an appraisal
 - No neighborhood price range was invented. 17 of 20 render a visible
   `[[FILL IN]]` rather than a plausible guess
@@ -156,6 +156,42 @@ used purely as atmosphere, the same way agent sites use stock photography.
 - If any caption, alt text, or copy is ever added that could read as a claim
   about a real property, that becomes a 61J2-10.025 problem. The current alt
   text describes the scene generically and should stay that way
+
+---
+
+## Neighborhood photography and image licensing
+
+The 20 neighborhood pages carry real photographs rather than the AI footage.
+All 20 are freely licensed works from Wikimedia Commons, held in
+`assets/neighborhoods/` and recorded file by file in
+`assets/neighborhoods/CREDITS.md`.
+
+- Every image is **CC BY, CC BY-SA, CC0, or public domain**. No image is under a
+  non commercial or no derivatives license, and none was scraped from a
+  brokerage, an MLS, or another agent's site
+- **Attribution is rendered on the page**, bottom left of each hero, naming the
+  author and linking both the source file and the license. CC BY and CC BY-SA
+  require this. Removing the credit line breaks the license, so the markup
+  carries an HTML comment saying so, and the credit data lives in the same
+  `PHOTOS` block as the image path to keep the two from drifting apart
+- **Four heroes are representative rather than local.** Lakewood Ranch,
+  Greyhawk Landing, River Strand, and Bayshore Gardens have no freely licensed
+  photograph of the community itself. Those pages show another Florida location,
+  their credit line names it explicitly, their alt text is generic, and they are
+  excluded from the `image` property of the page's Place schema so the site
+  never asserts, to a person or to a search engine, that the photo depicts that
+  neighborhood. Replacing them with Jennifer's own photography removes the issue
+- Several heroes show private homes photographed from the public street in
+  designated historic districts. Alt text describes the architecture and never
+  the occupants, no street address appears in any alt text or caption, and
+  nothing implies a property is listed, sold, or represented by Jennifer
+
+Open:
+
+- [ ] Replace the four representative images with Jennifer's own photos
+- [ ] Confirm Jennifer is comfortable that the historic district homes shown
+      (Cortez, Whitfield Estates, Riverview Boulevard) are photographed from
+      public rights of way and are not current or former clients' properties
 
 ---
 

@@ -29,7 +29,6 @@ const OVERRIDES = {
   'buyers.html':           { priority: '0.9', changefreq: 'monthly' },
   'sellers.html':          { priority: '0.9', changefreq: 'monthly' },
   'relocate.html':         { priority: '0.9', changefreq: 'monthly' },
-  'new-construction.html': { priority: '0.8', changefreq: 'monthly' },
   'neighborhoods.html':    { priority: '0.8', changefreq: 'monthly' },
   'about.html':            { priority: '0.7', changefreq: 'yearly' },
   'accessibility.html':    { priority: '0.3', changefreq: 'yearly' },

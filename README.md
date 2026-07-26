@@ -56,7 +56,6 @@ index.html               home: scrub hero, Start Here, listings, about, guide, c
 buyers.html              payment estimator, 3 step buyer form, 5 FAQs
 sellers.html             3 step valuation form, process, 5 FAQs
 relocate.html            for out of state buyers, gated guide, 4 FAQs
-new-construction.html    builder contracts, CDD, model home registration
 neighborhoods.html       generated hub
 neighborhoods/           20 generated area pages
 about.html               bio, headshots, credentials

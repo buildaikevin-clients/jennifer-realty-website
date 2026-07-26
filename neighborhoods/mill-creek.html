@@ -19,12 +19,12 @@
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://[[DOMAIN]]/neighborhoods/mill-creek.html" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:image" content="https://[[DOMAIN]]/assets/hero-neighborhoods.webp" />
-  <meta property="og:image:alt" content="The Gulf Coast of Florida seen from above, with palms and white sand." />
+  <meta property="og:image" content="https://[[DOMAIN]]/assets/neighborhoods/mill-creek.webp" />
+  <meta property="og:image:alt" content="Live oaks hung with Spanish moss along the shore of Lake Manatee." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Mill Creek Homes for Sale | Bradenton Area | Jennifer [[LAST]]" />
   <meta name="twitter:description" content="What to know about buying or selling in Mill Creek, Manatee County. Housing styles, flood and insurance considerations, and what the area is actually like." />
-  <meta name="twitter:image" content="https://[[DOMAIN]]/assets/hero-neighborhoods.webp" />
+  <meta name="twitter:image" content="https://[[DOMAIN]]/assets/neighborhoods/mill-creek.webp" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -47,7 +47,15 @@
         "name": "Mill Creek",
         "description": "Mill Creek is a residential community in east Manatee County near Lakewood Ranch, built out mostly through the 1990s and 2000s. What distinguishes it from most of its neighbors is lot size. Parcels here run considerably larger than the typical master planned subdivision.",
         "geo": { "@type": "GeoCoordinates", "latitude": 27.4744, "longitude": -82.3873 },
-        "containedInPlace": { "@type": "AdministrativeArea", "name": "Manatee County, Florida" }
+        "containedInPlace": { "@type": "AdministrativeArea", "name": "Manatee County, Florida" },
+        "image": {
+          "@type": "ImageObject",
+          "contentUrl": "https://[[DOMAIN]]/assets/neighborhoods/mill-creek.webp",
+          "caption": "Live oaks hung with Spanish moss along the shore of Lake Manatee.",
+          "creditText": "Ebyabe",
+          "license": "https://creativecommons.org/licenses/by-sa/3.0",
+          "acquireLicensePage": "https://commons.wikimedia.org/wiki/File:Lake_Manatee_SP_lake01.JPG"
+        }
       },
       {
         "@type": "FAQPage",
@@ -90,7 +98,6 @@
         <a href="../buyers.html">Buyers</a>
         <a href="../sellers.html">Sellers</a>
         <a href="../neighborhoods.html" aria-current="page">Neighborhoods</a>
-        <a href="../new-construction.html">New Construction</a>
         <a href="../relocate.html">Relocating</a>
         <a href="../about.html">About</a>
         <a href="../index.html#contact">Contact</a>
@@ -108,15 +115,19 @@
   <main id="main" tabindex="-1">
 
   <section class="page-hero">
-    <img class="page-hero__img" src="../assets/hero-neighborhoods.webp"
+    <img class="page-hero__img" src="../assets/neighborhoods/mill-creek.webp"
          width="1800" height="1013" fetchpriority="high"
-         alt="The Gulf Coast of Florida seen from above, with palms and white sand." />
+         alt="Live oaks hung with Spanish moss along the shore of Lake Manatee." />
     <div class="page-hero__veil" aria-hidden="true"></div>
     <div class="page-hero__content">
       <p class="eyebrow reveal">East County and Lakewood Ranch</p>
       <h1 class="page-hero__title reveal" style="--d:.08s">Mill Creek</h1>
       <p class="page-hero__lede reveal" style="--d:.18s">Manatee County, Florida</p>
     </div>
+    <!-- Required attribution. CC BY and CC BY-SA both oblige us to name the
+         author with the work. Do not remove it, and do not move it into a
+         page the photo does not appear on. -->
+    <p class="page-hero__credit">Photo <a href="https://commons.wikimedia.org/wiki/File:Lake_Manatee_SP_lake01.JPG" rel="noopener nofollow" target="_blank">Ebyabe</a>, via Wikimedia Commons &middot; <a href="https://creativecommons.org/licenses/by-sa/3.0" rel="license noopener nofollow" target="_blank">CC BY-SA 3.0</a></p>
   </section>
 
   <nav class="wrap" aria-label="Breadcrumb" style="padding-top:2rem">
@@ -214,24 +225,23 @@
   <footer class="footer">
     <div class="wrap">
       <div class="footer__top">
-        <div>
+        <div class="reveal" style="--d:0s">
           <p class="footer__brand-name">Jennifer [[LAST]]</p>
           <p class="footer__tagline">
             Buying and selling across Bradenton, the barrier islands, and
             Lakewood Ranch.
           </p>
         </div>
-        <div>
+        <div class="reveal" style="--d:.08s">
           <p class="footer__title">Explore</p>
           <ul class="footer__list">
             <li><a href="../buyers.html">Buyers</a></li>
             <li><a href="../sellers.html">Sellers</a></li>
             <li><a href="../neighborhoods.html">Neighborhoods</a></li>
-            <li><a href="../new-construction.html">New Construction</a></li>
             <li><a href="../relocate.html">Relocating</a></li>
           </ul>
         </div>
-        <div>
+        <div class="reveal" style="--d:.16s">
           <p class="footer__title">More</p>
           <ul class="footer__list">
             <li><a href="../about.html">About</a></li>
@@ -241,7 +251,7 @@
             <li><a href="../index.html#contact">Contact</a></li>
           </ul>
         </div>
-        <div class="footer__contact">
+        <div class="footer__contact reveal" style="--d:.24s">
           <p class="footer__title">Contact</p>
           <address>
             <a href="tel:[[TEL]]">[[PHONE]]</a><br />
@@ -258,7 +268,7 @@
       </div>
 
       <div class="footer__bottom">
-        <p class="footer__legal">
+        <p class="footer__legal reveal">
           &copy; <span class="js-year"></span> Jennifer [[LAST]], Licensed Real
           Estate Agent. Florida License [[LICENSE]]. Brokered by [[FIRM]].
           Neighborhood descriptions are general guidance about places and are
@@ -267,7 +277,7 @@
           change or prior sale. This site is not intended to solicit properties
           already listed with another broker.
         </p>
-        <p class="footer__legal footer__eho">
+        <p class="footer__legal footer__eho reveal" style="--d:.1s">
           <span class="eho-mark" aria-hidden="true"></span>
           <span>
             Equal Housing Opportunity. I am committed to the letter and the

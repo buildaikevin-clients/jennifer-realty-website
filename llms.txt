@@ -28,9 +28,6 @@
 - **Relocating** (/relocate.html). For people moving to Florida from out of
   state. Covers the real cost of carrying a home here, the order to do things
   in, and whether to rent first.
-- **New construction** (/new-construction.html). Builder contracts, CDD
-  assessments, and why a buyer must register their agent on the first visit to
-  a model home.
 - **Neighborhoods** (/neighborhoods.html). Twenty area guides covering Manatee
   County, each with local specifics rather than generic description.
 

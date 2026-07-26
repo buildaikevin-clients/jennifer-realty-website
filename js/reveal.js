@@ -1,13 +1,25 @@
 /* =============================================================================
-   Scroll animation system.
+   Scroll motion system.
 
-   One IntersectionObserver drives every entrance on the site. Adding a new
-   motion is a CSS class (see the "scroll animation" block in styles.css), not
-   new JavaScript. Stagger comes from an inline --d custom property on the
-   element, so markup controls sequencing without touching this file.
+   Three separate things, one scroll listener, one rAF, all reads before all
+   writes so nothing thrashes layout.
 
-   Exposes window.JR.observeReveals(root) so main.js can register cards that
-   are injected after page load.
+   1. ENTRANCES. Elements with .reveal animate in as they enter view. They
+      animate back OUT as they leave, and replay on re-entry, so the page is
+      alive whichever direction you scroll. Opt out per element with
+      .reveal--once for anything that should settle permanently.
+
+   2. PARALLAX. Large imagery drifts against the scroll so it is never static
+      while it is on screen. Applied automatically to page hero photos and
+      card media, so no page markup has to know about it.
+
+   3. PROGRESS. A hairline at the top of the viewport tracking read position.
+
+   Adding a new entrance motion is a CSS class, not code. See the scroll
+   animation block in styles.css.
+
+   Exposes window.JR.observeReveals(root) so main.js can register listing cards
+   that are injected after load.
    ========================================================================== */
 (function () {
   'use strict';
@@ -15,25 +27,24 @@
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------------------------------------------------------- entrances --- */
+  /* ========================================================== entrances === */
 
-  // Under reduced motion the CSS already renders everything in its final
+  // Under reduced motion the CSS already renders everything in its resting
   // state, so there is nothing to observe and no reason to pay for it.
   const io = reduce ? null : new IntersectionObserver(
     (entries) => {
-      entries.forEach((e) => {
-        // `reveal--repeat` plays in reverse on exit and replays on re-entry.
-        // Everything else fires once and is released.
-        const repeat = e.target.classList.contains('reveal--repeat');
+      for (const e of entries) {
         if (e.isIntersecting) {
           e.target.classList.add('is-in');
-          if (!repeat) io.unobserve(e.target);
-        } else if (repeat) {
+          // .reveal--once settles permanently. Everything else stays under
+          // observation so it can replay.
+          if (e.target.classList.contains('reveal--once')) io.unobserve(e.target);
+        } else {
           e.target.classList.remove('is-in');
         }
-      });
+      }
     },
-    { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+    { threshold: 0.08, rootMargin: '0px 0px -6% 0px' }
   );
 
   function observeReveals(root = document) {
@@ -41,38 +52,87 @@
     $$('.reveal', root).forEach((el) => io.observe(el));
   }
 
-  /* ----------------------------------------------------------- parallax --- */
+  /* =========================================================== parallax === */
 
-  // Writes --p (0 at the moment the element enters the bottom of the viewport,
-  // 1 as it leaves the top) so CSS can drift the inner layer. Everything runs
-  // inside one rAF and reads layout in a single pass.
-  const parallaxEls = reduce ? [] : $$('.parallax');
-  let parallaxRaf = 0;
+  /* Elements are tagged rather than hard coded so this stays additive: nothing
+     here hides anything, so a JS failure costs motion and never content.
+     `range` is how far the inner layer travels across the full pass, in px. */
+  const PARALLAX_TARGETS = [
+    { sel: '.page-hero__img',   range: 90 },
+    { sel: '.path__media img',  range: 26 },
+    { sel: '.card__media img',  range: 20 },
+    { sel: '.about__photo img', range: 34 },
+  ];
 
-  function updateParallax() {
-    parallaxRaf = 0;
-    const vh = window.innerHeight;
-    for (const el of parallaxEls) {
-      const r = el.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > vh) continue;   // off screen, skip the write
-      const p = (vh - r.top) / (vh + r.height);
-      el.style.setProperty('--p', Math.min(1, Math.max(0, p)).toFixed(4));
+  const layers = [];
+
+  function collectParallax(root = document) {
+    if (reduce) return;
+    for (const t of PARALLAX_TARGETS) {
+      for (const el of $$(t.sel, root)) {
+        if (el.dataset.pxOn) continue;          // already registered
+        el.dataset.pxOn = '1';
+        el.classList.add('px');
+        // Position is driven by the container, not the image, because the image
+        // is deliberately taller than its frame and its own rect would give a
+        // slightly wrong crossing point.
+        layers.push({ el, track: el.parentElement || el, range: t.range });
+      }
     }
   }
 
-  function onScroll() {
-    if (parallaxRaf) return;
-    parallaxRaf = requestAnimationFrame(updateParallax);
+  /* ========================================================== progress ==== */
+
+  let bar = null;
+  function makeProgressBar() {
+    if (reduce) return;
+    bar = document.createElement('div');
+    bar.className = 'scroll-progress';
+    bar.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(bar);
   }
 
-  /* --------------------------------------------------------- count ups --- */
+  /* ============================================================== loop ==== */
 
-  // Any [data-count] inside a group counts up once when the group first
-  // appears. Under reduced motion the number is simply written.
-  function initCounters() {
-    $$('[data-count-group]').forEach((group) => {
+  let raf = 0;
+
+  function frame() {
+    raf = 0;
+    const vh = window.innerHeight;
+
+    // --- read pass -------------------------------------------------------
+    const writes = [];
+    for (const l of layers) {
+      const r = l.track.getBoundingClientRect();
+      if (r.bottom < -40 || r.top > vh + 40) continue;   // off screen, skip
+      // 0 as the element enters the bottom, 1 as it clears the top.
+      const p = (vh - r.top) / (vh + r.height);
+      writes.push([l, Math.min(1, Math.max(0, p))]);
+    }
+
+    const doc = document.documentElement;
+    const scrollable = doc.scrollHeight - vh;
+    const progress = scrollable > 0 ? doc.scrollTop / scrollable : 0;
+
+    // --- write pass ------------------------------------------------------
+    for (const [l, p] of writes) {
+      l.el.style.setProperty('--py', ((p - 0.5) * l.range).toFixed(1) + 'px');
+    }
+    if (bar) bar.style.transform = `scaleX(${Math.min(1, Math.max(0, progress)).toFixed(4)})`;
+  }
+
+  function onScroll() {
+    if (raf) return;
+    raf = requestAnimationFrame(frame);
+  }
+
+  /* ========================================================== count ups === */
+
+  function initCounters(root = document) {
+    $$('[data-count-group]', root).forEach((group) => {
       const stats = $$('[data-count]', group);
-      if (!stats.length) return;
+      if (!stats.length || group.dataset.counted) return;
+      group.dataset.counted = '1';
 
       const run = () => {
         stats.forEach((el) => {
@@ -91,23 +151,32 @@
       };
 
       if (reduce) { run(); return; }
+      // Unlike the entrance reveals this fires once. A number that recounts
+      // every time you scroll past reads as broken rather than as alive.
       new IntersectionObserver((entries, obs) => {
         if (entries[0].isIntersecting) { run(); obs.disconnect(); }
       }, { threshold: 0.4 }).observe(group);
     });
   }
 
-  /* ------------------------------------------------------------- start --- */
+  /* ============================================================== start === */
 
-  observeReveals();
-  initCounters();
+  function scan(root = document) {
+    observeReveals(root);
+    collectParallax(root);
+    initCounters(root);
+  }
 
-  if (parallaxEls.length) {
+  scan();
+  makeProgressBar();
+
+  if (!reduce) {
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
-    updateParallax();
+    frame();
   }
 
   window.JR = window.JR || {};
   window.JR.observeReveals = observeReveals;
+  window.JR.scan = scan;
 })();

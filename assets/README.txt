@@ -53,8 +53,24 @@ card-relocate.webp        already licensed and visually consistent.
 hero-buyers.webp          Page heroes for the interior pages, also pulled
 hero-sellers.webp         from the hero footage.
 hero-relocate.webp
-hero-newbuild.webp
-hero-neighborhoods.webp
+hero-neighborhoods.webp   Still used by the neighborhoods hub page. The 20
+                          individual area pages now have their own photos.
+
+neighborhoods/            One hero per neighborhood page, 1800x1013 WebP.
+                          Real photographs from Wikimedia Commons, freely
+                          licensed, NOT the AI footage. Each one carries a
+                          visible credit in the bottom left of the hero
+                          because CC BY and CC BY-SA require attribution.
+                          See neighborhoods/CREDITS.md before swapping any
+                          of them, and keep the PHOTOS block in
+                          scripts/build-neighborhoods.js in sync.
+
+                          Four of the twenty are representative Florida
+                          images rather than the actual area, because no
+                          free photograph of those communities exists.
+                          They are labeled as such in CREDITS.md and their
+                          credit line names the real location. Jennifer's
+                          own photos would replace them cleanly.
 
 
 REGENERATING
