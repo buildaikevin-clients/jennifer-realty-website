@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="J">
+  <!-- Placeholder mark. A serif J on the deep panel color from the palette.
+       Replace with Jennifer's real logo when she has one, keeping the same
+       filename so no page markup has to change. -->
+  <rect width="64" height="64" rx="8" fill="#1f2422"/>
+  <text x="32" y="45"
+        font-family="Cinzel, Cormorant Garamond, Georgia, serif"
+        font-size="40" font-weight="600"
+        fill="#6f9ea3" text-anchor="middle">J</text>
+</svg>

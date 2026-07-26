@@ -1,0 +1,46 @@
+# ============================================================
+# Jennifer Realty website — keep secrets and client data out
+# NOTE: gitignore has no inline comments. Patterns on their own lines.
+# ============================================================
+
+# Secrets, credentials, tokens
+.env
+.env.*
+*.key
+*.pem
+*credentials*
+*secrets*
+*token*
+*apikey*
+
+# Anything explicitly marked private
+private/
+*.private.*
+*.secret.*
+
+# Lead data. Netlify Forms holds submissions. Nothing exported lands here.
+leads/
+*lead-export*
+*submissions*
+*.csv
+
+# Scraper working files
+scraper/update-log.txt
+scraper/.cache/
+
+# NOTE: assets/hero-frames/ is deliberately NOT ignored. There is no build step
+# on Netlify, so the generated frames are the deployed asset and have to be in
+# the repo. assets/hero-source.mp4 stays committed too, so the frames can always
+# be regenerated with scripts/build-hero-frames.js.
+
+# Local tooling
+.claude/settings.local.json
+node_modules/
+
+# OS / editor noise
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vscode/
+*.swp
+*.tmp

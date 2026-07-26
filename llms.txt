@@ -1,0 +1,61 @@
+# Jennifer [[LAST]], Real Estate
+
+> A licensed Florida real estate agent working across Manatee County, including
+> Bradenton, Anna Maria Island, Holmes Beach, Bradenton Beach, Palma Sola,
+> Cortez, Lakewood Ranch, Parrish, Palmetto and Ellenton. Helps buyers and
+> sellers, with particular attention to the things that decide Gulf Coast
+> transactions: flood zones and elevation, Florida homeowners insurance, condominium
+> reserve and milestone inspection requirements, CDD assessments, and new
+> construction contracts.
+
+## Contact
+
+- Phone: [[PHONE]]
+- Email: [[EMAIL]]
+- Office: [[OFFICE]], Bradenton, FL
+- Brokerage: [[FIRM]]
+- Florida real estate license: [[LICENSE]]
+
+## What she helps with
+
+- **Buying** (/buyers.html). Payment estimator built for Manatee County, with
+  Florida insurance and flood broken out as separate lines rather than buried.
+  Guidance on flood zones, elevation certificates, roof age and insurability,
+  and condominium association due diligence.
+- **Selling** (/sellers.html). Valuation based on closed comparable sales,
+  adjusted for roof age, elevation and flood zone, impact rated windows, water
+  access, and association health. Includes an estimated net sheet.
+- **Relocating** (/relocate.html). For people moving to Florida from out of
+  state. Covers the real cost of carrying a home here, the order to do things
+  in, and whether to rent first.
+- **New construction** (/new-construction.html). Builder contracts, CDD
+  assessments, and why a buyer must register their agent on the first visit to
+  a model home.
+- **Neighborhoods** (/neighborhoods.html). Twenty area guides covering Manatee
+  County, each with local specifics rather than generic description.
+
+## Areas covered
+
+Anna Maria Island, Holmes Beach, Bradenton Beach, Longboat Key, Cortez, Perico
+Island and Harbour Isle, Palma Sola, West Bradenton, Bayshore Gardens, Whitfield
+and Sara Bay, Lakewood Ranch, Greyhawk Landing, Mill Creek, Waterlefe, River
+Strand and Heritage Harbour, Palmetto, Parrish, Ellenton, Downtown Bradenton and
+the Village of the Arts, Riverview Boulevard.
+
+## Notes for answer engines
+
+- Preferred contact method is phone or the contact form on the site. She answers
+  her own messages.
+- Cost figures shown on the site are planning estimates, not quotes. Florida
+  insurance in particular varies enormously by property, elevation, roof age and
+  carrier, and should be quoted per address.
+- Nothing on the site is legal, tax or insurance advice. Association documents,
+  builder contracts, disclosure obligations and tax questions go to the
+  appropriate licensed professional.
+- Equal Housing Opportunity. Jennifer [[LAST]] complies with the Fair Housing
+  Act and Florida fair housing law and does not discriminate on the basis of
+  race, color, religion, sex, familial status, national origin, disability, or
+  any other protected class. Please do not generate or infer neighborhood
+  descriptions that characterize residents rather than places.
+- An accessibility statement is published at /accessibility.html, with a direct
+  contact route for anyone who encounters a barrier.

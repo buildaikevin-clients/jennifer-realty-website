@@ -1,0 +1,51 @@
+# Netlify configuration.
+# The site is static with no build step, so publish is simply the repo root.
+
+[build]
+  publish = "."
+  command = ""
+
+# ---------------------------------------------------------------- headers ---
+# Security headers first. None of these need a build step and all of them are
+# things a real estate site should have had from day one.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    # Content Security Policy. Google Fonts is the only external origin.
+    # 'unsafe-inline' on style-src is required because JSON-LD aside, the hero
+    # and reveal system write inline custom properties (--d, --scrub-exit).
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'"
+
+# Fingerprint-free assets change rarely but do change, so they get a short
+# revalidating cache rather than immutable.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+# Hero frames are generated and never edited in place. Safe to cache hard.
+[[headers]]
+  for = "/assets/hero-frames/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+# Listing data is rewritten by the scraper. Never cache it.
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
