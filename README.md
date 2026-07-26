@@ -175,10 +175,15 @@ is deliberate. Do not "fix" it.
    Forms > Settings > Form notifications. This is the single easiest thing to
    forget and it silently loses every lead.
 
-Five forms are wired: `contact`, `buyer-search`, `home-valuation`,
-`relocation-guide`, and `showing-request`. Each uses a honeypot rather than a
-captcha. Both wizard forms compose a readable `summary` field so the
-notification email is legible instead of a wall of field names.
+Four forms are wired: `contact`, `buyer-search`, `home-valuation`, and
+`relocation-guide`. Each uses a honeypot rather than a captcha. Both wizard
+forms compose a readable `summary` field so the notification email is legible
+instead of a wall of field names.
+
+The listing modal uses a prefilled `mailto:` CTA rather than a fifth form,
+because putting a form inside an already focus trapped dialog complicates the
+keyboard handling for little gain. If a showing request form is wanted later,
+`initSimpleForm` in `js/main.js` takes it with almost no new code.
 
 ---
 

@@ -101,7 +101,7 @@ Built in:
 Open:
 
 - [ ] Run `npx --yes @axe-core/cli` against every page type once deployed
-- [ ] Manual keyboard only pass through nav, carousel, modal, and all five forms
+- [ ] Manual keyboard only pass through nav, carousel, modal, and all four forms
 - [ ] Zoom to 200 percent, confirm no horizontal scrolling
 - [ ] Test with a real screen reader. Automated tools catch roughly a third of
       issues
