@@ -65,6 +65,19 @@ neighborhoods/            One hero per neighborhood page, 1800x1013 WebP.
                           of them, and keep the PHOTOS block in
                           scripts/build-neighborhoods.js in sync.
 
+                          Rebuild with:
+                            npm install sharp
+                            node scripts/build-neighborhood-heroes.js
+                          Originals are fetched on demand into
+                          scripts/.hero-cache/ and are not committed.
+
+                          NOTE ON CROPPING: the hero box is about 3:1 on
+                          desktop, so only the middle ~55% of a 16:9 file is
+                          ever visible. The crop of each image is chosen to
+                          put the subject in that band, via `focus` in the
+                          build script. Judge any change by loading the page,
+                          not by opening the file.
+
                           Four of the twenty are representative Florida
                           images rather than the actual area, because no
                           free photograph of those communities exists.

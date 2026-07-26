@@ -64,6 +64,13 @@ a sentence about street layout on the Perico Island page. The phrase is HUD
 flagged coded language regardless of intent. Rewritten to "conventional street
 grid."
 
+**A gap was found and closed on 2026-07-26.** The banned phrase patterns matched
+whitespace between words but not a hyphen, so "family-friendly" would have
+slipped past the fair housing check entirely and been reported only as a hyphen.
+That is the most canonical fair housing violation there is. Patterns now match
+whitespace or a hyphen, and a deliberate break test confirms both
+"family-friendly" and "safe-neighborhood" are caught in hyphenated form.
+
 Open:
 
 - [ ] Re-run `node scripts/copy-lint.js` before every commit. It is the whole

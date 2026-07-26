@@ -90,11 +90,21 @@ node scraper/scrape.js               # pull listings. needs config, see below
 It enforces the three rules the site was built under and exits nonzero on any
 finding:
 
-1. **No em dashes or en dashes.** Jennifer asked for no dashes. Ordinary hyphens
-   inside words are fine.
+1. **No hyphens and no dashes.** Jennifer asked for this literally. No em dash,
+   no en dash, and no hyphen joining two words. Write "mid century" not
+   "mid-century", "Interstate 75" not "I-75". Two narrow carve outs: digit to
+   digit passes so a phone number keeps its normal `(941) 555-0142` format, and
+   URLs plus language tags are stripped from JSON-LD before the check, since
+   that block legitimately holds page slugs and `en-US`.
 2. **No AI tells.** A vocabulary list of words that cluster in machine writing.
 3. **No fair housing violations.** Phrases that describe who lives somewhere
    rather than the place. This is the one that matters.
+
+The rule only ever sees visible text. Class names, element IDs, CSS properties
+and file paths are code rather than writing and never reach it. URL slugs keep
+their hyphens on purpose: Google treats a hyphen in a URL as a word separator
+and recommends it, so `anna-maria-island.html` earns search visibility that
+`annamariaisland.html` would throw away.
 
 It also flags images with no `alt` and more than one exclamation point per page.
 

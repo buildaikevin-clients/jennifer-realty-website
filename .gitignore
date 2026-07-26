@@ -44,3 +44,8 @@ Desktop.ini
 .vscode/
 *.swp
 *.tmp
+
+# Hero source originals, ~94 MB, downloaded on demand by
+# scripts/build-neighborhood-heroes.js. Provenance lives in
+# assets/neighborhoods/CREDITS.md, not in the repo.
+scripts/.hero-cache/

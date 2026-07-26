@@ -53,9 +53,39 @@ license clean and could drop the credit line entirely.
 | `riverview-boulevard.webp` | the neighborhood | Ebyabe | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Bradenton FL Richardson House01.jpg](https://commons.wikimedia.org/wiki/File:Bradenton_FL_Richardson_House01.jpg) |
 ## Regenerating
 
-The sources are downloaded, cropped to the hero ratio and compressed to sit
-near 100 KB each. Sizes range from 51 KB to 235 KB; the largest are the grainy
-foliage frames, which cost more bits per pixel no matter the quality setting.
+```
+npm install sharp                          # dev only, not a site dependency
+node scripts/build-neighborhood-heroes.js
+```
 
-Every file is committed, because Netlify runs no build step for this site and
+The script downloads each original from Commons, caches it in
+`scripts/.hero-cache/` (git ignored, about 94 MB), crops it and writes the
+WebP. Every output file is committed, because Netlify runs no build step and
 the generated output is the deployed asset.
+
+Sizes land between 58 KB and 239 KB. The large ones are grainy foliage frames,
+which cost more bits per pixel at any quality setting.
+
+## The crop is the hard part
+
+The files are 16:9. **The hero box is not.** `.page-hero` is
+`min-height: clamp(380px, 52vh, 560px)` at full viewport width, so on a
+1440px desktop it renders roughly 3.1:1 and `object-fit: cover` discards the
+top and bottom. **Only the middle ~55% of any of these images is ever seen on
+a desktop.** On a phone the box is taller than wide and the same thing happens
+horizontally instead.
+
+So a photo is not cropped to look right as a file, it is cropped so the subject
+sits in that middle band. `focus` in `HEROES` is where the band is taken from,
+0 being the top of the source and 1 the bottom. Ten images carry an explicit
+value; the rest are cropped by sharp's saliency detector, which is reliable on
+open landscape compositions and unreliable on anything with a built subject.
+
+Two consequences worth knowing before swapping an image in:
+
+- **A close-up will not survive.** A house photographed from across the street
+  fills a 4:3 frame vertically, and no 3:1 band contains all of it. Wide,
+  horizon-based compositions are the ones that work. Where a close-up was the
+  only free photograph available (Cortez, Whitfield, Riverview Boulevard) the
+  focus is set to the most legible slice, usually the roofline.
+- **Check the rendered page, not the file.** The file always looks fine.

@@ -4,10 +4,18 @@
 
    Three jobs, in ascending order of how much they matter:
 
-   1. DASHES.  Jennifer asked for no dashes. That means no em dash and no en
-      dash in prose, which happens to be the loudest tell that a machine wrote
-      the sentence. Ordinary hyphens inside words stay, because removing those
-      produces broken English.
+   1. HYPHENS AND DASHES.  Jennifer asked for no hyphens or dashes on the site,
+      and she meant it literally. No em dash, no en dash, and no hyphen joining
+      two words. Write "mid century" not "mid-century", "Interstate 75" not
+      "I-75", "well priced" not "well-priced".
+
+      Two carve outs, both narrow:
+        - Digit to digit passes, so a phone number keeps its normal format.
+        - JSON-LD has URLs and language tags stripped before the check, because
+          that block legitimately holds page slugs, license URLs, and en-US.
+
+      This rule only ever sees visible text. Class names, element IDs, CSS
+      properties and file paths are code, not writing, and never reach it.
 
    2. AI TELLS.  A vocabulary that reads as generated. Most of these are real
       words. They are banned here because they cluster in machine writing and
@@ -34,9 +42,16 @@ const ROOT = path.resolve(__dirname, '..');
 /* ------------------------------------------------------------------ rules */
 
 const DASHES = [
-  { re: /—/g, name: 'em dash',           hint: 'Rewrite as two sentences, or use a comma.' },
-  { re: /–/g, name: 'en dash',           hint: 'Write "to" in ranges. 3 to 6 months.' },
-  { re: /--/g,     name: 'double hyphen',     hint: 'Reads as an em dash. Rewrite the sentence.' },
+  { re: /—/g,  name: 'em dash',       hint: 'Rewrite as two sentences, or use a comma.' },
+  { re: /–/g,  name: 'en dash',       hint: 'Write "to" in ranges. 3 to 6 months.' },
+  { re: /--/g, name: 'double hyphen', hint: 'Reads as an em dash. Rewrite the sentence.' },
+  // Letter to letter, letter to digit, and digit to letter. Digit to digit is
+  // deliberately absent so 555-0142 passes.
+  {
+    re: /(?<=[A-Za-z])-(?=[A-Za-z0-9])|(?<=[0-9])-(?=[A-Za-z])/g,
+    name: 'hyphen',
+    hint: 'Separate the words, or pick one that does not need joining.',
+  },
 ];
 
 const AI_TELLS = [
@@ -116,7 +131,12 @@ function visibleText(html) {
 }
 
 /* JSON-LD is not read on the page but it is read in search results and by
-   answer engines, so its string values get the same treatment. */
+   answer engines, so its string values get the same treatment.
+
+   URLs and IETF language tags are blanked first. That block legitimately holds
+   page slugs (anna-maria-island.html), license URLs (.../licenses/by-sa/4.0),
+   and en-US, none of which are writing. Blanking preserves offsets so a finding
+   still maps back to the right line. */
 function jsonLdText(html) {
   let s = html.replace(/[^\n]/g, ' ');   // start blank, keep line structure
   const re = /<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
@@ -125,6 +145,8 @@ function jsonLdText(html) {
     const start = m.index + m[0].indexOf(m[1]);
     s = s.slice(0, start) + m[1] + s.slice(start + m[1].length);
   }
+  s = blank(s, /https?:\/\/[^\s"']+/g);      // URLs
+  s = blank(s, /\b[a-z]{2}-[A-Z]{2}\b/g);    // language tags such as en-US
   return s;
 }
 
@@ -174,11 +196,13 @@ for (const file of files) {
     const check = (list, sev, hint) => {
       for (const term of list) {
         if (allowed.has(term.toLowerCase())) continue;
-        // Word boundaries, and spaces in a term also match a newline or
-        // multiple spaces, because HTML wraps prose wherever it likes.
+        // A space in a term matches whitespace OR a hyphen. HTML wraps prose
+        // wherever it likes, and more importantly "family-friendly" has to be
+        // caught by the fair housing rule and not only by the hyphen rule.
+        // Without this, hyphenating a banned phrase hides it from its own check.
         const pattern = term
           .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-          .replace(/ /g, '\\s+');
+          .replace(/ /g, '[\\s-]+');
         const re = new RegExp('\\b' + pattern + '\\b', 'gi');
         let m;
         while ((m = re.exec(haystack))) {
