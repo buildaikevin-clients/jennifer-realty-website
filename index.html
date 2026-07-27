@@ -270,17 +270,25 @@
         </p>
       </div>
 
-      <div class="listings__tabs reveal" id="listings-tabs" role="group"
-           aria-label="Filter listings by property type" style="--d:.26s"></div>
+      <!-- Tabs and carousel arrows share one row above the grid. The arrows
+           used to be absolutely positioned over the cards, which covered
+           content on the two row layout. Up here they can never overlap a
+           listing at any width. -->
+      <div class="listings__controls reveal" style="--d:.26s">
+        <div class="listings__tabs" id="listings-tabs" role="group"
+             aria-label="Filter listings by property type"></div>
+        <div class="listings__arrows">
+          <button class="listings__nav" id="listings-prev"
+                  aria-label="Previous listings" disabled>&#8249;</button>
+          <button class="listings__nav" id="listings-next"
+                  aria-label="Next listings">&#8250;</button>
+        </div>
+      </div>
 
       <div class="listings__carousel">
-        <button class="listings__nav listings__nav--prev" id="listings-prev"
-                aria-label="Previous listings" disabled>&#8249;</button>
         <div class="listings__viewport" id="listings-viewport">
           <div class="listings__grid" id="listings-grid" aria-live="polite"></div>
         </div>
-        <button class="listings__nav listings__nav--next" id="listings-next"
-                aria-label="Next listings">&#8250;</button>
       </div>
 
       <p class="listings__meta" id="listings-meta"></p>
