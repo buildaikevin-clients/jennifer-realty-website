@@ -752,9 +752,14 @@
       tabs.push({ key: 'active', label: 'Active', items: active });
       cardTag = 'For Sale';
     } else {
-      titleEl.textContent = 'Search Every Listing';
+      // No listings of her own yet, so what shows belongs to her brokerage.
+      // The wording says so rather than implying these are hers, and the
+      // listing agent is named on every card and in the modal.
+      titleEl.textContent = 'Featured Properties';
       subEl.textContent =
-        'Bradenton, Lakewood Ranch, Sarasota and the barrier islands, on a live MLS feed.';
+        'A selection of what ' + CONTACT.firm + ' has on the market across ' +
+        'Manatee and Sarasota counties. Ask Jennifer about any of them, or ' +
+        'about something you have not seen listed.';
     }
 
     Object.keys(team).forEach((key) => {

@@ -602,7 +602,12 @@
     </div>
   </footer>
 
+  <!-- Seed first, then the scraper output. main.js reads window.LISTINGS and
+       falls back to window.LISTINGS_SEED, then to the brokerage handoff panel,
+       so a missing or empty feed degrades rather than breaking. listings.js is
+       absent until scraper/scrape.js has run, and a 404 here is harmless. -->
   <script src="data/listings.seed.js"></script>
+  <script src="data/listings.js"></script>
   <script src="js/reveal.js"></script>
   <script src="js/hero-scrub.js"></script>
   <script src="js/main.js"></script>
