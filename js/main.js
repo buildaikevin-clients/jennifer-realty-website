@@ -773,11 +773,13 @@
     // so the section does not look like a broken slider.
     if (!tabs.length) {
       renderGrid([]);
-      // Hide the whole controls row, not just its children, or an empty flex
+      // Hide the whole controls row, not just its children, or the empty
       // container keeps taking up its bottom margin above the panel.
       const controls = $('.listings__controls');
       if (controls) controls.style.display = 'none';
       else tabsEl.style.display = 'none';
+      if (prevBtn) prevBtn.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
       if (metaEl) {
         metaEl.textContent =
           'Listing search is provided by ' + CONTACT.firm + ' through its licensed MLS feed. ' +

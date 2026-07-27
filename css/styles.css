@@ -978,24 +978,8 @@ input:focus, select:focus, textarea:focus {
 
 .listings__head { margin-bottom: 2rem; }
 
-/* Tabs on the left, carousel arrows on the right, one row above the grid.
-   The arrows previously sat absolutely positioned over the cards and covered
-   content once the grid went to two rows. */
-.listings__controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
+.listings__controls { margin-bottom: 2rem; }
 .listings__tabs { display: flex; flex-wrap: wrap; gap: .6rem; }
-.listings__arrows { display: flex; gap: .5rem; flex: 0 0 auto; }
-
-@media (max-width: 680px) {
-  /* Arrows are pointless where the grid is swipeable. */
-  .listings__arrows { display: none; }
-  .listings__controls { margin-bottom: 1.5rem; }
-}
 .tab {
   display: inline-flex; align-items: center; gap: .55rem;
   min-height: 44px;
@@ -1018,7 +1002,15 @@ input:focus, select:focus, textarea:focus {
   font-variant-numeric: tabular-nums;
 }
 
-.listings__carousel { position: relative; }
+/* A gutter on each side holds the arrows. The viewport is inset by the same
+   amount, so an arrow sits beside the cards and never over one. */
+.listings__carousel {
+  position: relative;
+  --gutter: 64px;
+  padding-inline: var(--gutter);
+}
+@media (max-width: 1080px) { .listings__carousel { --gutter: 52px; } }
+@media (max-width: 680px)  { .listings__carousel { --gutter: 0px; } }
 .listings__viewport {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
@@ -1040,6 +1032,10 @@ input:focus, select:focus, textarea:focus {
 @media (max-width: 680px)  { .listings__grid { grid-auto-columns: 86%; } }
 
 .listings__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
   width: 46px; height: 46px;
   display: grid; place-items: center;
   background: var(--paper);
@@ -1047,17 +1043,24 @@ input:focus, select:focus, textarea:focus {
   border-radius: 50%;
   font-size: 1.4rem; line-height: 1; color: var(--ink);
   cursor: pointer;
+  box-shadow: var(--shadow-sm);
   transition: background .3s var(--ease), border-color .3s var(--ease),
-              opacity .3s var(--ease);
+              color .3s var(--ease), opacity .3s var(--ease);
 }
+/* Centred in the gutter rather than hard against the cards. */
+.listings__nav--prev { left: calc((var(--gutter) - 46px) / 2); }
+.listings__nav--next { right: calc((var(--gutter) - 46px) / 2); }
 .listings__nav:hover:not([disabled]) {
   background: var(--ink);
   border-color: var(--ink);
   color: var(--bone);
 }
-/* Dimmed rather than hidden at the ends of the track, so the control does not
-   jump out of the layout and shift the tabs beside it. */
-.listings__nav[disabled] { opacity: .3; cursor: not-allowed; }
+/* Dimmed rather than hidden at the ends of the track, so the arrow does not
+   pop out of the layout as you reach either edge. */
+.listings__nav[disabled] { opacity: .28; cursor: not-allowed; }
+
+/* No room for a gutter on phones, and the grid swipes anyway. */
+@media (max-width: 680px) { .listings__nav { display: none; } }
 
 .card {
   display: flex; flex-direction: column;
