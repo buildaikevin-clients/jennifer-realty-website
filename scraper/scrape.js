@@ -26,9 +26,12 @@
    ---------------------------------------------------------------------------
    Their robots.txt disallows /index.php?advanced=1 and /index.php?quick=1,
    which are the search endpoints. This script never touches them. It reads the
-   subdomain root, which is allowed, and optionally individual /property/ pages,
-   which are also allowed. One request gets everything, because the site embeds
-   a complete `account_info` JSON blob in the page.
+   subdomain root, which is allowed. That single request gets everything,
+   because the site embeds a complete account_info JSON blob in the page.
+
+   Photo galleries come from HEAD requests to the image CDN rather than from
+   fetching property pages, so preferredshore.com is hit exactly once per run
+   no matter how many listings come back.
 
    ---------------------------------------------------------------------------
    WHY curl AND NOT fetch
@@ -56,11 +59,17 @@ const CONFIG = {
   includeAgency: process.argv.includes('--agency'),
   maxAgency: 24,
 
-  // Fetch each property page to build a photo gallery. Costs one request per
-  // listing, so it is capped.
+  // Photo galleries come from probing the CDN, not from fetching property
+  // pages. See galleryFor() for why.
   fetchGalleries: true,
-  maxGalleryFetches: 30,
-  maxPhotosPerListing: 20,
+  maxPhotosPerListing: 24,
+
+  /* The photo CDN answers 200 for every index, serving a "no photo available"
+     placeholder past the end of a listing's real photos. It is identified by a
+     fixed ETag. Worth knowing: this is the same platform Kevin's HomeSmart
+     scraper talks to, and the placeholder ETag is byte for byte identical, so
+     the same detection works on both sites. */
+  placeholderEtag: '2cc381669533481bec152dd6d2794804',
 
   requestDelayMs: 1500,      // politeness. do not lower
   userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' +
@@ -134,25 +143,42 @@ const num = (v) => {
 
 const abs = (u) => !u ? null : (/^https?:/i.test(u) ? u : CONFIG.origin + u);
 
-/* Photos follow {CDN}/listingphotos{feed}/{MLSID}-{n}.jpg. Given photo 1 from
-   the summary, the rest can be derived and confirmed against the detail page
-   rather than blind probed, which keeps the request count honest. */
-function galleryFrom(detailHtml, firstPhoto) {
-  const out = [];
-  if (detailHtml) {
-    const re = /https:\/\/[^"'\s]*listingphotos[^"'\s]*?\.jpg[^"'\s]*/gi;
-    for (const m of detailHtml.matchAll(re)) {
-      const clean = m[0].replace(/\?v=$/, '');
-      if (!out.includes(clean)) out.push(clean);
-    }
+/* HEAD a photo URL. Returns true only if it is a real image rather than the
+   CDN's placeholder, which is served with 200 and a fixed ETag. */
+function photoExists(url) {
+  try {
+    const head = execFileSync('curl', [
+      '-sSI', '--max-time', '15', '-A', CONFIG.userAgent, url,
+    ], { encoding: 'utf8' });
+    if (!/^HTTP\/[\d.]+ 2\d\d/m.test(head)) return false;
+    const etag = (head.match(/^etag:\s*"?([^"\r\n]+)"?/im) || [])[1];
+    return etag !== CONFIG.placeholderEtag;
+  } catch { return false; }
+}
+
+/* Build the gallery by walking photo indexes on the CDN.
+
+   The property pages themselves only ever contain photo 1; the rest are loaded
+   by JavaScript, so scraping the detail page returns a single image. Probing
+   the CDN instead gets the whole gallery AND makes zero extra requests to
+   preferredshore.com, which is the politer of the two options.
+
+   Photo 1's URL comes from the summary payload, and the rest follow the same
+   {MLSID}-{n}.jpg pattern, so the URL is derived rather than guessed. */
+function galleryFor(firstPhoto) {
+  if (!firstPhoto) return [];
+  const m = firstPhoto.match(/^(.*-)(\d+)(\.jpg)$/i);
+  if (!m) return [firstPhoto];
+
+  const out = [firstPhoto];
+  let misses = 0;
+  for (let n = 2; n <= CONFIG.maxPhotosPerListing; n++) {
+    const url = m[1] + n + m[3];
+    if (photoExists(url)) { out.push(url); misses = 0; }
+    // One gap can be a deleted photo. Two in a row means the end.
+    else if (++misses >= 2) break;
   }
-  if (firstPhoto && !out.length) out.push(firstPhoto);
-  // Keep the summary photo first: it is the one the brokerage chose as primary.
-  if (firstPhoto) {
-    const i = out.indexOf(firstPhoto);
-    if (i > 0) { out.splice(i, 1); out.unshift(firstPhoto); }
-  }
-  return out.slice(0, CONFIG.maxPhotosPerListing);
+  return out;
 }
 
 const titleCase = (s) => String(s || '').toLowerCase()
@@ -160,19 +186,14 @@ const titleCase = (s) => String(s || '').toLowerCase()
   .replace(/\bN\b/g, 'N').replace(/\bS\b/g, 'S')
   .replace(/\bE\b/g, 'E').replace(/\bW\b/g, 'W');
 
-let galleryBudget = CONFIG.maxGalleryFetches;
-
 function normalize(raw, opts) {
   const price = num(raw.price);
   const link = abs(raw.url);
   const photo = (raw.photo || '').replace(/\?v=$/, '') || null;
 
-  let photos = photo ? [photo] : [];
-  if (CONFIG.fetchGalleries && link && galleryBudget > 0) {
-    galleryBudget--;
-    const detail = get(link);
-    photos = galleryFrom(detail, photo);
-  }
+  const photos = (CONFIG.fetchGalleries && photo)
+    ? galleryFor(photo)
+    : (photo ? [photo] : []);
 
   return {
     address: titleCase(raw.address) || null,

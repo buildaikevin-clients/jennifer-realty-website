@@ -11,10 +11,11 @@
   /* ---------------------------------------------------------------------- */
   /* Single source of truth for contact details used inside generated markup
      (modal CTAs, mailto links). The visible copy in the HTML carries its own
-     copies. Email is still unknown, so it stays a visible token rather than a
-     silently broken mailto. */
+     copies, so a change here has to be made there too. Every visible instance
+     of any of these is paired with the firm name in the markup, which
+     61J2-10.025 requires of every point of contact. */
   const CONTACT = {
-    email: '[[EMAIL]]',
+    email: 'jenniferbarragan.re@gmail.com',
     phone: '(205) 790-7560',
     tel:   '+12057907560',
     firm:  'Preferred SHORE Real Estate',

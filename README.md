@@ -24,6 +24,7 @@ rather than retyped:
 | Brokerage | Preferred SHORE Real Estate (SHORE capitalised, as they render it) |
 | Office | 50 S. Lemon Ave. Ste 302, **Sarasota**, FL 34236 |
 | Phone | (205) 790-7560 |
+| Email | jenniferbarragan.re@gmail.com (supplied 2026-07-27) |
 | License | **SL3586445** |
 | Lives in | Lakewood Ranch |
 | Languages | English and Spanish |
@@ -31,11 +32,10 @@ rather than retyped:
 
 ### Still outstanding
 
-Three tokens remain, deliberately visible rather than guessed:
+Two tokens remain, deliberately visible rather than guessed:
 
 | Token | Why it is blocking |
 |---|---|
-| `[[EMAIL]]` | Every `mailto:`, the JSON-LD, and the contact blocks. Netlify still captures form submissions without it |
 | `[[DOMAIN]]` | Canonical URLs, Open Graph, `sitemap.xml`, `robots.txt` |
 | `[[STAT_CLOSED]]` | The homes closed counter on the home page |
 
