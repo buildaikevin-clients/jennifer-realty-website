@@ -40,7 +40,7 @@
    ========================================================================== */
 
 window.LISTINGS_SEED = {
-  source: '[[FIRM]]',
+  source: 'Preferred SHORE Real Estate',
   generatedAt: null,
 
   // Jennifer's own listings. These take priority over everything else and

@@ -26,18 +26,18 @@ Implemented at every location where contact details appear:
 | Buyers form sidebar | Firm block under the contact details |
 | Sellers form sidebar | Firm block under the contact details |
 | Accessibility page | Firm block under the contact details |
-| Form error messages | "at [[FIRM]]" appended to the fallback phone number |
+| Form error messages | "at Preferred SHORE Real Estate" appended to the fallback phone number |
 
 Each pairing carries an HTML comment saying why. **Do not separate them.**
 
 Open:
 
-- [ ] `[[FIRM]]` replaced with the brokerage's exact registered name
+- [ ] `Preferred SHORE Real Estate` replaced with the brokerage's exact registered name
 - [ ] If Jennifer advertises under a personal marketing or team name, that name
       must be registered with DBPR before it is used
 - [ ] The word REALTOR appears nowhere on the site. It is a registered trademark
       and may only be used by current members of a Realtor association. The site
-      says "Licensed Real Estate Agent" instead, which is always safe. If she is
+      says "REALTOR®" instead, which is always safe. If she is
       a member and wants to use it, swap it deliberately
 
 ---

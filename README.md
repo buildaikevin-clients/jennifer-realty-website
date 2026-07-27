@@ -1,4 +1,4 @@
-# Jennifer [[LAST]] — Bradenton, Florida Real Estate
+# Jennifer Barragan — Bradenton, Florida Real Estate
 
 A static website for a licensed Florida real estate agent working Manatee County
 and the barrier islands. Hand written HTML, one stylesheet, three JavaScript
@@ -13,39 +13,63 @@ with the visual direction taken from [schranerrealty.com](https://www.schranerre
 
 ---
 
-## Fill these in first
+## Her details
 
-Every piece of real information is a bracketed token. Search the repo for `[[`
-and you will find all of them. These nine appear across every page and should be
-replaced with a global find and replace before anything goes live.
+Filled in 2026-07-26 and verified against Preferred Shore's own agent record
+rather than retyped:
 
-| Token | Replace with | Example |
-|---|---|---|
-| `[[LAST]]` | Jennifer's last name | `Vaz` |
-| `[[FIRM]]` | Brokerage's **licensed** name, exactly as registered with DBPR | `Coastal Gulf Realty LLC` |
-| `[[LICENSE]]` | Her Florida real estate license number | `SL3xxxxxx` |
-| `[[PHONE]]` | Display phone | `(941) 555-0142` |
-| `[[TEL]]` | Same number, `tel:` format | `+19415550142` |
-| `[[EMAIL]]` | Her email | `jennifer@example.com` |
-| `[[OFFICE]]` | Brokerage street address | `1234 Manatee Ave W` |
-| `[[DOMAIN]]` | Domain, no protocol, no trailing slash | `www.example.com` |
-| `[[STAT_CLOSED]]` `[[STAT_YEARS]]` `[[STAT_AREAS]]` | Numbers for the counter band on the home page | `140` `12` `20` |
+| | |
+|---|---|
+| Name | Jennifer Barragan |
+| Brokerage | Preferred SHORE Real Estate (SHORE capitalised, as they render it) |
+| Office | 50 S. Lemon Ave. Ste 302, **Sarasota**, FL 34236 |
+| Phone | (205) 790-7560 |
+| License | **SL3586445** |
+| Lives in | Lakewood Ranch |
+| Languages | English and Spanish |
+| Brokerage subdomain | `jenniferbarragan.preferredshore.com` |
 
-Longer `[[FILL IN: ...]]` blocks are prose Jennifer has to write herself: her
-bio, her opening line, her credentials. They say what is needed and why.
+### Still outstanding
 
-**`[[FIRM]]` is not cosmetic.** Florida rule
-[61J2-10.025](https://flrules.elaws.us/fac/61j2-10.025) requires the brokerage's
-licensed name to appear adjacent to, immediately above, or immediately below
-every point of contact, meaning every phone number, email address and mailing
-address. That is why the firm sits directly under the phone number in the nav,
-under the address block in the footer, and beside the contact details on About,
-Buyers, Sellers and Accessibility. Those pairings are marked with comments in the
-markup. **Do not separate them.**
+Three tokens remain, deliberately visible rather than guessed:
 
-One more: only use the word REALTOR if she is a current member of a Realtor
-association. It is a registered trademark. The site currently says "Licensed Real
-Estate Agent" everywhere, which is always safe.
+| Token | Why it is blocking |
+|---|---|
+| `[[EMAIL]]` | Every `mailto:`, the JSON-LD, and the contact blocks. Netlify still captures form submissions without it |
+| `[[DOMAIN]]` | Canonical URLs, Open Graph, `sitemap.xml`, `robots.txt` |
+| `[[STAT_CLOSED]]` | The homes closed counter on the home page |
+
+One `[[FILL IN]]` also remains on `about.html` for professional designations,
+which can simply be deleted if she has none.
+
+### Two things to verify before launch
+
+**The license prefix.** DBPR issues Florida licenses with a class prefix: `SL`
+for a sales associate, `BK` for a broker or broker associate. Her brokerage
+stores the number bare as `3586445`, so `SL` is inferred from the fact that she
+works under Preferred Shore rather than being its broker of record. After twenty
+years she could hold a broker associate license, in which case it is
+`BK3586445`. Check at myfloridalicense.com under Verify a License. It is one find
+and replace either way.
+
+**REALTOR® membership.** The site uses REALTOR® throughout. It is a registered
+trademark restricted to current members of a Realtor association. Preferred Shore
+advertises Realtors on staff, which is good evidence but is not confirmation of
+Jennifer's own dues paying membership. Worth a one line check with her.
+
+### The brokerage name is not cosmetic
+
+Florida rule [61J2-10.025](https://flrules.elaws.us/fac/61j2-10.025) requires the
+brokerage's licensed name to appear adjacent to, immediately above, or
+immediately below **every point of contact**, meaning every phone number, email
+address and mailing address. That is why the firm sits directly under the phone
+number in the nav, under the address block in the footer, and beside the contact
+details on About, Buyers, Sellers and Accessibility. Those pairings are marked
+with comments in the markup. **Do not separate them.**
+
+Note the office is in **Sarasota**, not Bradenton. The site covers the Bradenton
+market, but the address that appears next to her contact details is her
+brokerage's, and getting that wrong is a 61J2-10.025 problem rather than a typo.
 
 ---
 
@@ -64,10 +88,8 @@ css/styles.css           the entire site. tokens at :root
 js/reveal.js             scroll animation system, exposes window.JR.observeReveals
 js/hero-scrub.js         canvas frame scrub on desktop, video on mobile
 js/main.js               nav, forms, listings, modal, calculator
-data/listings.js         written by the scraper. do not edit
 data/listings.seed.js    hand maintained fallback. edit this one
 scripts/                 the four build and check scripts
-scraper/                 the listings bot
 assets/hero-frames/      145 WebP frames. generated, but committed
 ```
 
@@ -82,7 +104,6 @@ node scripts/copy-lint.js            # the guardrail. run before every commit
 node scripts/build-neighborhoods.js  # regenerate the 20 area pages + hub
 node scripts/build-sitemap.js        # regenerate sitemap.xml. run after the above
 node scripts/build-hero-frames.js    # regenerate hero frames from the source video
-node scraper/scrape.js               # pull listings. needs config, see below
 ```
 
 ### copy-lint is the important one
@@ -145,31 +166,28 @@ sale, or a specific property, and it should stay that way.
 
 ## Listings
 
-Three tiers of fallback so the grid is never broken:
+**The site does not host listings. It links to hers.**
 
-1. `window.LISTINGS` from `data/listings.js`, written by the scraper
-2. `window.LISTINGS_SEED` from `data/listings.seed.js`, hand maintained
-3. An honest empty state
+Preferred Shore's site runs on MLS Grid carrying Stellar MLS data and publishes
+an active takedown address. Republishing that here would not have been fixable
+with broker permission, because the brokerage does not hold the redistribution
+right either. On top of which her own listing array is empty, so a scraper would
+have filled her personal site with colleagues' inventory.
 
-The seed ships **empty**, which is deliberate. It is not filled with invented
-sample homes, because a real estate site displaying properties that do not exist
-is a compliance problem rather than a placeholder. To add listings by hand, copy
-the documented shape in `listings.seed.js`.
+Instead the listings section is a handoff panel pointing at
+`jenniferbarragan.preferredshore.com`, her own brokerage subdomain. It is a
+licensed IDX search, it is live rather than a stale copy, it is complete, and
+searches there are attributed to her. `BROKER_SEARCH` and `handoffHTML()` in
+`js/main.js` are the whole implementation.
 
-### Before the scraper can run
+Full reasoning is in `BROKER-PERMISSION.md`. Read it before anyone suggests
+adding a scraper back.
 
-`scraper/scrape.js` refuses to run until `CONFIG.broker` is filled in. It needs
-the brokerage site URL, Jennifer's agent profile URL on it, and the search path
-pattern.
-
-**And it needs the broker's written permission before the feed goes public.**
-Bradenton is [Stellar MLS](https://www.stellarmls.com/distribution) territory,
-whose Article 19 IDX rules are stricter than most. Scraped data does not satisfy
-them regardless of where the HTML came from. See `BROKER-PERMISSION.md`.
-
-Note: the scraper shells out to system `curl` rather than using Node's `fetch`,
-because brokerage sites sit behind Cloudflare which 403s `fetch` on sight. That
-is deliberate. Do not "fix" it.
+**Her own listings are a different matter** and she can advertise those freely.
+Add them by hand to `data/listings.seed.js`, following the shape documented in
+that file, and the carousel returns automatically with the handoff stepping
+aside. The seed ships empty on purpose: a real estate site showing properties
+that do not exist is a compliance problem, not a placeholder.
 
 ---
 

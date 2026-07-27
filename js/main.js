@@ -10,14 +10,20 @@
 
   /* ---------------------------------------------------------------------- */
   /* Single source of truth for contact details used inside generated markup
-     (modal CTAs, mailto links). The visible copy in the HTML has its own
-     copies; when the real details arrive, search the repo for [[FILL IN]]. */
+     (modal CTAs, mailto links). The visible copy in the HTML carries its own
+     copies. Email is still unknown, so it stays a visible token rather than a
+     silently broken mailto. */
   const CONTACT = {
-    email: '[[FILL IN: jennifer email]]',
-    phone: '[[FILL IN: jennifer phone]]',
-    tel:   '[[FILL IN: +1XXXXXXXXXX]]',
-    firm:  '[[FILL IN: brokerage licensed name]]',
+    email: '[[EMAIL]]',
+    phone: '(205) 790-7560',
+    tel:   '+12057907560',
+    firm:  'Preferred SHORE Real Estate',
   };
+
+  /* Her brokerage subdomain. Already a full IDX compliant search that she owns,
+     which is why the listings section hands off to it rather than republishing
+     MLS Grid data. See BROKER-PERMISSION.md. */
+  const BROKER_SEARCH = 'https://jenniferbarragan.preferredshore.com';
 
   const reveal = (root) => window.JR && window.JR.observeReveals
     ? window.JR.observeReveals(root) : null;
@@ -490,14 +496,33 @@
       '</a>';
   }
 
+  /* Handoff to her brokerage search. This is what shows whenever there is
+     nothing of her own to display, which is the normal state until she takes a
+     listing. It is deliberately not a scraped feed: the brokerage site runs on
+     MLS Grid carrying Stellar MLS data, which is licensed to them and policed
+     with a published takedown address. Sending people to her own subdomain is
+     both compliant and better, since the lead stays with her. */
+  function handoffHTML() {
+    return '' +
+      '<div class="handoff reveal">' +
+      '<p class="handoff__kicker">Full MLS Search</p>' +
+      '<h3 class="handoff__title">Every listing in Manatee and Sarasota counties.</h3>' +
+      '<p class="handoff__text">Jennifer&rsquo;s search runs on a live MLS feed through ' +
+      esc(CONTACT.firm) + ', so it is current and complete rather than a copy that ' +
+      'goes stale. Searching there tells her what you are looking for.</p>' +
+      '<a class="btn btn--solid" href="' + BROKER_SEARCH + '" target="_blank" rel="noopener">' +
+      'Search Every Listing</a>' +
+      '<p class="handoff__note">Opens in a new tab on her brokerage site.</p>' +
+      '</div>';
+  }
+
   let currentList = [];
   function renderGrid(list, tag, key) {
     currentList = list || [];
     grid.classList.toggle('listings__grid--six', key === 'singleFamily');
     if (!list || !list.length) {
-      grid.innerHTML =
-        '<p class="listings__empty">New listings are being added. ' +
-        'Reach out and I will send what is coming before it hits the market.</p>';
+      grid.innerHTML = handoffHTML();
+      reveal(grid);
       return;
     }
     grid.innerHTML = list.map((l, i) => cardHTML(l, tag, i)).join('');
@@ -651,7 +676,7 @@
     descEl.innerHTML =
       splitParas(teaser, 260).map((p) => '<p>' + esc(p) + '</p>').join('') +
       '<p class="modal__nudge">Want more photos, the full details, or a private showing? ' +
-      '<a href="' + mailto + '">Send me a note and I will walk you through it.</a></p>';
+      '<a href="' + mailto + '">Send Jennifer a note and she will walk you through it.</a></p>';
 
     modal.querySelector('#modal-cta').href = mailto;
     const source = modal.querySelector('#modal-source');
@@ -722,14 +747,13 @@
 
     if (active.length) {
       titleEl.textContent = 'My Listings';
-      subEl.textContent = 'Homes I am representing right now across Manatee County.';
+      subEl.textContent = 'Homes Jennifer is representing right now across Manatee County.';
       tabs.push({ key: 'active', label: 'Active', items: active });
       cardTag = 'For Sale';
     } else {
-      titleEl.textContent = 'Featured Properties';
+      titleEl.textContent = 'Search Every Listing';
       subEl.textContent =
-        'A look at what is available across Bradenton, the barrier islands, and Lakewood Ranch. ' +
-        'Ask me about any of these, or about something you have not seen listed yet.';
+        'Bradenton, Lakewood Ranch, Sarasota and the barrier islands, on a live MLS feed.';
     }
 
     Object.keys(team).forEach((key) => {
@@ -739,7 +763,22 @@
 
     if (sold.length) tabs.push({ key: 'sold', label: 'Recently Sold', items: sold });
 
-    if (!tabs.length) { renderGrid([]); return; }
+    // Nothing of her own to show. Hand off, and hide the carousel furniture
+    // so the section does not look like a broken slider.
+    if (!tabs.length) {
+      renderGrid([]);
+      tabsEl.style.display = 'none';
+      if (prevBtn) prevBtn.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
+      if (metaEl) {
+        metaEl.textContent =
+          'Listing search is provided by ' + CONTACT.firm + ' through its licensed MLS feed. ' +
+          'Information is deemed reliable but is not guaranteed, and is subject to change or ' +
+          'prior sale. This site is not intended to solicit properties already listed with ' +
+          'another broker.';
+      }
+      return;
+    }
 
     const byKey = {};
     tabs.forEach((t) => (byKey[t.key] = t));

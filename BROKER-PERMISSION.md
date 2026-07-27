@@ -1,91 +1,92 @@
-# Broker permission for listing display
+# Listings: why this site does not host them
 
-**Status: NOT YET REQUESTED.** The scraper is built but will not run until
-configured, and the feed should not go live publicly until this is answered in
-writing.
-
----
-
-## Why this exists
-
-The site displays listings pulled from the brokerage's public website. That is
-a different thing from an authorized IDX feed, and it matters here more than it
-would in most markets.
-
-Bradenton sits in [Stellar MLS](https://www.stellarmls.com/distribution)
-territory. Stellar's Article 19 governs IDX display and it is stricter than many
-MLSs: consent, attribution, refresh frequency, and honoring listing level opt
-outs are all specified. Scraped data does not satisfy those rules regardless of
-where the HTML was fetched from, and the exposure lands on Jennifer's license
-and on her broker, not on the website.
-
-Two acceptable outcomes:
-
-1. **The broker authorizes it in writing** and confirms what attribution and
-   refresh cadence they require. Record the answer below.
-2. **A proper IDX feed is set up** through the broker, usually via a vendor such
-   as IDX Broker, Showcase IDX or Realtyna. Slower and it costs a monthly fee,
-   but it is the clean path and it removes the question permanently.
-
-Until one of those happens, the site runs on `data/listings.seed.js`, which
-Jennifer can maintain by hand for her own listings. That is fully compliant,
-because they are her listings.
+**Decision: the site links to Jennifer's brokerage search rather than
+republishing listing data. No permission request is needed, and no scraper
+exists.** Recorded 2026-07-26.
 
 ---
 
-## Draft request
+## What the research found
 
-Send from Jennifer, not from Kevin. Fill the brackets first.
+The original plan was to scrape Preferred Shore's public site the way
+`kevin-vaz-realty-website` scrapes HomeSmart. Looking at the actual site changed
+that. Three findings, in order of how much they matter:
 
-> Subject: Permission to display brokerage listings on my agent website
->
-> Hi [[broker name]],
->
-> I am putting up a personal agent website and I would like to display our
-> brokerage's active listings on it, in addition to my own.
->
-> Before I turn that on I want to make sure I am doing it the way you want it
-> done. Three questions:
->
-> 1. Do I have your permission to display our brokerage's listings on my site?
-> 2. Do we have an IDX feed through Stellar MLS I should be using instead? If
->    we do, who administers it and how do I get access?
-> 3. What attribution and disclaimer language do you want on each listing?
->
-> The site already shows the listing brokerage on every property, states that
-> information is deemed reliable but not guaranteed and subject to change or
-> prior sale, and carries the Equal Housing Opportunity statement. I would
-> rather match your preferred wording exactly than guess at it.
->
-> Happy to hold off entirely until you have had a chance to look.
->
-> Thank you,
-> Jennifer
+**1. The data is licensed IDX, not public listings.**
+Preferred Shore's site is fed by **MLS Grid**, carrying Stellar MLS data, which
+their pages identify by its former name, MFR MLS. Their own footer says the
+listings come through "the Internet Data Exchange program of MFR MLS".
+
+**2. It is actively policed.**
+The site publishes a DMCA takedown procedure and a contact address,
+`DMCAnotice@MLSGrid.com`. That is not boilerplate. It is an enforcement channel
+for exactly the thing scraping would have done, and the exposure would land on
+Jennifer's license and on her broker, not on the website.
+
+Broker permission would not have solved this. Preferred Shore does not own the
+redistribution right either. Stellar MLS does, and MLS Grid administers it, so
+the brokerage cannot grant what it does not hold.
+
+**3. There was nothing of hers to show anyway.**
+Her agent record on their system lists `mylistings: []`. Every one of the 25
+listings on that site belongs to another Preferred Shore agent. A scraper would
+have filled her personal site with colleagues' inventory, which is a marketing
+problem before it is a legal one.
 
 ---
 
-## Answer
+## What the site does instead
 
-Record the response here. Date it. If permission comes verbally, follow up with
-an email confirming it and paste that thread in, because "he said it was fine"
-is not a defense.
+The listings section is a handoff panel pointing at
+**`jenniferbarragan.preferredshore.com`**, her own brokerage subdomain.
 
-- **Date asked:**
-- **Date answered:**
-- **Answered by:**
-- **Permission granted:** yes / no / use IDX instead
-- **Required attribution wording:**
-- **Required refresh cadence:**
-- **Notes:**
+This is better than scraping on every axis that matters:
+
+- **Compliant.** It is a licensed IDX search, operated by the brokerage that
+  holds the license.
+- **Current.** A live feed rather than a weekly copy that goes stale.
+- **Complete.** Every listing in the MLS, not a sample of whatever parsed.
+- **Hers.** It is her subdomain, so searches there are attributed to her. A
+  scraped grid on this site would have sent her nothing.
+- **Free.** No IDX vendor fee, no maintenance, nothing to break.
+
+Implementation lives in `js/main.js`: `BROKER_SEARCH` holds the URL and
+`handoffHTML()` renders the panel. It appears whenever there is nothing of her
+own to display, which is the normal state.
 
 ---
 
-## Checklist before turning the feed on
+## When she takes her own listings
 
-- [ ] Written permission recorded above, or an authorized IDX feed in place
-- [ ] `scraper/scrape.js` CONFIG.broker filled in
-- [ ] Attribution wording on the listing modal matches what the broker requires
-      (it is set in `js/main.js`, in the `#modal-disclaimer` block)
-- [ ] Refresh cadence matches what was agreed. The scheduled task currently runs
-      weekly, which is slower than most IDX rules allow
-- [ ] A route exists for removing a listing quickly if a seller opts out
+Her own listings are hers to advertise. No permission, no IDX feed, no question.
+
+Add them by hand to `data/listings.seed.js`, following the documented shape in
+that file. The carousel returns automatically and the handoff panel steps aside.
+`listingBroker` should be left out for her own listings and filled in for
+anyone else's.
+
+---
+
+## If a full search on this domain is ever wanted
+
+The only legitimate route is a proper IDX feed licensed to this domain:
+
+1. Jennifer's broker applies to Stellar MLS for IDX access for the new site.
+2. A vendor delivers it. IDX Broker, Showcase IDX and Realtyna are the usual
+   options, and each carries a monthly fee.
+3. Display then has to follow Stellar's Article 19: attribution on every
+   listing, a refresh cadence, and honoring listing level opt outs.
+
+Weeks of lead time and an ongoing cost, for something the handoff already
+achieves. Worth revisiting only if she wants search traffic landing on her own
+domain rather than the brokerage's.
+
+---
+
+## Do not
+
+- Scrape `preferredshore.com` or any of its agent subdomains.
+- Copy listing photos from `d36xftgacqn2p.cloudfront.net`, which is their
+  MLS photo CDN.
+- Reintroduce `scraper/`. It was written, then deleted once these findings came
+  in. It is in git history at `7833163` if anyone needs to see what it did.
