@@ -789,20 +789,64 @@
     const byKey = {};
     tabs.forEach((t) => (byKey[t.key] = t));
 
-    // Deal price sorted listings across the carousel pages so each scroll spans
-    // the whole range instead of stacking every expensive home on page one.
+    /* Deal listings out so every carousel page spans the price range instead of
+       stacking the expensive homes on page one.
+
+       Each page gets, in order: one home over 2M, one between 1M and 2M, then
+       the rest filled from the middle and entry bands. Someone scrolling sees a
+       multi million, a million, and several more attainable homes on every
+       page rather than paging down through a descending price list.
+
+       Bands drain independently and the fill falls back to whatever is left, so
+       an inventory that is all one price point still renders sensibly. That is
+       currently the case: the brokerage feed only exposes its top 25 by price,
+       so everything lands in the luxury band until the source is widened. */
+    const BANDS = [
+      ['luxury',  (p) => p >= 2000000],
+      ['million', (p) => p >= 1000000 && p < 2000000],
+      ['mid',     (p) => p >= 600000  && p < 1000000],
+      ['entry',   (p) => p <  600000],
+    ];
+
     function mixByPrice(list, perPage) {
-      const pages = Math.max(1, Math.ceil(list.length / perPage));
-      const sorted = [...list].sort((a, b) => (b.price || 0) - (a.price || 0));
-      const buckets = Array.from({ length: pages }, () => []);
-      sorted.forEach((l, i) => buckets[i % pages].push(l));
-      return buckets.flat();
+      const bag = {};
+      BANDS.forEach(([k]) => (bag[k] = []));
+      [...list]
+        .sort((a, b) => (b.price || 0) - (a.price || 0))
+        .forEach((l) => {
+          const p = l.price || 0;
+          const hit = BANDS.find(([, test]) => test(p));
+          bag[hit ? hit[0] : 'entry'].push(l);
+        });
+
+      const lead = ['luxury', 'million'];   // one of each, at the top of a page
+      const fill = ['mid', 'entry'];        // the rest of the page
+      const out = [];
+
+      while (out.length < list.length) {
+        const page = [];
+        for (const k of lead) {
+          if (bag[k].length && page.length < perPage) page.push(bag[k].shift());
+        }
+        while (page.length < perPage) {
+          const k = fill.find((x) => bag[x].length) || lead.find((x) => bag[x].length);
+          if (!k) break;
+          page.push(bag[k].shift());
+        }
+        if (!page.length) break;
+        out.push(...page);
+      }
+      return out;
     }
 
     function show(key) {
       const t = byKey[key];
       const tag = key === 'sold' ? 'Sold' : key === 'active' ? 'For Sale' : cardTag;
-      const items = key === 'singleFamily' ? mixByPrice(t.items, 6) : t.items;
+      // Six per page on single family (two rows of three), four on the
+      // narrower condo tab. Both get the band mix.
+      const items = key === 'singleFamily' ? mixByPrice(t.items, 6)
+                  : key === 'condos'       ? mixByPrice(t.items, 3)
+                  : t.items;
       renderGrid(items, tag, key);
     }
 

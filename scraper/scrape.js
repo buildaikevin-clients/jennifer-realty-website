@@ -205,6 +205,9 @@ function normalize(raw, opts) {
     beds: raw.beds || null,
     baths: raw.baths || null,
     sqft: num(raw.footage),
+    // Carried through so main() can split the tabs. The source calls this
+    // listing_type_label and its values are Single Family, Condos, Income.
+    type: raw.listing_type_label || null,
     area: titleCase(raw.city) || null,
     description: null,          // not present in the summary payload
     photo: photos[0] || null,
@@ -264,7 +267,9 @@ function main() {
       .map((r) => normalize(r, { own: false }));
     const single = [], condos = [];
     for (const l of dedupe(picked)) {
-      (/condo|town/i.test(String(l.type || '')) ? condos : single).push(l);
+      // Condos, townhomes and villas go in their own tab. Everything else,
+      // including Income and multi family, sits with single family.
+      (/condo|town|villa/i.test(String(l.type || '')) ? condos : single).push(l);
     }
     if (single.length) { team.singleFamily = single; teamLabels.singleFamily = 'Single Family'; }
     if (condos.length) { team.condos = condos; teamLabels.condos = 'Condos and Townhomes'; }
