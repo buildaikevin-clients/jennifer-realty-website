@@ -4,17 +4,6 @@ ASSETS — what is here and what is still needed
 STILL NEEDED
 ------------
 
-jennifer-headshot.jpg     REQUIRED. Portrait, 4:5 ratio, about 1600x2000.
-                          Used on the home page about band, the About page,
-                          and as the social preview for About.
-                          If missing, the page hides the photo block rather
-                          than showing a broken image, so the site still
-                          looks intentional. But it needs to be there.
-
-jennifer-working.jpg      Optional second photo for the About page. 4:3,
-                          about 1600x1200. Something candid at a property
-                          rather than a second studio headshot.
-
 guides/moving-to-bradenton.pdf
                           REQUIRED for the relocation guide form to deliver
                           anything. The form captures the lead either way,
@@ -30,6 +19,30 @@ favicon.svg               Present, but it is a placeholder J monogram in the
 
 ALREADY HERE
 ------------
+
+jennifer-source.jpg       Her master portrait, 4672x7008. Supplied 2026-07-27.
+                          Never referenced by the site directly. It is kept so
+                          the three crops below can be recut.
+
+jennifer-headshot.jpg     4:5, 1600x2000. Home page about band and the About
+                          page. The crop deliberately holds her face in the
+                          upper third and leaves headroom, because
+                          .about__photo oversizes the image by 42px for the
+                          parallax drift and a tight crop would travel the top
+                          of her hair out of frame on scroll.
+
+jennifer-working.jpg      4:3, 1600x1200. Second About photo, wider, keeping
+                          the surf artwork in frame behind her.
+
+og-jennifer.jpg           1200x630. Social preview for the About page.
+
+                          Recut any of them with:
+                            ffmpeg -i assets/jennifer-source.jpg \
+                              -vf "crop=3760:4700:912:1500,scale=1600:2000" \
+                              -q:v 3 assets/jennifer-headshot.jpg
+                          The crop is x=912 y=1500, 3760x4700 for the 4:5.
+                          Judge any change by loading the page, not by opening
+                          the file, because of the parallax oversize.
 
 hero-source.mp4           The master hero video. 1920x1080, 12 seconds,
                           silent, no watermark. Committed so the frames can

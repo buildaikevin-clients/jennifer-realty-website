@@ -166,7 +166,11 @@ sale, or a specific property, and it should stay that way.
 
 ## Listings
 
-**The site does not host listings. It links to hers.**
+**Default: her own listings only. Brokerage listings are opt in.**
+
+`node scraper/scrape.js` pulls her listings. Add `--agency` to include the
+brokerage feed. Read `BROKER-PERMISSION.md` before using that flag: dropping it
+and redeploying is the one command rollback if a takedown notice ever arrives.
 
 Preferred Shore's site runs on MLS Grid carrying Stellar MLS data and publishes
 an active takedown address. Republishing that here would not have been fixable
@@ -174,14 +178,15 @@ with broker permission, because the brokerage does not hold the redistribution
 right either. On top of which her own listing array is empty, so a scraper would
 have filled her personal site with colleagues' inventory.
 
-Instead the listings section is a handoff panel pointing at
+When there is nothing to show, the listings section falls back to a handoff
+panel pointing at
 `jenniferbarragan.preferredshore.com`, her own brokerage subdomain. It is a
 licensed IDX search, it is live rather than a stale copy, it is complete, and
 searches there are attributed to her. `BROKER_SEARCH` and `handoffHTML()` in
 `js/main.js` are the whole implementation.
 
-Full reasoning is in `BROKER-PERMISSION.md`. Read it before anyone suggests
-adding a scraper back.
+Full reasoning, and what the scraper respects in their robots.txt, is in
+`BROKER-PERMISSION.md`.
 
 **Her own listings are a different matter** and she can advertise those freely.
 Add them by hand to `data/listings.seed.js`, following the shape documented in
