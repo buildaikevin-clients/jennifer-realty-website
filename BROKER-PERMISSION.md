@@ -1,8 +1,14 @@
-# Listings: why this site does not host them
+# Listings: where they come from and what the risk is
 
-**Decision: the site links to Jennifer's brokerage search rather than
-republishing listing data. No permission request is needed, and no scraper
-exists.** Recorded 2026-07-26.
+**Current state, updated 2026-07-27.** A scraper exists at `scraper/scrape.js`.
+
+- **Default run pulls only Jennifer's own listings.** Zero risk. An agent may
+  always advertise her own inventory.
+- **`--agency` also pulls the brokerage's listings.** Kevin asked for this
+  knowingly after the risk below was raised twice. It is opt in rather than
+  default for that reason.
+- When there is nothing to show, the site falls back to a handoff panel pointing
+  at her brokerage search, which is always compliant.
 
 ---
 
@@ -83,10 +89,33 @@ domain rather than the brokerage's.
 
 ---
 
-## Do not
+## How the scraper works, and what it respects
 
-- Scrape `preferredshore.com` or any of its agent subdomains.
-- Copy listing photos from `d36xftgacqn2p.cloudfront.net`, which is their
-  MLS photo CDN.
-- Reintroduce `scraper/`. It was written, then deleted once these findings came
-  in. It is in git history at `7833163` if anyone needs to see what it did.
+One request to `jenniferbarragan.preferredshore.com/` gets everything. The page
+embeds a complete `account_info` JSON blob holding `mylistings`, `soldlistings`
+and `agencylistings`, so there is no need to crawl search results.
+
+That matters, because their robots.txt **disallows** the search endpoints:
+
+```
+Disallow: /index.php?advanced=1
+Disallow: /index.php?quick=1
+```
+
+The scraper never touches those. It reads the subdomain root and individual
+`/property/` pages, both of which are allowed. It waits 1500ms between requests
+and caps gallery fetches at 30.
+
+Every listing that is not hers carries `listingBroker`, naming the listing agent
+and the brokerage, and the modal prints it. Her own listings leave it empty
+because attribution to herself would be nonsense.
+
+## If a takedown ever arrives
+
+Do not argue it. Run `node scraper/scrape.js` without `--agency`, which strips
+the brokerage listings and leaves only hers, then redeploy. The handoff panel
+takes over automatically and the site is immediately compliant. Reply to
+`DMCAnotice@MLSGrid.com` confirming removal.
+
+Keeping that path one command away is the whole reason `--agency` is a flag
+rather than the default.

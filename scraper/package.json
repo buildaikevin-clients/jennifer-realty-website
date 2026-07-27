@@ -1,0 +1,13 @@
+{
+  "name": "jennifer-realty-scraper",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pulls listings from Jennifer's Preferred Shore subdomain into data/listings.js.",
+  "main": "scrape.js",
+  "scripts": {
+    "scrape": "node scrape.js",
+    "scrape:agency": "node scrape.js --agency"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {}
+}
