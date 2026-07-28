@@ -509,9 +509,9 @@
       '<div class="handoff reveal">' +
       '<p class="handoff__kicker">Full MLS Search</p>' +
       '<h3 class="handoff__title">Every listing in Manatee and Sarasota counties.</h3>' +
-      '<p class="handoff__text">Jennifer&rsquo;s search runs on a live MLS feed through ' +
+      '<p class="handoff__text">My search runs on a live MLS feed through ' +
       esc(CONTACT.firm) + ', so it is current and complete rather than a copy that ' +
-      'goes stale. Searching there tells her what you are looking for.</p>' +
+      'goes stale. Searching there tells me what you are looking for.</p>' +
       '<a class="btn btn--solid" href="' + BROKER_SEARCH + '" target="_blank" rel="noopener">' +
       'Search Every Listing</a>' +
       '<p class="handoff__note">Opens in a new tab on her brokerage site.</p>' +
@@ -678,7 +678,7 @@
     descEl.innerHTML =
       splitParas(teaser, 260).map((p) => '<p>' + esc(p) + '</p>').join('') +
       '<p class="modal__nudge">Want more photos, the full details, or a private showing? ' +
-      '<a href="' + mailto + '">Send Jennifer a note and she will walk you through it.</a></p>';
+      '<a href="' + mailto + '">Send me a note and I will walk you through it.</a></p>';
 
     modal.querySelector('#modal-cta').href = mailto;
     const source = modal.querySelector('#modal-source');
@@ -749,7 +749,7 @@
 
     if (active.length) {
       titleEl.textContent = 'My Listings';
-      subEl.textContent = 'Homes Jennifer is representing right now across Manatee County.';
+      subEl.textContent = 'Homes I am representing right now across Manatee County.';
       tabs.push({ key: 'active', label: 'Active', items: active });
       cardTag = 'For Sale';
     } else {
@@ -759,7 +759,7 @@
       titleEl.textContent = 'Featured Properties';
       subEl.textContent =
         'A selection of what ' + CONTACT.firm + ' has on the market across ' +
-        'Manatee and Sarasota counties. Ask Jennifer about any of them, or ' +
+        'Manatee and Sarasota counties. Ask me about any of them, or ' +
         'about something you have not seen listed.';
     }
 

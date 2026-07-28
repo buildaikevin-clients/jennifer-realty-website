@@ -669,19 +669,28 @@ a:hover { color: var(--ink); }
    The reference does this with Wix BackgroundParallax. Here .workwith__img is
    oversized and registered in PARALLAX_TARGETS, so the house drifts against
    the scroll the same way. */
+/* This band runs shorter than a standard .section. It was the tallest thing on
+   the page after the hero and most of that was air, so the padding, the gap
+   under the heading, the card photos and the card bodies are all tightened
+   here. Nothing outside .workwith changes.
+
+   Every one of these numbers moves the seam, so the 58% above became 62%.
+   Change any of them and that percentage has to be checked again. */
 .workwith {
   position: relative;
   background: var(--deep);
   color: var(--bone);
   overflow: hidden;
+  padding: clamp(3rem, 5.5vw, 4.75rem) 0;
 }
+.workwith .section__head { margin-bottom: clamp(1.8rem, 3vw, 2.5rem); }
 .workwith__inner { position: relative; z-index: 1; }
 
 /* Where the photo stops. The cards are pulled up so they cross it. */
 .workwith__bg {
   position: absolute;
   inset: 0 0 auto 0;
-  height: 58%;
+  height: 62%;
   overflow: hidden;
 }
 /* Headroom for the drift, and the zoom comes free with it.
@@ -737,16 +746,19 @@ a:hover { color: var(--ink); }
   box-shadow: var(--shadow-lg);
 }
 .workwith .path:hover { border-color: transparent; }
+/* The reference leaves a lot of air below the copy. Kept, but roughly half of
+   what it was: at 5.5rem it was the single biggest block of empty space in the
+   band. */
 .workwith .path__body {
-  padding: clamp(2rem, 3.4vw, 3rem) clamp(1.4rem, 2.4vw, 2.2rem)
-           clamp(3rem, 6vw, 5.5rem);
+  padding: clamp(1.5rem, 2.4vw, 2rem) clamp(1.4rem, 2.4vw, 2.2rem)
+           clamp(1.8rem, 3vw, 2.6rem);
 }
 .workwith .path__title {
   color: var(--paper);
-  font-size: clamp(1.6rem, 2.5vw, 2.15rem);
+  font-size: clamp(1.45rem, 2.1vw, 1.85rem);
   font-weight: 600;
   line-height: 1.14;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   max-width: 15ch;
   margin-inline: auto;
 }
@@ -761,14 +773,20 @@ a:hover { color: var(--ink); }
 .workwith .path__num { display: none; }
 .workwith .path__link {
   color: var(--paper);
-  margin-top: 1.6rem;
+  margin-top: 1.1rem;
   justify-content: center;
 }
-.workwith .path__media { aspect-ratio: 4 / 3; }
+/* 3/2 rather than 4/3. A third of the band's height was card photograph, and
+   the wider crop suits these three images anyway. */
+.workwith .path__media { aspect-ratio: 3 / 2; }
 
 @media (max-width: 860px) {
-  /* Less card height to cross, so the photo band shrinks with it. */
-  .workwith__bg { height: 46%; }
+  /* Less card height to cross, so the photo band shrinks with it. Approximate
+     by nature: one percentage has to cover everything from a phone, where the
+     cards are in a single tall column, up to the two column layout just under
+     this breakpoint, and the seam sits at a very different fraction of the
+     section in each. */
+  .workwith__bg { height: 48%; }
 }
 
 /* ============================================================ pathways === */

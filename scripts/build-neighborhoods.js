@@ -210,9 +210,9 @@ const DATA = [
     ],
     faq: [
       ['Can I rent out a home on Anna Maria Island?',
-       'Sometimes, and the answer depends on which of the three cities the property sits in and how the parcel is zoned. Minimum rental periods, occupancy caps, and registration requirements are all set locally rather than county wide, and they have been revised more than once. Before you buy anything here with rental income in mind, she confirms the rules for that exact parcel in writing.'],
+       'Sometimes, and the answer depends on which of the three cities the property sits in and how the parcel is zoned. Minimum rental periods, occupancy caps, and registration requirements are all set locally rather than county wide, and they have been revised more than once. Before you buy anything here with rental income in mind, we confirm the rules for that exact parcel in writing.'],
       ['What is different about insuring an island property?',
-       'Most of the island falls in coastal high hazard flood zones, which changes both what coverage is required and what it costs. Wind coverage is frequently written separately. The elevation of the structure matters enormously, and an elevation certificate can shift a premium by thousands per year. Jennifer gets quotes on a specific address early rather than at the end of a contract.'],
+       'Most of the island falls in coastal high hazard flood zones, which changes both what coverage is required and what it costs. Wind coverage is frequently written separately. The elevation of the structure matters enormously, and an elevation certificate can shift a premium by thousands per year. I get quotes on a specific address early rather than at the end of a contract.'],
       ['Is the island the same market as mainland Bradenton?',
        'No. Island inventory is smaller, prices per square foot are substantially higher, buyers are often paying cash or buying with rental income in mind, and homes can take longer to sell. It moves on its own cycle and comparable sales from the mainland tell you almost nothing about it.'],
     ],
@@ -237,7 +237,7 @@ const DATA = [
     ],
     faq: [
       ['What should I check on a canal home here?',
-       'Seawall condition and age first, because replacement is expensive and it is not always obvious from a walk through. Then dock and lift condition and permits, water depth at low tide, and whether the bridge clearance between the canal and open water fits the boat you actually own. Better to find these before an offer than during inspection.'],
+       'Seawall condition and age first, because replacement is expensive and it is not always obvious from a walk through. Then dock and lift condition and permits, water depth at low tide, and whether the bridge clearance between the canal and open water fits the boat you actually own. I would rather find these before an offer than during inspection.'],
       ['How does Holmes Beach compare to Anna Maria city?',
        'Holmes Beach is larger, has more canal inventory, and generally more year round residents. Anna Maria at the north end is smaller, quieter in inventory terms, and its rental rules differ. Prices in both are set more by water access, elevation, and rental rights than by which city line the parcel falls on.'],
       ['Are there still older homes to renovate here?',
@@ -264,7 +264,7 @@ const DATA = [
     ],
     faq: [
       ['What should I look at before buying a condominium here?',
-       'The association documents, in detail. Florida now requires milestone structural inspections and reserve funding based on a structural integrity reserve study for buildings three stories and taller, and the effect on some island associations has been higher dues or special assessments. Jennifer wants the budget, the reserve study, the milestone inspection, and recent minutes before you go under contract.'],
+       'The association documents, in detail. Florida now requires milestone structural inspections and reserve funding based on a structural integrity reserve study for buildings three stories and taller, and the effect on some island associations has been higher dues or special assessments. I want the budget, the reserve study, the milestone inspection, and recent minutes before we go under contract.'],
       ['Is this a better rental market than the rest of the island?',
        'It has historically had more rental inventory and more units zoned for shorter stays, but the rules are set by the city and by zoning district rather than by reputation. Any income assumption should be checked against that specific parcel and its rental history rather than against what is typical for the area.'],
       ['How far is it to the mainland?',
@@ -291,7 +291,7 @@ const DATA = [
     ],
     faq: [
       ['Does the county line actually matter?',
-       'Yes. Property tax rates, county services, permitting, and public records all follow the county the parcel sits in rather than the town. Two comparable units a mile apart can carry noticeably different tax bills for that reason alone. It is one of the first things Jennifer checks on any Longboat Key property.'],
+       'Yes. Property tax rates, county services, permitting, and public records all follow the county the parcel sits in rather than the town. Two comparable units a mile apart can carry noticeably different tax bills for that reason alone. It is one of the first things I check on any Longboat Key property.'],
       ['Can properties here be rented short term?',
        'In most of the town, no. Longboat Key has long enforced minimum rental periods across the majority of its zoning districts, with limited exceptions in specific tourism zoned areas. If income is part of your plan, the rental minimum for that exact parcel needs to be confirmed before you write an offer.'],
       ['What is the condominium situation here?',
@@ -322,7 +322,7 @@ const DATA = [
       ['Is Cortez a practical alternative to buying on the island?',
        'For many buyers it is. You are minutes from the beach with mainland pricing, mainland insurance in many cases, and deep water access on much of the waterfront inventory. The tradeoff is a much smaller inventory, since the village is small and turnover is limited.'],
       ['What about flood zones here?',
-       'Much of Cortez sits low and close to the water, so flood zone and structure elevation drive both insurance cost and what you can do with an older home. Substantial improvement rules can limit how much you invest in an existing structure before it must be brought up to current elevation standards. Jennifer pulls the zone before you look seriously.'],
+       'Much of Cortez sits low and close to the water, so flood zone and structure elevation drive both insurance cost and what you can do with an older home. Substantial improvement rules can limit how much you invest in an existing structure before it must be brought up to current elevation standards. I pull the zone before we look seriously.'],
     ],
     nearby: ['bradenton-beach', 'holmes-beach', 'perico-island', 'west-bradenton'],
   },
@@ -345,7 +345,7 @@ const DATA = [
     ],
     faq: [
       ['What do the association dues cover here?',
-       'It varies by community, but on Perico Island they commonly include exterior maintenance, grounds, amenity access, and in some cases roof and insurance on the building shell. That makes a direct comparison to a single family home misleading unless you account for what you would otherwise pay separately. Jennifer breaks that out when you compare options.'],
+       'It varies by community, but on Perico Island they commonly include exterior maintenance, grounds, amenity access, and in some cases roof and insurance on the building shell. That makes a direct comparison to a single family home misleading unless you account for what you would otherwise pay separately. I break that out when we compare options.'],
       ['Is this a good option for part time residents?',
        'It is one of the more practical ones in the county, because exterior maintenance and landscaping are handled and the communities are gated. That said, rental minimums vary by community and need to be checked if you intend to rent when you are away.'],
       ['How close is it really to the beach?',
@@ -376,7 +376,7 @@ const DATA = [
       ['Why do people choose Palma Sola over the island?',
        'Cost, mostly. You are close to the beach without island pricing, island insurance, or island rental rules, and you get larger lots than most island inventory. The tradeoff is that you drive to the sand rather than walk to it.'],
       ['What is the waterfront situation here?',
-       'Palma Sola Bay is shallow in places, so water depth and access matter as much as the fact of being on the water. If a boat is part of the plan, she checks depth at low tide, bridge clearances on the route out, and the condition and permitting of any existing dock and lift before you commit.'],
+       'Palma Sola Bay is shallow in places, so water depth and access matter as much as the fact of being on the water. If a boat is part of the plan, we check depth at low tide, bridge clearances on the route out, and the condition and permitting of any existing dock and lift before you commit.'],
       ['Are homes here being torn down and rebuilt?',
        'On the better lots, yes, and it has been going on for years. That has two effects worth knowing. Comparable sales need care, because a 1960s ranch and a new build can sit side by side. And if you buy an older home in a flood zone intending a major renovation, substantial improvement rules may require the whole structure to be brought up to current elevation standards.'],
     ],
@@ -403,7 +403,7 @@ const DATA = [
       ['What should I check on a home from this era?',
        'Roof age first, because Florida carriers are strict about it and an older roof can prevent a buyer from getting insured at all. Then the electrical panel, the plumbing type, and whether the windows have been replaced with impact rated units. Original 1960s systems are common here and each of them affects both insurability and your offer.'],
       ['Is west Bradenton in a flood zone?',
-       'Parts of it are and parts are not, and it changes street by street rather than neighborhood by neighborhood. Areas closer to Palma Sola Bay and to the creeks sit lower. Jennifer pulls the FEMA zone for any specific address, because the difference between Zone X and Zone AE is a meaningful monthly number.'],
+       'Parts of it are and parts are not, and it changes street by street rather than neighborhood by neighborhood. Areas closer to Palma Sola Bay and to the creeks sit lower. I pull the FEMA zone for any specific address, because the difference between Zone X and Zone AE is a meaningful monthly number.'],
       ['How does it compare to the newer communities east of Interstate 75?',
        'Different tradeoffs entirely. West Bradenton gives you larger lots, mature landscaping, no CDD assessments, and a much shorter drive to the beach. The eastern communities give you newer construction, amenity centers, and homes built to current codes. Which is better depends on whether you value the beach drive or the newer build.'],
     ],
@@ -457,7 +457,7 @@ const DATA = [
       ['What is the housing stock actually like?',
        'Unusually varied for one neighborhood. Original 1920s and 1930s homes sit near 1950s and 1960s construction and near substantially rebuilt bayfront property. That range makes comparable sales work more involved here than in a subdivision where everything was built in the same three years.'],
       ['Does the airport affect the area?',
-       'Sarasota Bradenton International is close, which is convenient and also means aircraft noise on some approach paths. It varies considerably by exact location within the neighborhood. If it matters to you, stand on the lot at a few different times before making a decision.'],
+       'Sarasota Bradenton International is close, which is convenient and also means aircraft noise on some approach paths. It varies considerably by exact location within the neighborhood. If it matters to you, I would want you to stand on the lot at a few different times before making a decision.'],
       ['Is golf course frontage a premium here?',
        'It generally carries a premium, though the course is private and frontage does not convey membership. Membership terms are set by the club and are separate from the real estate, so they should be confirmed with the club directly rather than assumed from the listing.'],
     ],
@@ -484,7 +484,7 @@ const DATA = [
     ],
     faq: [
       ['What is a CDD and how is it different from an HOA?',
-       'A Community Development District is a special taxing district that financed the infrastructure of the community, meaning the roads, utilities, and amenities. You repay it through an assessment on your annual property tax bill, separate from and in addition to HOA dues. It can run well over a thousand dollars a year. Some villages have paid theirs off and some have decades left, so it is one of the first numbers Jennifer pulls on any Lakewood Ranch property.'],
+       'A Community Development District is a special taxing district that financed the infrastructure of the community, meaning the roads, utilities, and amenities. You repay it through an assessment on your annual property tax bill, separate from and in addition to HOA dues. It can run well over a thousand dollars a year. Some villages have paid theirs off and some have decades left, so it is one of the first numbers I pull on any Lakewood Ranch property.'],
       ['Is it really in two counties?',
        'Yes. The community straddles the Manatee and Sarasota county line, and the county a parcel sits in determines its property tax rate, its school assignment, and which county government you deal with. Buyers regularly assume the whole community is one or the other. It is worth confirming for any specific address.'],
       ['How far is it to the beach from Lakewood Ranch?',
@@ -511,7 +511,7 @@ const DATA = [
     ],
     faq: [
       ['What do the assessments run here?',
-       'Greyhawk Landing carries both HOA dues and a CDD assessment, and the CDD appears on the property tax bill rather than being billed separately. The combined figure varies by phase and lot, so it needs to be pulled for the specific parcel. Jennifer does that before you tour rather than after you like the house.'],
+       'Greyhawk Landing carries both HOA dues and a CDD assessment, and the CDD appears on the property tax bill rather than being billed separately. The combined figure varies by phase and lot, so it needs to be pulled for the specific parcel. I do that before we tour rather than after you like the house.'],
       ['What is the appeal versus Lakewood Ranch?',
        'Generally a lower price point for comparable square footage, a single community rather than a collection of villages, and a considerable amount of preserve within the gates. Lakewood Ranch offers more amenities, more dining, and more inventory. It comes down to whether you want the larger ecosystem or a self contained community.'],
       ['Are homes here newer than in Bradenton proper?',
@@ -569,7 +569,7 @@ const DATA = [
       ['How usable is the marina for a larger boat?',
        'That depends on slip availability, draft, and bridge clearances between the marina and open water on the Manatee River. Those constraints are specific enough that anyone buying here for the boating should verify them against the actual vessel rather than the brochure.'],
       ['What are the assessments like?',
-       'Waterlefe has both a CDD and community association dues, and there are additional costs tied to the river club. The full picture varies by property type, since villas and single family homes carry different maintenance obligations. Jennifer pulls the complete number rather than the headline HOA figure.'],
+       'Waterlefe has both a CDD and community association dues, and there are additional costs tied to the river club. The full picture varies by property type, since villas and single family homes carry different maintenance obligations. I pull the complete number rather than the headline HOA figure.'],
     ],
     nearby: ['lakewood-ranch', 'river-strand', 'ellenton'],
   },
@@ -594,7 +594,7 @@ const DATA = [
       ['What is the difference between Heritage Harbour and River Strand?',
        'Heritage Harbour is the larger master planned area. River Strand is the gated golf community inside it. They have different associations, different fee structures, and different amenity access, so a listing in Heritage Harbour does not necessarily include River Strand golf or club privileges. It is a common point of confusion and worth being precise about.'],
       ['Do condominiums here carry golf membership?',
-       'Some do and some do not, and in certain buildings a membership is bundled into the association dues. Because this varies by building and by phase, the specific documents for that unit are the only reliable source. She reads them before you make an offer.'],
+       'Some do and some do not, and in certain buildings a membership is bundled into the association dues. Because this varies by building and by phase, the specific documents for that unit are the only reliable source. I read them before we make an offer.'],
       ['Why do prices vary so much within one community?',
        'Because the housing types vary so much. A two bedroom condominium and a single family home on the golf course are both technically River Strand. That range is why a valuation here has to be based on comparable sales of the same product type rather than on a community average.'],
     ],
@@ -648,11 +648,11 @@ const DATA = [
     ],
     faq: [
       ['What should I know about buying from a builder here?',
-       'That the builder contract is not the standard Florida contract and it is written to favor the builder. Completion dates are often not firm, the deposit terms differ, and the ability to walk away is more limited than in a resale. Having representation at the model home matters, and in most cases the builder pays for it, but you generally have to register her on your first visit rather than after.'],
+       'That the builder contract is not the standard Florida contract and it is written to favor the builder. Completion dates are often not firm, the deposit terms differ, and the ability to walk away is more limited than in a resale. Having representation at the model home matters, and in most cases the builder pays for it, but you generally have to register me on your first visit rather than after.'],
       ['Why are prices lower here than closer to the water?',
        'Distance, mostly. Parrish is forty to fifty minutes from the Gulf beaches, and that drive is the tradeoff for newer construction at a lower price per square foot. For buyers who work from home or commute north toward Tampa, it can be the right trade. For buyers who came for the beach, it often is not.'],
       ['Is the growth here a problem?',
-       'It is a real consideration rather than a problem exactly. Road capacity, school capacity, and construction traffic are all following rather than leading the housing. If you buy into an early phase of a community you should expect construction around you for years. Better to know that going in.'],
+       'It is a real consideration rather than a problem exactly. Road capacity, school capacity, and construction traffic are all following rather than leading the housing. If you buy into an early phase of a community you should expect construction around you for years. I would rather you know that going in.'],
     ],
     nearby: ['palmetto', 'ellenton', 'lakewood-ranch'],
   },
@@ -705,7 +705,7 @@ const DATA = [
     ],
     faq: [
       ['What does live and work zoning mean in the Village of the Arts?',
-       'The neighborhood carries a zoning overlay that permits residents to operate certain small businesses, most commonly galleries and studios, from their homes. The permitted uses and requirements are set by the city of Bradenton and are specific. If running a business from the property is part of your plan, confirm the allowed use for that exact parcel with the city.'],
+       'The neighborhood carries a zoning overlay that permits residents to operate certain small businesses, most commonly galleries and studios, from their homes. The permitted uses and requirements are set by the city of Bradenton and are specific. If running a business from the property is part of your plan, we confirm the allowed use for that exact parcel with the city.'],
       ['What should I expect from homes of this age?',
        'Original wood frame construction, older electrical and plumbing, and often no central air in the earliest homes unless it has been added. Insurers look closely at roof, wiring, and plumbing on properties this old. Many have been renovated and many have not, and the difference between the two is substantial in both price and insurability.'],
       ['Are the riverfront condominiums subject to the new inspection rules?',
@@ -881,8 +881,8 @@ function footer(prefix) {
         <p class="footer__legal footer__eho reveal" style="--d:.1s">
           <span class="eho-mark" aria-hidden="true"></span>
           <span>
-            Equal Housing Opportunity. Jennifer Barragan is committed to the letter
-            and the spirit of the Fair Housing Act, and does not discriminate on the
+            Equal Housing Opportunity. I am committed to the letter and the
+            spirit of the Fair Housing Act, and I do not discriminate on the
             basis of race, color, religion, sex, familial status, national
             origin, disability, or any other class protected by federal or
             Florida law.
@@ -1034,7 +1034,7 @@ ${a.known.map((k) => `        <li>${esc(k)}</li>`).join('\n')}
     <div class="wrap">
       <div class="section__head">
         <p class="eyebrow reveal">Questions</p>
-        <h2 class="section__title reveal" style="--d:.08s">What people ask about ${esc(a.name)}.</h2>
+        <h2 class="section__title reveal" style="--d:.08s">What people ask me about ${esc(a.name)}.</h2>
       </div>
       <div class="faq">
 ${a.faq.map(([q, ans], i) => `        <details class="faq__item reveal" style="--d:.${i * 6}s">
@@ -1147,7 +1147,7 @@ ${nav('')}
         in common. One is a barrier island with coastal flood zones and rental
         rules that change by the block. The other is new construction on former
         farmland with builder contracts and CDD assessments. Picking the wrong
-        one for how you actually live is the most expensive mistake there is.
+        one for how you actually live is the most expensive mistake I see.
       </p>
 ${groups}
     </div>
