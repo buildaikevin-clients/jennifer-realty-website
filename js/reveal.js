@@ -76,15 +76,15 @@
      frame starts low in the picture and climbs. */
   const PARALLAX_TARGETS = [
     { sel: '.workwith__img',   range: 920 },  // oversized 1000px, the feature one
-    /* Oversized 900px, hung low in CSS so this sits on the furniture. 400 over
-       a pass of roughly 1400 is a little under a third of scroll speed: a
-       drift up through the lower half of the room, which never reaches the
+    /* Oversized 1200px, hung low in CSS so this sits on the furniture. 600
+       over a pass of roughly 1510 is about 40% of scroll speed: a clear climb
+       up through the lower half of the room, which never reaches the
        chandeliers and is not meant to.
 
-       400 is close to the ceiling. The way the image hangs leaves 250px of
-       room to move up, so this uses 200 of it. Going much past 440 needs the
-       margin in styles.css changed too, and that moves the framing. */
-    { sel: '.story__img',      range: 400, dir: -1 },
+       The way the image hangs leaves 400px of room to move up, so this uses
+       300 of it. Going much past 700 needs the margin and the oversize in
+       styles.css changed together, and past that the source runs out. */
+    { sel: '.story__img',      range: 600, dir: -1 },
     { sel: '.page-hero__img',  range: 90 },   // oversized 120px
     { sel: '.path__media img', range: 26 },   // oversized 34px
     { sel: '.card__media img', range: 20 },   // oversized 26px

@@ -1705,8 +1705,26 @@ input:focus, select:focus, textarea:focus {
   color: var(--ink-2);
   font-size: .96rem;
 }
-.journey__cta { margin-top: auto; align-self: flex-start; }
-.journey__cta:not(:first-child) { margin-top: 1.8rem; }
+/* Solid taupe, as on the reference, rather than the ghost outline used
+   elsewhere on the site. The same #7b736d as the service cards, which reads on
+   both the dark and the light bands without needing a variant for each. */
+.journey__cta {
+  margin-top: 2rem;
+  align-self: flex-start;
+  background: #7b736d;
+  border-color: #7b736d;
+  color: var(--paper);
+}
+.journey__cta:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+.journey__band--dark .journey__cta:hover {
+  background: var(--bone);
+  border-color: var(--bone);
+  color: var(--ink);
+}
 
 .section--dark .journey__step { border-top-color: rgba(239, 238, 236, .18); }
 .section--dark .journey__num { color: var(--gulf); }
