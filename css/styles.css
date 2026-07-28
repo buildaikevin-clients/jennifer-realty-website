@@ -742,6 +742,38 @@ a:hover { color: var(--ink); }
 
 /* ============================================================ about ====== */
 
+/* ---- pointer orb ------------------------------------------------------- */
+
+/* A soft light that drifts after the cursor across the About band. It is the
+   one place the gulf accent appears as atmosphere rather than as a line or a
+   word, which keeps it inside the one accent, one region rule in DESIGN.md.
+
+   Deliberately slow and low contrast. This band carries her photograph and her
+   bio, and anything brighter competes with both. */
+#about { position: relative; overflow: hidden; }
+#about > .wrap { position: relative; z-index: 1; }
+
+.orb {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .9s var(--ease);
+  background: radial-gradient(
+    460px circle at var(--ox, 50%) var(--oy, 45%),
+    rgba(111, 158, 163, .18),
+    rgba(111, 158, 163, .07) 36%,
+    rgba(111, 158, 163, 0) 65%
+  );
+}
+.orb.is-lit { opacity: 1; }
+
+/* Never on touch, where there is no cursor to trail and it would just sit
+   wherever the last tap landed. */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .orb { display: none; }
+}
+
 .about__grid {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);

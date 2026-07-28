@@ -295,6 +295,9 @@
 
   <!-- ==================================================== ABOUT ========== -->
   <section class="section section--dark" id="about">
+    <!-- Pointer orb. Purely decorative, so it is hidden from assistive tech
+         and js/main.js never initialises it on touch or under reduced motion. -->
+    <span class="orb" id="about-orb" aria-hidden="true"></span>
     <div class="wrap">
       <div class="about__grid">
         <!-- No onerror hide and no lazy loading here. The hide was a guard for

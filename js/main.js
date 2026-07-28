@@ -877,4 +877,65 @@
   }
 
   initListings();
+
+  /* ------------------------------------------------------------ orb ----- */
+  /* Soft light trailing the cursor across the About band.
+
+     It eases toward the pointer rather than tracking it exactly. Following the
+     cursor precisely reads as a hard spotlight stuck to the mouse; a lag of
+     around 0.09 per frame makes it drift, which is the point.
+
+     The loop only runs while the pointer is inside the band, and then for the
+     few frames it takes to settle, so an idle page costs nothing. */
+  function initOrb() {
+    const band = $('#about');
+    const orb = $('#about-orb');
+    if (!band || !orb) return;
+
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!fine || reduce) return;   // CSS hides it too, this just skips the work
+
+    const EASE = 0.09;
+    let tx = 0, ty = 0;      // where the pointer is
+    let cx = 0, cy = 0;      // where the orb currently is
+    let inside = false, raf = 0, primed = false;
+
+    function step() {
+      cx += (tx - cx) * EASE;
+      cy += (ty - cy) * EASE;
+      orb.style.setProperty('--ox', cx.toFixed(1) + 'px');
+      orb.style.setProperty('--oy', cy.toFixed(1) + 'px');
+      // Keep going while the pointer is in the band, or until the orb has
+      // caught up with wherever it was last headed.
+      if (inside || Math.abs(tx - cx) > 0.5 || Math.abs(ty - cy) > 0.5) {
+        raf = requestAnimationFrame(step);
+      } else {
+        raf = 0;
+      }
+    }
+
+    band.addEventListener('pointermove', (e) => {
+      const r = band.getBoundingClientRect();
+      tx = e.clientX - r.left;
+      ty = e.clientY - r.top;
+      // First move inside: drop the orb where the cursor is rather than
+      // letting it fly in from the corner.
+      if (!primed) { cx = tx; cy = ty; primed = true; }
+      if (!raf) raf = requestAnimationFrame(step);
+    });
+
+    band.addEventListener('pointerenter', () => {
+      inside = true;
+      orb.classList.add('is-lit');
+      if (!raf) raf = requestAnimationFrame(step);
+    });
+
+    band.addEventListener('pointerleave', () => {
+      inside = false;
+      orb.classList.remove('is-lit');
+      primed = false;
+    });
+  }
+  initOrb();
 })();
