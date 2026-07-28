@@ -92,11 +92,7 @@ card-buy.webp             The three service cards in the Ways To Work band.
                           All cropped to 1200x900, matching the 4:3 image band
                           on the cards.
 
-OLD, from the hero footage:
-card-sell.webp            All pulled from the hero footage, so they are
-card-relocate.webp        already licensed and visually consistent.
-
-hero-buyers.webp          Page heroes for the interior pages, also pulled
+hero-buyers.webp          Page heroes for the interior pages, pulled
 hero-sellers.webp         from the hero footage.
 hero-relocate.webp
 hero-neighborhoods.webp   Still used by the neighborhoods hub page. The 20
