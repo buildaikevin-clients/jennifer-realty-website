@@ -59,6 +59,30 @@ hero-mobile.mp4           1.1 MB loop served to phones instead of the frame
 
 hero-poster.webp          First frame. Video poster and og:image.
 
+workwith-bg.webp          Background for the Ways To Work band on the home
+                          page. 2200x1410.
+
+                          NOT from the hero footage. This one is a real
+                          photograph of a Florida waterfront mansion, from
+                          Pexels photo 15334535.
+
+                          Pexels licence: free for commercial use, no
+                          attribution required, no credit line needed on the
+                          page. That is why this file carries no visible
+                          credit while assets/neighborhoods/ does, since
+                          those are Wikimedia CC BY and CC BY-SA which do
+                          require it.
+
+                          Source is 3200x4800 portrait. The crop takes the
+                          full width from y=2350, height 2050, which drops
+                          most of the sky and keeps the house, palms,
+                          seawall and water. Then scaled to 2200 wide.
+
+                          Kept at quality 62 on purpose. Palm foliage does
+                          not compress well and it was 773 KB at the sizes
+                          tried first. It sits behind a heavy scrim, so the
+                          quality is not visible and the weight is.
+
 card-buy.webp             The three Start Here cards on the home page.
 card-sell.webp            All pulled from the hero footage, so they are
 card-relocate.webp        already licensed and visually consistent.
