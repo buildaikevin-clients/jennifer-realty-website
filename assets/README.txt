@@ -130,11 +130,30 @@ about-interior.webp       Background behind the long biography in the About
 
 journey-prepare.webp      The three photographs in the buying steps on
 journey-shop.webp         buyers.html, 800x1000 to suit the tall figures in
-journey-offer.webp        that layout. Pexels, free for commercial use, no
-                          attribution required.
-                            prepare  photo 14598479, dining room
-                            shop     photo 12558961, Florida home exterior
-                            offer    photo 27359993, modern bathroom
+journey-offer.webp        that layout. Both licences below are free for
+                          commercial use with no attribution required, so no
+                          credit line is needed on the page.
+                            prepare  Pexels photo 14598479, dining room
+                            shop     Pexels photo 12558961, Florida home
+                            offer    Unsplash photo 1638799869566-b17fa794c4de,
+                                     modern bathroom, by Lotus Design N Print
+
+                          The offer image was replaced on 2026-07-28. The
+                          original Pexels 27359993 was a beige tiled bathroom
+                          with a bidet and a framed sliding shower enclosure,
+                          which read as an early 2000s European apartment
+                          rather than a modern Florida home.
+
+                          The replacement is cropped 4:5 from the RIGHT of a
+                          3:2 landscape original, which is deliberate. The
+                          full frame also holds a freestanding tub and the
+                          walk in shower, but centering the crop puts a plain
+                          white door through the middle of it. Cropping right
+                          keeps the walnut floating vanity, and the shower
+                          still reads because it is reflected in the mirror.
+                          Recut with:
+                            python -c "from PIL import Image; im=Image.open('src.jpg'); W,H=im.size; cw=int(H*4/5); im.crop((W-cw,0,W,H)).resize((800,1000),Image.LANCZOS).save('journey-offer.webp',quality=85,method=6)"
+                          where src.jpg is the CDN original at q=90&w=2400.
 
 card-buy.webp             The three service cards in the Ways To Work band.
                           Pexels, free for commercial use, no attribution
