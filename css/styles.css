@@ -684,16 +684,25 @@ a:hover { color: var(--ink); }
   height: 58%;
   overflow: hidden;
 }
-/* Headroom for the drift. The image is 260px taller than its frame and centred
-   with a negative margin, so it can travel 130px either way before an edge
-   shows. js/reveal.js drives it at range 240, which is +/-120 and leaves a
-   small safety margin. Change one and change the other. */
+/* Headroom for the drift, and the zoom comes free with it.
+
+   The image is 700px taller than its frame, centred with a negative margin, so
+   it can travel 350px either way before an edge shows. js/reveal.js drives it
+   at range 640, which is +/-320.
+
+   Making the box taller is also what zooms the picture: object-fit cover has to
+   scale the image up to cover the extra height, which crops the sides and
+   enlarges the house. That is deliberate. Travel and zoom are the same dial
+   here, and a bigger source file (2600px wide, full frame) keeps it sharp.
+
+   Travel must stay under the oversize or the translate slides the image off its
+   own frame. Change one number and change the other. */
 .workwith__img {
   width: 100%;
-  height: calc(100% + 260px);
-  margin-top: -130px;
+  height: calc(100% + 700px);
+  margin-top: -350px;
   object-fit: cover;
-  object-position: center 42%;
+  object-position: center 45%;
 }
 /* Scrim. Darkest at the bottom so the seam into the solid ground is a fade
    rather than a hard edge, and heavy enough at the top for white type. */

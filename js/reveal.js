@@ -65,7 +65,7 @@
      of it either side of centre. It must stay under the element's oversize in
      CSS or the translate exposes an edge. */
   const PARALLAX_TARGETS = [
-    { sel: '.workwith__img',   range: 240 },  // oversized 260px, the feature one
+    { sel: '.workwith__img',   range: 640 },  // oversized 700px, the feature one
     { sel: '.page-hero__img',  range: 90 },   // oversized 120px
     { sel: '.path__media img', range: 26 },   // oversized 34px
     { sel: '.card__media img', range: 20 },   // oversized 26px
