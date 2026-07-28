@@ -1,11 +1,12 @@
 # Jennifer's bio, as she wrote it
 
-Preserved verbatim. The site carries a compressed version of this on the home
-page band and on `about.html`, cut down to fit and cleaned of em dashes and
+Preserved verbatim. The site carries a compressed version of this in the About
+band on the home page, cut down to fit and cleaned of em dashes and
 hyphenated compounds so it passes `scripts/copy-lint.js`. Nothing was added and
-no claim was changed.
+no claim was changed. There was a separate `about.html` until 2026-07-27, when
+it was folded into that band.
 
-If she prefers her full text, it can go back on `about.html` in one edit. The
+If she prefers her full text, it can go back into the band in one edit. The
 only mandatory changes are the punctuation ones: `fix-and-flips`,
 `long-term rentals` and `first-time homebuyer` have to lose their hyphens, and
 the three em dashes have to go.

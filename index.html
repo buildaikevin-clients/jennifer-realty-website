@@ -99,7 +99,8 @@
         "jobTitle": "REALTOR®",
         "worksFor": { "@type": "Organization", "name": "Preferred SHORE Real Estate" },
         "image": "https://[[DOMAIN]]/assets/jennifer-headshot.jpg",
-        "url": "https://[[DOMAIN]]/about.html",
+        "url": "https://[[DOMAIN]]/#about",
+        "mainEntityOfPage": { "@id": "https://[[DOMAIN]]/#website" },
         "telephone": "+12057907560",
         "email": "jenniferbarragan.re@gmail.com",
         "knowsLanguage": ["en", "es"],
@@ -137,7 +138,7 @@
         <a href="sellers.html">Sellers</a>
         <a href="neighborhoods.html">Neighborhoods</a>
         <a href="relocate.html">Relocating</a>
-        <a href="about.html">About</a>
+        <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
       <!-- Florida rule 61J2-10.025 requires the brokerage name adjacent to the
@@ -315,25 +316,21 @@
 
         <div>
           <p class="eyebrow reveal">About Jennifer</p>
-          <!-- Direct quotation, so it stays in her voice on an otherwise third
-               person page. This is what DESIGN.md means by serif when Jennifer
-               is speaking. -->
-          <blockquote class="about__quote reveal" style="--d:.1s">
-            &ldquo;My job is to educate first. Everything else follows from
-            that.&rdquo;
-          </blockquote>
-          <p class="reveal" style="--d:.18s">
+          <h2 class="section__title reveal" style="--d:.08s">
+            Twenty years, three states, and a family full of agents.
+          </h2>
+          <p class="section__lede reveal" style="--d:.16s">
             Jennifer has been licensed since 2006, first in Georgia, then
             Alabama, and now Florida. Twenty years across residential sales,
             property management, investing, new construction, fix and flips,
             long term rentals and relocation.
           </p>
-          <p class="reveal" style="--d:.24s">
+          <p class="reveal" style="--d:.22s; margin-top:1.2rem">
             She lives in Lakewood Ranch, so what she knows about these
             neighborhoods comes from living in them rather than from a listing
             sheet. She works in English and Spanish.
           </p>
-          <p class="about__sig reveal" style="--d:.3s">
+          <p class="about__sig reveal" style="--d:.28s">
             Jennifer Barragan &nbsp;|&nbsp; Florida License SL3586445
           </p>
 
@@ -351,105 +348,84 @@
               <p class="stat__label">Areas Covered</p>
             </div>
           </div>
-
-          <p style="margin-top:2rem">
-            <a href="about.html" class="btn btn--ghost">More About Jennifer</a>
-          </p>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ==================================================== GUIDE ========== -->
-  <section class="section" id="guide">
-    <div class="wrap">
-      <div class="guide__grid">
-        <div>
-          <p class="eyebrow reveal">Free Guide</p>
-          <h2 class="section__title reveal reveal--lines" style="--d:.08s">
-            <span class="lines__line"><span>Moving to Bradenton</span></span>
-            <span class="lines__line"><span>from somewhere else?</span></span>
-          </h2>
-          <p class="section__lede reveal" style="--d:.16s">
-            The part nobody tells you is that the house is the easy decision.
-            Working out what it costs to carry, where the water goes in a
-            storm, and which side of the bridge suits how you actually live
-            takes longer. Jennifer put what she explains on every call into one document.
-          </p>
-          <ul class="guide__list reveal" style="--d:.24s">
-            <li>Every area from Anna Maria to Parrish, with what homes run and why</li>
-            <li>How flood zones and elevation certificates change your insurance</li>
-            <li>What a Florida homeowners policy actually costs right now</li>
-            <li>CDD fees, HOA dues, and the line items buyers miss</li>
-            <li>Buying new construction versus resale on the Gulf Coast</li>
-            <li>The order to do things in if you are moving from out of state</li>
-          </ul>
+      <!-- The long version. This used to be a separate about page, which said
+           these same things one click further away and split her presence in
+           search across two thin URLs. Full width under the portrait grid, in
+           two columns so it reads as a page rather than one tall ribbon. -->
+      <div class="about__story">
+        <!-- Direct quotation, so it stays in her voice on an otherwise third
+             person page. This is what DESIGN.md means by serif when Jennifer
+             is speaking. -->
+        <blockquote class="about__quote about__story-quote reveal">
+          &ldquo;My job is to educate first. Everything else follows from
+          that.&rdquo;
+        </blockquote>
+
+        <div class="about__cols">
+          <div>
+            <p class="reveal" style="--d:.06s">
+              Over two decades she has worked residential sales, property
+              management, investing, new construction, fix and flips, long term
+              rentals and relocation. That range is the point. A buyer moving
+              from out of state, a seller trying to price honestly, and an
+              investor looking at a rental are three different conversations,
+              and she has had all three from both sides of the table.
+            </p>
+            <p class="reveal" style="--d:.12s">
+              Real estate runs in her family. Her mother, father and brothers
+              have all worked as agents, and her father ran a construction
+              business, so she grew up around renovation and around what it
+              costs to fix what is actually wrong with a house. An aunt who
+              moved from banking into investing taught her to see property as a
+              way to build wealth rather than only as a place to live.
+            </p>
+          </div>
+          <div>
+            <p class="reveal" style="--d:.18s">
+              She invests herself. She has done fix and flips and long term
+              rentals, and she still owns and manages property in Alabama while
+              expanding in Florida. It means she reads a listing for value,
+              potential and marketability rather than only for the sale, and she
+              will tell you when the numbers do not work.
+            </p>
+            <p class="reveal" style="--d:.24s">
+              For Jennifer a good transaction is not the closing table. It is a
+              decision that holds up years later, protects what you have built,
+              and can pass to the next generation. She lives in Lakewood Ranch
+              with her husband and their two children, and works in English and
+              Spanish.
+            </p>
+          </div>
         </div>
+      </div>
 
-        <div class="guide__card reveal reveal--scale" style="--d:.12s">
-          <h3 class="guide__card-title">Send it to me</h3>
-          <p class="guide__card-sub">
-            One email with the guide attached. No sequence, no drip, no calls
-            you did not ask for.
-          </p>
+      <div class="about__cred">
+        <div class="about__grid">
+          <div>
+            <p class="eyebrow reveal">Credentials</p>
+            <h3 class="section__title reveal" style="--d:.08s">The formal part.</h3>
+            <ul class="guide__list reveal" style="--d:.16s">
+              <li>Florida License SL3586445, licensed since 2006</li>
+              <li>Previously licensed in Georgia and Alabama</li>
+              <li>Brokered by Preferred SHORE Real Estate, Sarasota</li>
+              <li>Bilingual, English and Spanish</li>
+              <li>Investor, with fix and flip and long term rental experience</li>
+              <li>[[FILL IN: designations such as GRI, ABR, SRES, CLHMS. Delete this line if none.]]</li>
+              <li>Serving Lakewood Ranch, Sarasota, Bradenton, Anna Maria Island, Palma Sola, Parrish and Palmetto</li>
+            </ul>
+          </div>
 
-          <form id="guide-form" name="relocation-guide" method="POST"
-                data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="relocation-guide" />
-            <p class="hp-field" aria-hidden="true">
-              <label>Leave this field empty:
-                <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
-            </p>
-
-            <label class="field">
-              <span>Your name</span>
-              <input type="text" name="name" autocomplete="name" required />
-            </label>
-            <div class="form__row">
-              <label class="field">
-                <span>Email</span>
-                <input type="email" name="email" autocomplete="email" required />
-              </label>
-              <label class="field">
-                <span>Phone <em>(optional)</em></span>
-                <input type="tel" name="phone" autocomplete="tel" />
-              </label>
-            </div>
-            <label class="field">
-              <span>Where are you moving from</span>
-              <input type="text" name="movingFrom" placeholder="City and state" required />
-            </label>
-            <label class="field">
-              <span>When are you hoping to move</span>
-              <select name="timeline" required>
-                <option value="" disabled selected>Select one</option>
-                <option>Within 3 months</option>
-                <option>3 to 6 months</option>
-                <option>6 to 12 months</option>
-                <option>More than a year out</option>
-                <option>Still deciding</option>
-              </select>
-            </label>
-
-            <button type="submit" class="btn btn--solid" style="width:100%">
-              Send Me The Guide
-            </button>
-            <p class="form__note">
-              Your details go to Jennifer and stay there. They are not sold or
-              shared.
-            </p>
-            <p class="form__error" id="guide-error" hidden>
-              Something went wrong sending that. Please try again, or reach Jennifer directly at <a href="tel:+12057907560">(205) 790-7560</a> at Preferred SHORE Real Estate.
-            </p>
-          </form>
-
-          <div class="form__done" id="guide-done" hidden tabindex="-1">
-            <span class="form__done-mark" aria-hidden="true">&#10003;</span>
-            <h3>On its way.</h3>
-            <p>
-              Check your email in the next few minutes. You can also
-              <a href="assets/guides/moving-to-bradenton.pdf" download>download it here</a>.
-            </p>
+          <!-- Same reasoning as the portrait above: no .reveal, because a
+               missed observer would silently remove a photograph of her. Lazy
+               loading is fine here, unlike on the portrait, because nothing is
+               masking this container from the browser. -->
+          <div class="about__photo" style="aspect-ratio:4/3">
+            <img src="assets/jennifer-working.jpg" width="1600" height="1200"
+                 loading="lazy" decoding="async"
+                 alt="Jennifer Barragan in the Preferred SHORE Real Estate office in Sarasota." />
           </div>
         </div>
       </div>
@@ -457,7 +433,7 @@
   </section>
 
   <!-- ==================================================== CONTACT ======== -->
-  <section class="section section--dark" id="contact">
+  <section class="section" id="contact">
     <div class="wrap">
       <div class="contact__grid">
         <div>
@@ -563,9 +539,9 @@
         <div class="reveal" style="--d:.16s">
           <p class="footer__title">More</p>
           <ul class="footer__list">
-            <li><a href="about.html">About</a></li>
+            <li><a href="index.html#about">About</a></li>
             <li><a href="index.html#listings">Listings</a></li>
-            <li><a href="index.html#guide">Free Guide</a></li>
+            <li><a href="relocate.html#guide">Free Guide</a></li>
             <li><a href="accessibility.html">Accessibility</a></li>
             <li><a href="index.html#contact">Contact</a></li>
           </ul>

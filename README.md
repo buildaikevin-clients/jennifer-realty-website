@@ -39,8 +39,8 @@ Two tokens remain, deliberately visible rather than guessed:
 | `[[DOMAIN]]` | Canonical URLs, Open Graph, `sitemap.xml`, `robots.txt` |
 | `[[STAT_CLOSED]]` | The homes closed counter on the home page |
 
-One `[[FILL IN]]` also remains on `about.html` for professional designations,
-which can simply be deleted if she has none.
+One `[[FILL IN]]` also remains in the credentials list on the home page, for
+professional designations, which can simply be deleted if she has none.
 
 ### Two things to verify before launch
 
@@ -64,7 +64,7 @@ brokerage's licensed name to appear adjacent to, immediately above, or
 immediately below **every point of contact**, meaning every phone number, email
 address and mailing address. That is why the firm sits directly under the phone
 number in the nav, under the address block in the footer, and beside the contact
-details on About, Buyers, Sellers and Accessibility. Those pairings are marked
+details on Home, Buyers, Sellers and Accessibility. Those pairings are marked
 with comments in the markup. **Do not separate them.**
 
 Note the office is in **Sarasota**, not Bradenton. The site covers the Bradenton
@@ -76,13 +76,12 @@ brokerage's, and getting that wrong is a 61J2-10.025 problem rather than a typo.
 ## Layout
 
 ```
-index.html               home: scrub hero, Start Here, listings, about, guide, contact
+index.html               home: scrub hero, listings, Start Here, about, guide, contact
 buyers.html              payment estimator, 3 step buyer form, 5 FAQs
 sellers.html             3 step valuation form, process, 5 FAQs
 relocate.html            for out of state buyers, gated guide, 4 FAQs
 neighborhoods.html       generated hub
 neighborhoods/           20 generated area pages
-about.html               bio, headshots, credentials
 accessibility.html       WCAG statement and barrier reporting route
 css/styles.css           the entire site. tokens at :root
 js/reveal.js             scroll animation system, exposes window.JR.observeReveals

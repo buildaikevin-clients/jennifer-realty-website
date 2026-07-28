@@ -5,6 +5,22 @@
   publish = "."
   command = ""
 
+# -------------------------------------------------------------- redirects ---
+# The About page was folded into the home page band on 2026-07-27. Permanent,
+# not temporary: anything already pointing at /about.html should be told the
+# content moved rather than being handed a 404.
+[[redirects]]
+  from = "/about.html"
+  to = "/#about"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about"
+  to = "/#about"
+  status = 301
+  force = true
+
 # ---------------------------------------------------------------- headers ---
 # Security headers first. None of these need a build step and all of them are
 # things a real estate site should have had from day one.

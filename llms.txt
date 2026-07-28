@@ -16,6 +16,19 @@
 - Brokerage: Preferred SHORE Real Estate
 - Florida real estate license: SL3586445
 
+## About Jennifer Barragan
+
+Licensed since 2006, first in Georgia, then Alabama, and now Florida. Twenty
+years across residential sales, property management, investing, new
+construction, fix and flips, long term rentals and relocation. She lives in
+Lakewood Ranch and works in English and Spanish. Real estate runs in her family:
+her mother, father and brothers have all worked as agents, and her father ran a
+construction business. She invests herself, with fix and flip and long term
+rental experience and property she still owns and manages in Alabama, so she
+reads a home for value and potential rather than only for the sale. Her full
+biography is in the About band on the home page (/#about). There is no separate
+about page.
+
 ## What she helps with
 
 - **Buying** (/buyers.html). Payment estimator built for Manatee County, with

@@ -807,7 +807,7 @@ function nav(prefix) {
         <a href="${prefix}sellers.html">Sellers</a>
         <a href="${prefix}neighborhoods.html" aria-current="page">Neighborhoods</a>
         <a href="${prefix}relocate.html">Relocating</a>
-        <a href="${prefix}about.html">About</a>
+        <a href="${prefix}index.html#about">About</a>
         <a href="${prefix}index.html#contact">Contact</a>
       </nav>
       <a href="tel:+12057907560" class="nav__cta">
@@ -845,9 +845,9 @@ function footer(prefix) {
         <div class="reveal" style="--d:.16s">
           <p class="footer__title">More</p>
           <ul class="footer__list">
-            <li><a href="${prefix}about.html">About</a></li>
+            <li><a href="${prefix}index.html#about">About</a></li>
             <li><a href="${prefix}index.html#listings">Listings</a></li>
-            <li><a href="${prefix}index.html#guide">Free Guide</a></li>
+            <li><a href="${prefix}relocate.html#guide">Free Guide</a></li>
             <li><a href="${prefix}accessibility.html">Accessibility</a></li>
             <li><a href="${prefix}index.html#contact">Contact</a></li>
           </ul>

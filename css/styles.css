@@ -59,6 +59,12 @@
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
+/* The nav is fixed, so an anchor target would otherwise come to rest
+   underneath it. Nav height plus a little air. This matters more since About
+   became a section on the home page rather than a page of its own: every nav
+   and footer About link on the site is now a jump to #about. */
+html { scroll-padding-top: 92px; }
+
 body {
   margin: 0;
   background: var(--bone);
@@ -802,6 +808,36 @@ a:hover { color: var(--ink); }
   margin-top: 1.8rem;
 }
 .section--dark .about__sig { color: var(--sand); }
+
+/* The long biography, folded in from the separate about page it used to live
+   on. It sits below the portrait grid at full width, because a long read
+   stacked into the right hand column would run twice the height of the
+   photograph beside it. */
+.about__story {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  padding-top: clamp(2.6rem, 5vw, 3.6rem);
+  border-top: 1px solid rgba(239, 238, 236, .16);
+}
+/* Held narrow so the quotation breaks the column rhythm instead of stretching
+   into a headline. */
+.about__story-quote { max-width: 24ch; margin-bottom: clamp(2rem, 4vw, 2.8rem); }
+
+.about__cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.4rem, 4vw, 3.5rem);
+  align-items: start;
+}
+@media (max-width: 860px) { .about__cols { grid-template-columns: 1fr; } }
+.about__cols p { max-width: 62ch; }
+.section--dark .about__cols p { color: var(--sand-l); }
+
+.about__cred {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  padding-top: clamp(2.6rem, 5vw, 3.6rem);
+  border-top: 1px solid rgba(239, 238, 236, .16);
+}
+.about__cred .section__title { font-size: clamp(1.6rem, 3vw, 2.3rem); }
 
 /* ============================================================ guide ====== */
 
