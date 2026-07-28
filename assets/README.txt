@@ -83,7 +83,16 @@ workwith-bg.webp          Background for the Ways To Work band on the home
                           tried first. It sits behind a heavy scrim, so the
                           quality is not visible and the weight is.
 
-card-buy.webp             The three Start Here cards on the home page.
+card-buy.webp             The three service cards in the Ways To Work band.
+                          Pexels, free for commercial use, no attribution
+                          required, so no credit line is needed on the page.
+                            card-buy       photo 11593489, marble island kitchen
+                            card-sell      photo 12558848, large Florida home
+                            card-relocate  photo 17329322, white sand aerial
+                          All cropped to 1200x900, matching the 4:3 image band
+                          on the cards.
+
+OLD, from the hero footage:
 card-sell.webp            All pulled from the hero footage, so they are
 card-relocate.webp        already licensed and visually consistent.
 
