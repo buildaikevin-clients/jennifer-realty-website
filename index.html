@@ -301,7 +301,13 @@
              transient failure would permanently remove her photo. Lazy loading
              is dropped because this sits inside a clip-path masked container,
              which browsers can treat as never visible and defer forever. -->
-        <div class="about__photo reveal reveal--mask">
+        <!-- Deliberately NOT a .reveal. Every other entrance hides with
+             opacity, which fails visible. reveal--mask hides with a clip-path
+             that stays fully closed if the observer ever misses the element,
+             and the failure mode is her photograph silently missing from her
+             own website. It still drifts with the parallax, which is additive
+             and cannot hide anything. -->
+        <div class="about__photo">
           <img src="assets/jennifer-headshot.jpg" width="1600" height="2000"
                decoding="async"
                alt="Jennifer Barragan, a REALTOR at Preferred SHORE Real Estate, photographed in her Sarasota office." />

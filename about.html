@@ -88,7 +88,9 @@
   <section class="section" style="padding-top:calc(76px + clamp(3rem,7vw,6rem))">
     <div class="wrap">
       <div class="about__grid">
-        <div class="about__photo reveal reveal--mask">
+        <!-- Not a .reveal on purpose. See the note in index.html: a clip-path
+             entrance fails hidden, and this is her photograph. -->
+        <div class="about__photo">
           <img src="assets/jennifer-headshot.jpg" width="1600" height="2000"
                fetchpriority="high" decoding="async"
                alt="Jennifer Barragan, a REALTOR at Preferred SHORE Real Estate, photographed in her Sarasota office." />
@@ -172,7 +174,7 @@
           </ul>
         </div>
 
-        <div class="about__photo reveal reveal--mask" style="--d:.12s;aspect-ratio:4/3">
+        <div class="about__photo" style="aspect-ratio:4/3">
           <img src="assets/jennifer-working.jpg" width="1600" height="1200"
                decoding="async"
                alt="Jennifer Barragan in the Preferred SHORE Real Estate office in Sarasota." />

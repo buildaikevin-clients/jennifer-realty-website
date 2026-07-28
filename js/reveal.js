@@ -170,6 +170,28 @@
   scan();
   makeProgressBar();
 
+  /* Failsafe sweep.
+
+     Every entrance on this site starts hidden in CSS and is revealed by the
+     observer above. That means a single missed callback leaves content
+     permanently invisible, and the user never sees an error, just an absence.
+     It already cost us Jennifer's photograph once.
+
+     A second after load, and again after the window settles, anything already
+     within the viewport is marked in directly. Cheap, idempotent, and it turns
+     a silent disappearance into at worst a missed animation. */
+  function sweep() {
+    if (reduce) return;
+    const vh = window.innerHeight;
+    for (const el of $$('.reveal')) {
+      if (el.classList.contains('is-in')) continue;
+      const r = el.getBoundingClientRect();
+      if (r.top < vh && r.bottom > 0) el.classList.add('is-in');
+    }
+  }
+  setTimeout(sweep, 1000);
+  window.addEventListener('load', () => setTimeout(sweep, 200));
+
   if (!reduce) {
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
