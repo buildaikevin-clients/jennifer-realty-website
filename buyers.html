@@ -209,7 +209,6 @@
           <p class="journey__num" aria-hidden="true">03.</p>
           <h3 class="journey__title">Offer</h3>
           <p class="journey__text">You found it, so now it has to hold together. I write the offer against what has actually closed nearby rather than against asking prices, then manage the inspection, the appraisal, the insurance binder and title. Deals here fall apart on one of those four far more often than on price, so I stay on all of them and you hear from me before you have to ask.</p>
-          <a class="btn journey__cta" href="#guide">Buyer&rsquo;s Guide</a>
         </div>
         <figure class="journey__figure reveal reveal--scale" style="--d:.1s">
           <img src="assets/journey-offer.webp" width="800" height="1000" loading="lazy"
@@ -467,9 +466,11 @@
     </div>
   </section>
 
-  <!-- ================================================= READY / GUIDE ===== -->
+  <!-- ================================================= READY ============= -->
   <!-- The reference closes its buying page with a Let's Get Started band and
-       then a free guide capture. Same two beats here. -->
+       then a free guide capture. The guide was dropped on 2026-07-28, so this
+       band is now the only closing beat and carries the page's last call to
+       action on its own. -->
   <section class="section section--dark">
     <div class="wrap">
       <div class="section__head section__head--center">
@@ -486,95 +487,6 @@
       <p class="reveal" style="--d:.24s;text-align:center">
         <a class="btn btn--solid" href="#search">Get Started Now</a>
       </p>
-    </div>
-  </section>
-
-  <!-- ==================================================== GUIDE ========== -->
-  <section class="section" id="guide">
-    <div class="wrap">
-      <div class="guide__grid">
-        <div>
-          <p class="eyebrow reveal">Your Guide To Buying Here</p>
-          <h2 class="section__title reveal reveal--lines" style="--d:.08s">
-            <span class="lines__line"><span>Take my buyer&rsquo;s</span></span>
-            <span class="lines__line"><span>guide, free.</span></span>
-          </h2>
-          <p class="section__lede reveal" style="--d:.16s">
-            The checklist I actually use, written for this market rather than
-            for the country at large.
-          </p>
-          <ul class="guide__list reveal" style="--d:.24s">
-            <li>What to ask a lender and an insurance agent, in that order</li>
-            <li>Reading a flood zone and an elevation certificate</li>
-            <li>Roof age, impact windows and what they do to your premium</li>
-            <li>Association documents, reserves and milestone inspections</li>
-            <li>CDD assessments and the line items buyers miss</li>
-            <li>What the closing timeline really looks like here</li>
-          </ul>
-        </div>
-
-        <div class="guide__card reveal reveal--scale" style="--d:.12s">
-          <h3 class="guide__card-title">Send it to me</h3>
-          <p class="guide__card-sub">
-            One email with the guide attached. No sequence and no calls you did
-            not ask for.
-          </p>
-
-          <form id="guide-form" name="buyer-guide" method="POST"
-                data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="buyer-guide" />
-            <p class="hp-field" aria-hidden="true">
-              <label>Leave this field empty:
-                <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
-            </p>
-
-            <label class="field">
-              <span>Your name</span>
-              <input type="text" name="name" autocomplete="name" required />
-            </label>
-            <div class="form__row">
-              <label class="field">
-                <span>Email</span>
-                <input type="email" name="email" autocomplete="email" required />
-              </label>
-              <label class="field">
-                <span>Phone <em>(optional)</em></span>
-                <input type="tel" name="phone" autocomplete="tel" />
-              </label>
-            </div>
-            <label class="field">
-              <span>When are you hoping to buy</span>
-              <select name="timeline" required>
-                <option value="" disabled selected>Select one</option>
-                <option>As soon as the right one comes up</option>
-                <option>Within 3 months</option>
-                <option>3 to 6 months</option>
-                <option>6 to 12 months</option>
-                <option>Just starting to look</option>
-              </select>
-            </label>
-
-            <button type="submit" class="btn btn--solid" style="width:100%">
-              Send Me The Guide
-            </button>
-            <p class="form__note">
-              Your details come to me and stay with me. They are not sold or
-              shared.
-            </p>
-            <p class="form__error" id="guide-error" hidden>
-              Something went wrong sending that. Please try again, or call or
-              text me at <a href="tel:+12057907560">(205) 790-7560</a> at
-              Preferred SHORE Real Estate.
-            </p>
-          </form>
-
-          <div class="form__done" id="guide-done" hidden tabindex="-1">
-            <span class="form__done-mark" aria-hidden="true">&#10003;</span>
-            <h3>On its way.</h3>
-            <p>Check your email in the next few minutes.</p>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
