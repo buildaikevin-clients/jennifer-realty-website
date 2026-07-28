@@ -686,9 +686,9 @@ a:hover { color: var(--ink); }
 }
 /* Headroom for the drift, and the zoom comes free with it.
 
-   The image is 700px taller than its frame, centred with a negative margin, so
-   it can travel 350px either way before an edge shows. js/reveal.js drives it
-   at range 640, which is +/-320.
+   The image is 1000px taller than its frame, centred with a negative margin, so
+   it can travel 500px either way before an edge shows. js/reveal.js drives it
+   at range 920, which is +/-460.
 
    Making the box taller is also what zooms the picture: object-fit cover has to
    scale the image up to cover the extra height, which crops the sides and
@@ -699,8 +699,8 @@ a:hover { color: var(--ink); }
    own frame. Change one number and change the other. */
 .workwith__img {
   width: 100%;
-  height: calc(100% + 700px);
-  margin-top: -350px;
+  height: calc(100% + 1000px);
+  margin-top: -500px;
   object-fit: cover;
   object-position: center 45%;
 }
