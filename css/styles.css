@@ -744,12 +744,33 @@ a:hover { color: var(--ink); }
 }
 @media (max-width: 860px) { .about__grid { grid-template-columns: 1fr; } }
 
+/* Framed portrait. A hairline rectangle sits 16px outside the photo on every
+   side, like the mat line on a mounted print. Symmetric on purpose: this rule
+   is used in the left column on the home page and the right column on About,
+   and an offset frame would lean into the text on one of them.
+
+   No overflow:hidden here any more, or the frame would be clipped by its own
+   container. The radius moved onto the image instead, which is possible only
+   because the file is now cut to the container ratio exactly. */
 .about__photo {
   position: relative;
   aspect-ratio: 4 / 5;
-  overflow: hidden;
-  border-radius: var(--radius);
-  background: var(--bone-2);
+}
+.about__photo::before {
+  content: "";
+  position: absolute;
+  inset: -16px;
+  border: 1px solid var(--sand);
+  border-radius: calc(var(--radius) + 2px);
+  pointer-events: none;
+}
+/* The frame reads as decoration on light grounds and needs a touch more
+   presence against the dark band. */
+.section--dark .about__photo::before { border-color: rgba(129, 120, 114, .85); }
+
+@media (max-width: 560px) {
+  /* Less room to breathe, so the frame tucks in closer. */
+  .about__photo::before { inset: -10px; }
 }
 /* Exact fit, no oversize. The file is cut to the same ratio as the box, so
    cover crops nothing and the whole photograph is visible. It used to be 42px
@@ -757,9 +778,13 @@ a:hover { color: var(--ink); }
    the top and bottom of the frame. The drift is not worth losing her hands and
    the top of the artwork, so this one does not parallax. */
 .about__photo img {
+  position: relative;   /* above the frame line */
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center;
+  border-radius: var(--radius);
+  background: var(--bone-2);
+  box-shadow: var(--shadow-md);
 }
 .about__quote {
   font-family: var(--display);
