@@ -61,11 +61,14 @@
      travel without exposing an edge. Do not add a selector whose image is cut
      to exactly its container: the translate would crop the frame.
      .about__photo is the example, and it is why it is not in this list. */
+  /* range is total travel in px across the full pass, so the image moves half
+     of it either side of centre. It must stay under the element's oversize in
+     CSS or the translate exposes an edge. */
   const PARALLAX_TARGETS = [
-    { sel: '.page-hero__img',  range: 90 },
-    { sel: '.workwith__img',   range: 70 },
-    { sel: '.path__media img', range: 26 },
-    { sel: '.card__media img', range: 20 },
+    { sel: '.workwith__img',   range: 240 },  // oversized 260px, the feature one
+    { sel: '.page-hero__img',  range: 90 },   // oversized 120px
+    { sel: '.path__media img', range: 26 },   // oversized 34px
+    { sel: '.card__media img', range: 20 },   // oversized 26px
   ];
 
   const layers = [];
@@ -120,7 +123,11 @@
 
     // --- write pass ------------------------------------------------------
     for (const [l, p] of writes) {
-      l.el.style.setProperty('--py', ((p - 0.5) * l.range).toFixed(1) + 'px');
+      /* Sign matters. Going positive to negative slides the image UP as the
+         page scrolls down, so the content inside the frame appears to travel
+         bottom to top. That is the direction a parallax reads as correct, and
+         it was inverted here until 2026-07-28. */
+      l.el.style.setProperty('--py', ((0.5 - p) * l.range).toFixed(1) + 'px');
     }
     if (bar) bar.style.transform = `scaleX(${Math.min(1, Math.max(0, progress)).toFixed(4)})`;
   }

@@ -684,10 +684,14 @@ a:hover { color: var(--ink); }
   height: 58%;
   overflow: hidden;
 }
+/* Headroom for the drift. The image is 260px taller than its frame and centred
+   with a negative margin, so it can travel 130px either way before an edge
+   shows. js/reveal.js drives it at range 240, which is +/-120 and leaves a
+   small safety margin. Change one and change the other. */
 .workwith__img {
   width: 100%;
-  height: calc(100% + 80px);   /* headroom for the drift */
-  margin-top: -40px;
+  height: calc(100% + 260px);
+  margin-top: -130px;
   object-fit: cover;
   object-position: center 42%;
 }
