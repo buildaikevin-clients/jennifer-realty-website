@@ -83,6 +83,31 @@ workwith-bg.webp          Background for the Ways To Work band on the home
                           tried first. It sits behind a heavy scrim, so the
                           quality is not visible and the weight is.
 
+about-interior.webp       Background behind the long biography in the About
+                          band on the home page. 2400x1350.
+
+                          Unsplash photo 1758448755856-01d3add0177b, a modern
+                          living room with chandeliers, wood and marble.
+
+                          Unsplash licence: free for commercial use, no
+                          attribution required, so no credit line is needed on
+                          the page. Same reasoning as workwith-bg.webp above.
+
+                          Downloaded already encoded, straight from the
+                          Unsplash CDN at fm=webp, q=74, w=2400, so no local
+                          re-encode was involved.
+
+                          It is a stock interior and not one of Jennifer's
+                          listings. It is meant to be plainly visible, so if
+                          it ever moves anywhere it could be mistaken for a
+                          home she has sold, it needs a caption saying it is
+                          not.
+
+                          The scrim over it bottoms out at .66, which is the
+                          contrast floor for the copy on top rather than a
+                          look. See .story__bg::after in css/styles.css before
+                          lightening it further.
+
 card-buy.webp             The three service cards in the Ways To Work band.
                           Pexels, free for commercial use, no attribution
                           required, so no credit line is needed on the page.

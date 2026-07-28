@@ -63,9 +63,27 @@
      .about__photo is the example, and it is why it is not in this list. */
   /* range is total travel in px across the full pass, so the image moves half
      of it either side of centre. It must stay under the element's oversize in
-     CSS or the translate exposes an edge. */
+     CSS or the translate exposes an edge.
+
+     dir flips which end of the picture you meet first. The default, 1, slides
+     the image up as you scroll down, so the frame starts on the top of the
+     photograph and travels toward the bottom of it. -1 reverses that: the
+     frame starts on the bottom of the picture and climbs.
+
+     window remaps the travel onto a slice of the pass instead of all of it.
+     This matters more than it sounds. A pass runs from the band entering the
+     bottom of the viewport to it clearing the top, but a 500px band inside a
+     900px viewport is only fully visible for about the middle 28% of that.
+     Spread the travel over the whole pass and the interesting ends of the
+     picture happen while the band is half off screen, and all anyone sees is
+     the middle of the image barely moving. Squeezing the same travel into
+     [.30, .72] puts about 70% of it inside the part you can actually see. It
+     clamps outside that, which is fine, because outside it the band is mostly
+     off screen anyway. */
   const PARALLAX_TARGETS = [
     { sel: '.workwith__img',   range: 920 },  // oversized 1000px, the feature one
+    // Oversized 900px. Starts on the furniture and climbs to the chandeliers.
+    { sel: '.story__img',      range: 860, dir: -1, window: [0.30, 0.72] },
     { sel: '.page-hero__img',  range: 90 },   // oversized 120px
     { sel: '.path__media img', range: 26 },   // oversized 34px
     { sel: '.card__media img', range: 20 },   // oversized 26px
@@ -83,7 +101,13 @@
         // Position is driven by the container, not the image, because the image
         // is deliberately taller than its frame and its own rect would give a
         // slightly wrong crossing point.
-        layers.push({ el, track: el.parentElement || el, range: t.range });
+        layers.push({
+          el,
+          track: el.parentElement || el,
+          range: t.range,
+          dir: t.dir === -1 ? -1 : 1,
+          win: Array.isArray(t.window) ? t.window : null,
+        });
       }
     }
   }
@@ -113,7 +137,10 @@
       const r = l.track.getBoundingClientRect();
       if (r.bottom < -40 || r.top > vh + 40) continue;   // off screen, skip
       // 0 as the element enters the bottom, 1 as it clears the top.
-      const p = (vh - r.top) / (vh + r.height);
+      let p = (vh - r.top) / (vh + r.height);
+      // Then, optionally, onto just the stretch of that where the element is
+      // properly on screen. See window in PARALLAX_TARGETS.
+      if (l.win) p = (p - l.win[0]) / (l.win[1] - l.win[0]);
       writes.push([l, Math.min(1, Math.max(0, p))]);
     }
 
@@ -126,8 +153,10 @@
       /* Sign matters. Going positive to negative slides the image UP as the
          page scrolls down, so the content inside the frame appears to travel
          bottom to top. That is the direction a parallax reads as correct, and
-         it was inverted here until 2026-07-28. */
-      l.el.style.setProperty('--py', ((0.5 - p) * l.range).toFixed(1) + 'px');
+         it was inverted here until 2026-07-28. dir is the per element opt out
+         of that, for a picture whose interest is at the bottom of the frame
+         rather than the top. */
+      l.el.style.setProperty('--py', ((0.5 - p) * l.range * l.dir).toFixed(1) + 'px');
     }
     if (bar) bar.style.transform = `scaleX(${Math.min(1, Math.max(0, progress)).toFixed(4)})`;
   }

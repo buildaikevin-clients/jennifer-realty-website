@@ -972,9 +972,61 @@ a:hover { color: var(--ink); }
    stacked into the right hand column would run twice the height of the
    photograph beside it. */
 .about__story {
+  position: relative;
+  /* Own stacking context, so the photograph behind the copy can sit at z-index
+     -1 and land above the section's own dark ground rather than behind it. */
+  isolation: isolate;
   margin-top: clamp(3rem, 6vw, 4.5rem);
-  padding-top: clamp(2.6rem, 5vw, 3.6rem);
-  border-top: 1px solid rgba(239, 238, 236, .16);
+  padding-top: clamp(3.2rem, 6vw, 4.5rem);
+  padding-bottom: clamp(3.2rem, 6vw, 4.5rem);
+  /* No hairline any more. The photograph's own hard top edge is the divider,
+     and a rule sitting on it read as a mistake. */
+}
+
+/* Interior photograph behind the long read. Full bleed out of .wrap, the same
+   left 50% and negative margin trick a contained column always needs, because
+   the copy stays on the 1180px measure while the picture runs edge to edge.
+   Parallaxed like the Ways To Work band: .story__img is oversized and
+   registered in PARALLAX_TARGETS. */
+.story__bg {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  overflow: hidden;
+  z-index: -1;
+}
+/* 900px of headroom, so the picture can travel 450px either side of centre.
+   reveal.js drives it at range 860 with dir -1, which is 430px each way and
+   runs the other direction to every other parallax on the site: the frame
+   opens on the bottom of the photograph, the seating and the ottoman, and
+   climbs to the chandeliers as you scroll.
+
+   900 is also about the ceiling. The band is roughly 500px tall, so the image
+   renders near 1400px against a 1350px source. Any more headroom starts
+   upscaling it, and the scrim is now light enough that softness would show. */
+.story__img {
+  width: 100%;
+  height: calc(100% + 900px);
+  margin-top: -450px;
+  object-fit: cover;
+  object-position: center;
+}
+/* Scrim. Flat, and it stops hard at both edges rather than fading into the
+   section, because the band is meant to arrive as a photograph and not as a
+   gradient. The room should be plainly readable through it.
+
+   .66 is the floor, and it is not a taste number. Against a pure white pixel
+   it blends to about rgb(107,107,107), which carries the --bone copy at
+   4.63:1, just over the 4.5:1 AA floor for body text. That is the worst case,
+   so the copy stays legible no matter which part of the room drifts behind it.
+   Going lighter means either shrinking the picture's role or putting the text
+   on its own panel. Do not just lower this number. */
+.story__bg::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: rgba(31, 36, 34, .66);
 }
 /* Held narrow so the quotation breaks the column rhythm instead of stretching
    into a headline. */
@@ -988,7 +1040,10 @@ a:hover { color: var(--ink); }
 }
 @media (max-width: 860px) { .about__cols { grid-template-columns: 1fr; } }
 .about__cols p { max-width: 62ch; }
-.section--dark .about__cols p { color: var(--sand-l); }
+/* Full --bone rather than the dimmed --sand-l used elsewhere on dark grounds.
+   These paragraphs sit on a photograph now, and --sand-l does not survive a
+   .66 scrim over a bright part of the room. See .story__bg::after. */
+.section--dark .about__cols p { color: var(--bone); }
 
 .about__cred {
   margin-top: clamp(3rem, 6vw, 4.5rem);
@@ -1538,6 +1593,46 @@ input:focus, select:focus, textarea:focus {
 }
 .faq__item[open] summary::after { transform: rotate(135deg); }
 .faq__answer { padding: 0 0 1.5rem; color: var(--ink-2); font-size: .95rem; max-width: 68ch; }
+
+/* ============================================================ journey ==== */
+
+/* Three numbered stages side by side, each ending in its own call to action.
+   Follows the buying page at schranerrealty.com: the number is the visual
+   anchor, oversized and in the accent, with the heading under it rather than
+   beside it. Buttons sit on a shared baseline via margin-top auto, so a longer
+   paragraph in one column does not leave its button floating. */
+.journey {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(2.5rem, 5vw, 4rem);
+}
+.journey__step {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+.journey__num {
+  font-family: var(--display);
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  line-height: 1;
+  color: var(--gulf-d);
+  margin: 0 0 .6rem;
+}
+.journey__title {
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  margin-bottom: 1rem;
+}
+.journey__text {
+  color: var(--ink-2);
+  font-size: .96rem;
+}
+.journey__cta { margin-top: auto; align-self: flex-start; }
+.journey__cta:not(:first-child) { margin-top: 1.8rem; }
+
+.section--dark .journey__step { border-top-color: rgba(239, 238, 236, .18); }
+.section--dark .journey__num { color: var(--gulf); }
+.section--dark .journey__text { color: var(--sand-l); }
 
 /* ============================================================ process ==== */
 

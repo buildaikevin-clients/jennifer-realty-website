@@ -363,6 +363,14 @@
            search across two thin URLs. Full width under the portrait grid, in
            two columns so it reads as a page rather than one tall ribbon. -->
       <div class="about__story">
+        <!-- Decorative only, so it is hidden from assistive tech and carries an
+             empty alt. The scrim over it is heavy enough that the copy's
+             contrast never depends on what is in the photograph. -->
+        <div class="story__bg" aria-hidden="true">
+          <img class="story__img" src="assets/about-interior.webp"
+               width="2400" height="1350" loading="lazy" decoding="async" alt="" />
+        </div>
+
         <!-- Direct quotation, so it stays in her voice on an otherwise third
              person page. This is what DESIGN.md means by serif when Jennifer
              is speaking. -->
