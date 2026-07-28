@@ -37,10 +37,18 @@
         grid-template-columns:repeat(auto-fill,minmax(430px,1fr))}
   @media (max-width:520px){.grid{grid-template-columns:1fr}}
 
+  .verdict{border-left:2px solid var(--gulf-d);padding-left:16px;
+       max-width:62ch;color:var(--ink)}
+  .verdict code{font-size:.85em}
+
   .card{background:var(--paper);border:1px solid var(--line);border-radius:3px;
         overflow:hidden;display:flex;flex-direction:column;
         box-shadow:0 2px 10px rgba(31,36,34,.05);transition:box-shadow .35s,transform .35s}
   .card:hover{box-shadow:0 18px 50px -22px rgba(31,36,34,.30);transform:translateY(-2px)}
+  .card--chosen{border-color:var(--gulf-d);box-shadow:0 0 0 1px var(--gulf-d),
+       0 18px 50px -22px rgba(31,36,34,.30)}
+  .card--chosen .card__no{color:var(--paper);background:var(--gulf-d);
+       padding:3px 9px;border-radius:2px;white-space:nowrap}
 
   .card__no{font-family:var(--label);font-size:.7rem;letter-spacing:.2em;
         color:var(--gulf-d)}
@@ -81,17 +89,22 @@
 
 <div class="wrap">
   <header class="top">
-    <p class="eyebrow">Brand exploration &middot; 2026 07 28</p>
+    <p class="eyebrow">Brand exploration &middot; 2026 07 28 &middot; Decided</p>
     <h1>Ten logo directions</h1>
+    <p class="verdict"><strong>Number 09, Split Initials, was chosen on
+      2026 07 28</strong> and is now live across the site. This page is kept as
+      the record of what else was on the table. See
+      <code>brand/README.md</code> for the finished files.</p>
     <p>Every mark below is built from the palette and the two serifs the website
       already runs on, so whichever one gets picked drops straight into the site
       with nothing else to change. Each card shows the full lockup on the page
       ground, the same lockup reversed on the dark panel color, and the icon
       alone at 48, 28 and 16 pixels, because a mark that dies at favicon size is
       not finished.</p>
-    <p>Tell me the number you like. I will then draw it properly as outlined
-      vector paths, export the favicon, the social preview and a transparent PNG
-      set, and swap it into the site.</p>
+    <p>The marks on this page are set in live text, which was fine for choosing
+      between them. The one that won was then redrawn as outlined vector paths so
+      it no longer depends on a font loading. That is the version in
+      <code>assets/</code>, and it is the only one that should ever be used.</p>
   </header>
 
   <div class="grid">
@@ -437,10 +450,10 @@
     </section>
 
     <!-- ============================================================ 09 -->
-    <section class="card">
+    <section class="card card--chosen">
       <div class="card__head">
         <span class="card__name">Split initials</span>
-        <span class="card__no">09</span>
+        <span class="card__no">09 &middot; chosen</span>
       </div>
       <p class="card__note">The initials set large with a hairline between them
         and the full name underneath. Editorial rather than corporate. This is

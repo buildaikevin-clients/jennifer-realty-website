@@ -235,6 +235,25 @@ a:hover { color: var(--ink); }
   text-decoration: none; color: inherit;
   margin-right: auto;
 }
+
+/* The J and B monogram. Loaded as a background rather than inline markup so
+   the outlines are fetched and cached once instead of being repeated in all 27
+   pages, and as a background rather than an <img> so the state swap below is a
+   one line CSS change. Two files rather than a mask, because a mask would
+   flatten the gulf rule to a single color and that hairline is the whole
+   character of the mark. Aspect ratio is fixed to the artwork: 1.2 to 1. */
+.nav__brand-mark {
+  flex: none;
+  width: 36px; height: 30px;
+  background: url("../assets/logo-mark.svg") center / contain no-repeat;
+}
+.nav.is-top .nav__brand-mark { background-image: url("../assets/logo-mark-light.svg"); }
+/* Narrow phones: the wordmark keeps the room and the monogram steps aside. */
+@media (max-width: 400px) { .nav__brand-mark { display: none; } }
+
+/* Both lines hold to one line. The monogram takes real width out of a nav that
+   was already tight at 1280, and a wrapped wordmark next to a mark reads as a
+   broken logo rather than as two lines of type. */
 .nav__brand-name {
   display: block;
   font-family: var(--label);
@@ -244,6 +263,7 @@ a:hover { color: var(--ink); }
   text-transform: uppercase;
   color: var(--ink);
   line-height: 1.2;
+  white-space: nowrap;
 }
 .nav__brand-sub {
   display: block;
@@ -254,11 +274,20 @@ a:hover { color: var(--ink); }
   text-transform: uppercase;
   color: var(--muted);
   margin-top: .25rem;
+  white-space: nowrap;
 }
 .nav.is-top .nav__brand-name { color: var(--bone); }
 .nav.is-top .nav__brand-sub { color: rgba(239, 238, 236, .82); }
 
 .nav__links { display: flex; align-items: center; gap: 1.9rem; }
+/* The monogram costs the brand block about 50px, which is enough to push the
+   brokerage line onto a second row on a 1280 laptop. Buy it back from the link
+   gap instead: the firm name has to sit with the phone number under
+   61J2-10.025, and a wrapped one reads as detached from it. Desktop nav only,
+   since below 1040 the links become the stacked panel. */
+@media (min-width: 1041px) and (max-width: 1400px) {
+  .nav__links { gap: 1.35rem; }
+}
 .nav__links a {
   font-size: .74rem;
   font-weight: 500;
@@ -344,6 +373,10 @@ a:hover { color: var(--ink); }
   .nav.is-open .nav__brand-name { color: var(--ink); }
   .nav.is-open .nav__brand-sub { color: var(--muted); }
   .nav.is-open .nav__burger span { background: var(--ink); }
+  /* The open menu drops a bone panel behind a header that may still be flagged
+     is-top. Same specificity as the is-top rule but later in the file, so the
+     dark mark wins back and does not vanish into the light panel. */
+  .nav.is-open .nav__brand-mark { background-image: url("../assets/logo-mark.svg"); }
   .nav__links a {
     color: var(--ink-2);
     padding: 1rem 0;
@@ -977,8 +1010,12 @@ a:hover { color: var(--ink); }
      -1 and land above the section's own dark ground rather than behind it. */
   isolation: isolate;
   margin-top: clamp(3rem, 6vw, 4.5rem);
-  padding-top: clamp(3.2rem, 6vw, 4.5rem);
-  padding-bottom: clamp(3.2rem, 6vw, 4.5rem);
+  /* Generous, and the padding is what sizes the photograph. The band is the
+     picture's frame, so growing it does two things at once: the photo covers
+     more of the section, and cover has to scale the source up to fill the
+     taller box, which enlarges the room inside it. */
+  padding-top: clamp(4.5rem, 9vw, 8rem);
+  padding-bottom: clamp(4.5rem, 9vw, 8rem);
   /* No hairline any more. The photograph's own hard top edge is the divider,
      and a rule sitting on it read as a mistake. */
 }
@@ -997,19 +1034,30 @@ a:hover { color: var(--ink); }
   overflow: hidden;
   z-index: -1;
 }
-/* 900px of headroom, so the picture can travel 450px either side of centre.
-   reveal.js drives it at range 860 with dir -1, which is 430px each way and
-   runs the other direction to every other parallax on the site: the frame
-   opens on the bottom of the photograph, the seating and the ottoman, and
-   climbs to the chandeliers as you scroll.
+/* 1200px of headroom, deliberately hung off centre. -800px rather than the
+   -600px that would centre it, so the frame rests low in the photograph, on
+   the seating and the ottoman, instead of on the middle of the room. That is
+   the only way to choose which part of the picture you see: the box is taller
+   than the source's aspect, so cover crops the width and object-position has
+   no vertical travel to work with.
 
-   900 is also about the ceiling. The band is roughly 500px tall, so the image
-   renders near 1400px against a 1350px source. Any more headroom starts
-   upscaling it, and the scrim is now light enough that softness would show. */
+   Hanging it low leaves 800px of room to move down and 400px to move up, and
+   it is the 400 that constrains reveal.js. It runs range 600, so 300px each
+   way, which keeps 100px in hand before an edge of the photograph could show.
+   That 400 holds whatever height the band ends up, since both this margin and
+   the oversize are fixed. The two numbers move together: raising the oversize
+   without moving this margin down by the same amount buys travel in the wrong
+   direction, since it is upward room that is short.
+
+   1200 is near the ceiling, and the ceiling is the source. At roughly 610px of
+   band the image has to fill a box about 1810px tall, and the file is 1801px.
+   That is native size, near enough. Grow either this or the band's padding
+   much further and the photograph starts being stretched to fit, which the
+   .66 scrim is too light to hide. Refetch a taller source instead. */
 .story__img {
   width: 100%;
-  height: calc(100% + 900px);
-  margin-top: -450px;
+  height: calc(100% + 1200px);
+  margin-top: -800px;
   object-fit: cover;
   object-position: center;
 }
@@ -1601,16 +1649,46 @@ input:focus, select:focus, textarea:focus {
    anchor, oversized and in the accent, with the heading under it rather than
    beside it. Buttons sit on a shared baseline via margin-top auto, so a longer
    paragraph in one column does not leave its button floating. */
-.journey {
+.journey { padding: clamp(4.5rem, 9vw, 8rem) 0 0; }
+
+/* Full width colour band. Alternates dark, light, dark down the page. */
+.journey__band { padding: clamp(3.5rem, 6vw, 5.5rem) 0; }
+.journey__band--dark { background: var(--deep); color: var(--bone); }
+.journey__band--dark .journey__title { color: var(--bone); }
+.journey__band--dark .journey__text { color: var(--sand-l); }
+.journey__band--dark .journey__num { color: var(--gulf); }
+
+.journey__row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: clamp(2.5rem, 5vw, 4rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
 }
-.journey__step {
-  display: flex;
-  flex-direction: column;
-  padding-top: 2rem;
-  border-top: 1px solid var(--line);
+/* Photo on the left, copy on the right. Source order stays copy first so the
+   reading order is right for a screen reader on every band. */
+.journey__row--flip .journey__copy  { order: 2; }
+.journey__row--flip .journey__figure { order: 1; }
+
+/* The photograph breaks out past the band, which is the whole trick: the
+   negative margin is larger than the band padding, so it overhangs into the
+   sections above and below. Nothing in this component may set overflow
+   hidden or the overhang is clipped away. */
+.journey__figure {
+  margin: clamp(-5rem, -8vw, -7rem) 0;
+  padding: 10px;
+  background: var(--paper);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  z-index: 1;
+}
+.journey__figure img { width: 100%; height: auto; display: block; }
+
+@media (max-width: 780px) {
+  /* Stacked, so the overhang has nothing to overhang into. */
+  .journey__row { grid-template-columns: 1fr; }
+  .journey__row--flip .journey__copy,
+  .journey__row--flip .journey__figure { order: 0; }
+  .journey__figure { margin: 0; max-width: 26rem; }
 }
 .journey__num {
   font-family: var(--display);
@@ -1729,6 +1807,10 @@ input:focus, select:focus, textarea:focus {
   letter-spacing: .16em; text-transform: uppercase;
   color: var(--bone);
 }
+/* The full lockup, reversed, as the footer signature. Width capped rather than
+   set, so it never outgrows a narrow column. The alt text carries the name, so
+   nothing is lost to a screen reader or to a crawler by it being artwork. */
+.footer__logo { width: 100%; max-width: 226px; height: auto; }
 .footer__tagline { margin-top: .9rem; max-width: 32ch; color: var(--sand-l); }
 
 .footer__title {

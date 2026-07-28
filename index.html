@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jennifer Barragan | Bradenton, Anna Maria Island and Lakewood Ranch Real Estate</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <!-- iOS ignores an SVG icon on the home screen, so the touch icon is
+       a raster. Both are generated from brand/build/emit.py. -->
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <meta name="description" content="Jennifer Barragan helps buyers and sellers across Bradenton, Anna Maria Island, Palma Sola and Lakewood Ranch. Local guidance on flood zones, insurance, new construction and what each area actually costs." />
 
   <link rel="canonical" href="https://[[DOMAIN]]/" />
@@ -127,6 +130,7 @@
   <header class="nav is-top" id="nav">
     <div class="nav__inner">
       <a href="/" class="nav__brand">
+        <span class="nav__brand-mark" aria-hidden="true"></span>
         <span class="nav__brand-text">
           <span class="nav__brand-name">Jennifer Barragan</span>
           <span class="nav__brand-sub">Preferred SHORE Real Estate</span>
@@ -368,7 +372,7 @@
              contrast never depends on what is in the photograph. -->
         <div class="story__bg" aria-hidden="true">
           <img class="story__img" src="assets/about-interior.webp"
-               width="2400" height="1350" loading="lazy" decoding="async" alt="" />
+               width="3200" height="1801" loading="lazy" decoding="async" alt="" />
         </div>
 
         <!-- Direct quotation, so it stays in her voice on an otherwise third
@@ -534,7 +538,9 @@
     <div class="wrap">
       <div class="footer__top">
         <div class="reveal" style="--d:0s">
-          <p class="footer__brand-name">Jennifer Barragan</p>
+          <img class="footer__logo" src="assets/logo-reversed.svg"
+               width="280" height="116" loading="lazy"
+               alt="Jennifer Barragan, Bradenton Florida" />
           <p class="footer__tagline">
             Buying and selling across Bradenton, the barrier islands, and
             Lakewood Ranch.

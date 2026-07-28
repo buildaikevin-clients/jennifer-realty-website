@@ -19,8 +19,11 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const DOMAIN = '[[DOMAIN]]';
 
-// Pages that should never appear in search results.
-const EXCLUDE = new Set(['404.html']);
+// Pages that should never appear in search results. brand/ holds the logo
+// concept sheet, which is internal working material rather than site content.
+// It already carries a noindex, and listing a noindex page in the sitemap sends
+// Google two contradictory instructions, so it is excluded here as well.
+const EXCLUDE = new Set(['404.html', 'brand/logo-concepts.html']);
 
 // Explicit priority and change frequency. Anything not listed falls back to
 // the depth based default below.

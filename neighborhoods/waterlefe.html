@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Waterlefe Homes for Sale | Bradenton Area | Jennifer Barragan</title>
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <!-- iOS ignores an SVG icon on the home screen, so the touch icon is
+       a raster. Both are generated from brand/build/emit.py. -->
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
   <meta name="description" content="What to know about buying or selling in Waterlefe, Manatee County. Housing styles, flood and insurance considerations, and what the area is actually like." />
 
   <link rel="canonical" href="https://[[DOMAIN]]/neighborhoods/waterlefe.html" />
@@ -88,6 +91,7 @@
   <header class="nav" id="nav">
     <div class="nav__inner">
       <a href="../index.html" class="nav__brand">
+        <span class="nav__brand-mark" aria-hidden="true"></span>
         <span class="nav__brand-text">
           <span class="nav__brand-name">Jennifer Barragan</span>
           <span class="nav__brand-sub">Preferred SHORE Real Estate</span>
@@ -226,7 +230,9 @@
     <div class="wrap">
       <div class="footer__top">
         <div class="reveal" style="--d:0s">
-          <p class="footer__brand-name">Jennifer Barragan</p>
+          <img class="footer__logo" src="../assets/logo-reversed.svg"
+               width="280" height="116" loading="lazy"
+               alt="Jennifer Barragan, Bradenton Florida" />
           <p class="footer__tagline">
             Buying and selling across Bradenton, the barrier islands, and
             Lakewood Ranch.

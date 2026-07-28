@@ -49,3 +49,7 @@ Desktop.ini
 # scripts/build-neighborhood-heroes.js. Provenance lives in
 # assets/neighborhoods/CREDITS.md, not in the repo.
 scripts/.hero-cache/
+
+# Logo build input: the three Google fonts, fetched on demand. Large, and
+# Google serves them at a stable URL. See brand/README.md.
+brand/build/*.ttf

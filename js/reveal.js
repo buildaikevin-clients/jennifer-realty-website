@@ -65,25 +65,26 @@
      of it either side of centre. It must stay under the element's oversize in
      CSS or the translate exposes an edge.
 
+     Speed is range against the length of the pass, which is the viewport plus
+     the element's own height. Anything approaching 1 is moving as fast as the
+     page and reads as a slide rather than a drift. A quarter of that is about
+     where it stops calling attention to itself.
+
      dir flips which end of the picture you meet first. The default, 1, slides
      the image up as you scroll down, so the frame starts on the top of the
      photograph and travels toward the bottom of it. -1 reverses that: the
-     frame starts on the bottom of the picture and climbs.
-
-     window remaps the travel onto a slice of the pass instead of all of it.
-     This matters more than it sounds. A pass runs from the band entering the
-     bottom of the viewport to it clearing the top, but a 500px band inside a
-     900px viewport is only fully visible for about the middle 28% of that.
-     Spread the travel over the whole pass and the interesting ends of the
-     picture happen while the band is half off screen, and all anyone sees is
-     the middle of the image barely moving. Squeezing the same travel into
-     [.30, .72] puts about 70% of it inside the part you can actually see. It
-     clamps outside that, which is fine, because outside it the band is mostly
-     off screen anyway. */
+     frame starts low in the picture and climbs. */
   const PARALLAX_TARGETS = [
     { sel: '.workwith__img',   range: 920 },  // oversized 1000px, the feature one
-    // Oversized 900px. Starts on the furniture and climbs to the chandeliers.
-    { sel: '.story__img',      range: 860, dir: -1, window: [0.30, 0.72] },
+    /* Oversized 900px, hung low in CSS so this sits on the furniture. 400 over
+       a pass of roughly 1400 is a little under a third of scroll speed: a
+       drift up through the lower half of the room, which never reaches the
+       chandeliers and is not meant to.
+
+       400 is close to the ceiling. The way the image hangs leaves 250px of
+       room to move up, so this uses 200 of it. Going much past 440 needs the
+       margin in styles.css changed too, and that moves the framing. */
+    { sel: '.story__img',      range: 400, dir: -1 },
     { sel: '.page-hero__img',  range: 90 },   // oversized 120px
     { sel: '.path__media img', range: 26 },   // oversized 34px
     { sel: '.card__media img', range: 20 },   // oversized 26px
@@ -106,7 +107,6 @@
           track: el.parentElement || el,
           range: t.range,
           dir: t.dir === -1 ? -1 : 1,
-          win: Array.isArray(t.window) ? t.window : null,
         });
       }
     }
@@ -137,10 +137,7 @@
       const r = l.track.getBoundingClientRect();
       if (r.bottom < -40 || r.top > vh + 40) continue;   // off screen, skip
       // 0 as the element enters the bottom, 1 as it clears the top.
-      let p = (vh - r.top) / (vh + r.height);
-      // Then, optionally, onto just the stretch of that where the element is
-      // properly on screen. See window in PARALLAX_TARGETS.
-      if (l.win) p = (p - l.win[0]) / (l.win[1] - l.win[0]);
+      const p = (vh - r.top) / (vh + r.height);
       writes.push([l, Math.min(1, Math.max(0, p))]);
     }
 

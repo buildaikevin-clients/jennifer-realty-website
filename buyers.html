@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Buying a Home in Bradenton and Manatee County | Jennifer Barragan</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <!-- iOS ignores an SVG icon on the home screen, so the touch icon is
+       a raster. Both are generated from brand/build/emit.py. -->
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <meta name="description" content="What it really costs to buy on Florida's Gulf Coast. Flood zones, insurance, condo reserve studies and closing timelines, plus a payment estimator built for Manatee County." />
 
   <link rel="canonical" href="https://[[DOMAIN]]/buyers.html" />
@@ -102,6 +105,7 @@
   <header class="nav" id="nav">
     <div class="nav__inner">
       <a href="index.html" class="nav__brand">
+        <span class="nav__brand-mark" aria-hidden="true"></span>
         <span class="nav__brand-text">
           <span class="nav__brand-name">Jennifer Barragan</span>
           <span class="nav__brand-sub">Preferred SHORE Real Estate</span>
@@ -147,10 +151,12 @@
   </section>
 
   <!-- ==================================================== JOURNEY ======== -->
-  <!-- Three numbered stages, each with its own call to action, modeled on the
-       buying page at schranerrealty.com. Layout follows theirs; the copy and
-       the market are Jennifer's. -->
-  <section class="section" id="start">
+  <!-- Three alternating full width bands, dark then light then dark, with the
+       photograph on the opposite side each time and breaking out past the band
+       edges in a white frame. Layout follows the buying page at
+       schranerrealty.com. The bands must not clip, which is why nothing here
+       carries overflow hidden. -->
+  <section class="journey" id="start">
     <div class="wrap">
       <div class="section__head section__head--center">
         <p class="eyebrow reveal">Decided You Would Like To Buy A Home?</p>
@@ -160,52 +166,55 @@
         <p class="section__lede reveal" style="--d:.16s">
           Buying here is the largest purchase most people ever make, and the
           part that catches them out is rarely the house. It is the flood zone,
-          the insurance quote, the roof that has four years left, the
-          association that has not funded its reserves. Here is how I work
-          through all of it with you.
+          the insurance quote, the roof with four years left, the association
+          that has not funded its reserves. Here is how I work through all of
+          it with you.
         </p>
       </div>
+    </div>
 
-      <div class="journey">
-        <div class="journey__step reveal" style="--d:0s">
+    <div class="journey__band journey__band--dark">
+      <div class="wrap journey__row">
+        <div class="journey__copy reveal">
           <p class="journey__num" aria-hidden="true">01.</p>
           <h3 class="journey__title">Prepare</h3>
-          <p class="journey__text">
-            Before we look at a single house you talk to a lender and to an
-            insurance agent. In Florida that second call is not a formality at
-            the end, it is a large part of your monthly payment. You will walk
-            in knowing your real number rather than a calculator's guess, and I
-            will introduce you to people who actually answer the phone.
-          </p>
-          <a class="btn btn--ghost journey__cta" href="index.html#contact">Book A Call</a>
+          <p class="journey__text">Before we look at a single house you talk to a lender and to an insurance agent. In Florida that second call is not a formality at the end, it is a large part of your monthly payment. You will walk in knowing your real number rather than a calculator&rsquo;s guess, and I will introduce you to people who actually answer the phone. No obligation, and no pressure to move faster than you want to.</p>
+          <a class="btn journey__cta" href="index.html#contact">Book A Call</a>
         </div>
+        <figure class="journey__figure reveal reveal--scale" style="--d:.1s">
+          <img src="assets/journey-prepare.webp" width="800" height="1000" loading="lazy"
+               decoding="async" alt="A coastal Florida home at sunrise, seen from above." />
+        </figure>
+      </div>
+    </div>
 
-        <div class="journey__step reveal" style="--d:.1s">
+    <div class="journey__band">
+      <div class="wrap journey__row journey__row--flip">
+        <div class="journey__copy reveal">
           <p class="journey__num" aria-hidden="true">02.</p>
           <h3 class="journey__title">Shop</h3>
-          <p class="journey__text">
-            The good part. We work out what actually matters to you, full time
-            or seasonal, walk to the sand or a bigger lot, then I tell you what
-            I see in every house. Roof age, elevation against the street,
-            whether the windows are rated, what the association holds in
-            reserve. If a home has a problem I will say so, even when it is the
-            one you already love.
-          </p>
-          <a class="btn btn--ghost journey__cta" href="#search">Start My Search</a>
+          <p class="journey__text">The good part. We work out what actually matters to you, full time or seasonal, walk to the sand or a bigger lot, near the water or east where the newer construction is. Then I tell you what I see in every house. Roof age, elevation against the street, whether the windows are rated, what the association holds in reserve. If a home has a problem I will say so, even when it is the one you already love.</p>
+          <a class="btn journey__cta" href="#search">Home Search</a>
         </div>
+        <figure class="journey__figure reveal reveal--scale" style="--d:.1s">
+          <img src="assets/journey-shop.webp" width="800" height="1000" loading="lazy"
+               decoding="async" alt="The front entry of a white coastal home, doors open to the water beyond." />
+        </figure>
+      </div>
+    </div>
 
-        <div class="journey__step reveal" style="--d:.2s">
+    <div class="journey__band journey__band--dark">
+      <div class="wrap journey__row">
+        <div class="journey__copy reveal">
           <p class="journey__num" aria-hidden="true">03.</p>
           <h3 class="journey__title">Offer</h3>
-          <p class="journey__text">
-            You found it, so now it has to hold together. I write the offer,
-            then manage the inspection, the appraisal, the insurance binder and
-            title. Deals here fall apart on one of those four far more often
-            than on price, so I stay on all of them and you hear from me before
-            you have to ask.
-          </p>
-          <a class="btn btn--ghost journey__cta" href="#calculator">Run The Numbers</a>
+          <p class="journey__text">You found it, so now it has to hold together. I write the offer against what has actually closed nearby rather than against asking prices, then manage the inspection, the appraisal, the insurance binder and title. Deals here fall apart on one of those four far more often than on price, so I stay on all of them and you hear from me before you have to ask.</p>
+          <a class="btn journey__cta" href="#guide">Buyer&rsquo;s Guide</a>
         </div>
+        <figure class="journey__figure reveal reveal--scale" style="--d:.1s">
+          <img src="assets/journey-offer.webp" width="800" height="1000" loading="lazy"
+               decoding="async" alt="A covered lanai looking out over a pool toward the Gulf." />
+        </figure>
       </div>
     </div>
   </section>
@@ -675,7 +684,9 @@
     <div class="wrap">
       <div class="footer__top">
         <div class="reveal" style="--d:0s">
-          <p class="footer__brand-name">Jennifer Barragan</p>
+          <img class="footer__logo" src="assets/logo-reversed.svg"
+               width="280" height="116" loading="lazy"
+               alt="Jennifer Barragan, Bradenton Florida" />
           <p class="footer__tagline">
             Buying and selling across Bradenton, the barrier islands, and
             Lakewood Ranch.

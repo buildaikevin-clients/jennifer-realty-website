@@ -760,6 +760,9 @@ function head({ title, description, canonical, image, imageAlt, extraLd }) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>${esc(title)}</title>
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <!-- iOS ignores an SVG icon on the home screen, so the touch icon is
+       a raster. Both are generated from brand/build/emit.py. -->
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
   <meta name="description" content="${esc(description)}" />
 
   <link rel="canonical" href="https://${DOMAIN}/${canonical}" />
@@ -796,6 +799,7 @@ function nav(prefix) {
   <header class="nav" id="nav">
     <div class="nav__inner">
       <a href="${prefix}index.html" class="nav__brand">
+        <span class="nav__brand-mark" aria-hidden="true"></span>
         <span class="nav__brand-text">
           <span class="nav__brand-name">Jennifer Barragan</span>
           <span class="nav__brand-sub">Preferred SHORE Real Estate</span>
@@ -827,7 +831,9 @@ function footer(prefix) {
     <div class="wrap">
       <div class="footer__top">
         <div class="reveal" style="--d:0s">
-          <p class="footer__brand-name">Jennifer Barragan</p>
+          <img class="footer__logo" src="${prefix}assets/logo-reversed.svg"
+               width="280" height="116" loading="lazy"
+               alt="Jennifer Barragan, Bradenton Florida" />
           <p class="footer__tagline">
             Buying and selling across Bradenton, the barrier islands, and
             Lakewood Ranch.
