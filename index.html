@@ -192,8 +192,42 @@
     </div>
   </section>
 
+  <!-- ==================================================== LISTINGS ======= -->
+  <section class="section" id="listings">
+    <div class="wrap">
+      <div class="listings__head">
+        <p class="eyebrow reveal">Available Now</p>
+        <h2 class="section__title reveal" id="listings-title" style="--d:.1s">Featured Properties</h2>
+        <p class="section__lede reveal" id="listings-sub" style="--d:.18s">
+          A look at what is available across Bradenton, the barrier islands,
+          and Lakewood Ranch.
+        </p>
+      </div>
+
+      <div class="listings__controls reveal" style="--d:.26s">
+        <div class="listings__tabs" id="listings-tabs" role="group"
+             aria-label="Filter listings by property type"></div>
+      </div>
+
+      <!-- The carousel reserves a gutter on each side and the arrows sit in it,
+           beside the cards rather than on top of them. The grid is inset by
+           the same amount, so nothing ever overlaps a listing. -->
+      <div class="listings__carousel">
+        <button class="listings__nav listings__nav--prev" id="listings-prev"
+                aria-label="Previous listings" disabled>&#8249;</button>
+        <div class="listings__viewport" id="listings-viewport">
+          <div class="listings__grid" id="listings-grid" aria-live="polite"></div>
+        </div>
+        <button class="listings__nav listings__nav--next" id="listings-next"
+                aria-label="Next listings">&#8250;</button>
+      </div>
+
+      <p class="listings__meta" id="listings-meta"></p>
+    </div>
+  </section>
+
   <!-- ==================================================== START HERE ===== -->
-  <section class="section" id="start">
+  <section class="section section--bone2" id="start">
     <div class="wrap">
       <div class="section__head section__head--center">
         <p class="eyebrow reveal">Ways To Work With Me</p>
@@ -255,40 +289,6 @@
           </div>
         </a>
       </div>
-    </div>
-  </section>
-
-  <!-- ==================================================== LISTINGS ======= -->
-  <section class="section section--bone2" id="listings">
-    <div class="wrap">
-      <div class="listings__head">
-        <p class="eyebrow reveal">Available Now</p>
-        <h2 class="section__title reveal" id="listings-title" style="--d:.1s">Featured Properties</h2>
-        <p class="section__lede reveal" id="listings-sub" style="--d:.18s">
-          A look at what is available across Bradenton, the barrier islands,
-          and Lakewood Ranch.
-        </p>
-      </div>
-
-      <div class="listings__controls reveal" style="--d:.26s">
-        <div class="listings__tabs" id="listings-tabs" role="group"
-             aria-label="Filter listings by property type"></div>
-      </div>
-
-      <!-- The carousel reserves a gutter on each side and the arrows sit in it,
-           beside the cards rather than on top of them. The grid is inset by
-           the same amount, so nothing ever overlaps a listing. -->
-      <div class="listings__carousel">
-        <button class="listings__nav listings__nav--prev" id="listings-prev"
-                aria-label="Previous listings" disabled>&#8249;</button>
-        <div class="listings__viewport" id="listings-viewport">
-          <div class="listings__grid" id="listings-grid" aria-live="polite"></div>
-        </div>
-        <button class="listings__nav listings__nav--next" id="listings-next"
-                aria-label="Next listings">&#8250;</button>
-      </div>
-
-      <p class="listings__meta" id="listings-meta"></p>
     </div>
   </section>
 
