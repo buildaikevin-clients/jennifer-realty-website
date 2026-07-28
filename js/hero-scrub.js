@@ -108,10 +108,19 @@
     return Math.min(FRAME_COUNT - 1, Math.floor(progress() * FRAME_COUNT));
   }
 
-  // Ramp --scrub-exit from 0 to 1 across the last 8% so the hero dissolves
-  // into the page instead of hard cutting. See .hero__fade in styles.css.
+  /* Ramp --scrub-exit from 0 to 1 so the hero dissolves into the page instead
+     of hard cutting. See .hero__fade in styles.css.
+
+     EXIT_START is late on purpose. The track is 320vh with 100vh pinned, so
+     every percent of progress is over 2vh of scrolling. At 0.92 the dissolve
+     ran for roughly 18vh, which reads as a long blank white hold at the end of
+     the video rather than as a transition. Starting at 0.965 cuts that to
+     about 8vh, so the fade lands just as the section releases. */
+  const EXIT_START = 0.965;
+
   function updateExit() {
-    const v = Math.min(1, Math.max(0, (progress() - 0.92) / 0.08));
+    const v = Math.min(1, Math.max(0,
+      (progress() - EXIT_START) / (1 - EXIT_START)));
     section.style.setProperty('--scrub-exit', v.toFixed(3));
   }
 

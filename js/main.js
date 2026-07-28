@@ -58,11 +58,12 @@
   if (nav) {
     function onScroll() {
       const y = window.scrollY;
-      // On the scrubbed hero, hold the over-hero treatment until the pinned
-      // section is nearly released, so the nav flips once the exit fade has
-      // already turned the backdrop light. 0.94 lands just before the release.
+      // On the scrubbed hero, hold the over-hero treatment until the exit fade
+      // has actually turned the backdrop light, or the nav switches to dark
+      // text while the footage behind it is still dark. Kept in step with
+      // EXIT_START in js/hero-scrub.js, which begins the dissolve at 0.965.
       const scrub = hero && hero.classList.contains('hero--scrub')
-        ? (hero.offsetHeight - window.innerHeight) * 0.94
+        ? (hero.offsetHeight - window.innerHeight) * 0.985
         : null;
       nav.classList.toggle('is-scrolled', y > (scrub !== null ? scrub : 40));
       const heroBottom = hero
