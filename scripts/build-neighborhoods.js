@@ -1148,13 +1148,40 @@ ${nav('')}
 
   <section class="section">
     <div class="wrap">
-      <p class="lede-lg reveal" style="max-width:60ch">
-        Anna Maria and Parrish are forty minutes apart and have almost nothing
-        in common. One is a barrier island with coastal flood zones and rental
-        rules that change by the block. The other is new construction on former
-        farmland with builder contracts and CDD assessments. Picking the wrong
-        one for how you actually live is the most expensive mistake I see.
-      </p>
+      <!-- The page opens on an argument, not a paragraph: two places that
+           share a county and nothing else, then what choosing wrong costs.
+           Run together as prose it read as filler, which is a waste of the
+           best line on the page. The italic accent on the last phrase is the
+           .hero__title em idiom, the one place Cormorant goes italic and picks
+           up the accent colour. -->
+      <div class="contrast reveal">
+        <p class="eyebrow">The Same County</p>
+
+        <div class="contrast__pair">
+          <div>
+            <p class="contrast__place">Anna Maria</p>
+            <p class="contrast__text">
+              A barrier island. Coastal flood zones, and rental rules that
+              change by the block.
+            </p>
+          </div>
+
+          <p class="contrast__vs"><span>forty minutes apart</span></p>
+
+          <div>
+            <p class="contrast__place">Parrish</p>
+            <p class="contrast__text">
+              New construction on former farmland. Builder contracts, and CDD
+              assessments.
+            </p>
+          </div>
+        </div>
+
+        <p class="contrast__punch">
+          Picking the wrong one for how you actually live is
+          <em>the most expensive mistake I see.</em>
+        </p>
+      </div>
 ${groups}
     </div>
   </section>
