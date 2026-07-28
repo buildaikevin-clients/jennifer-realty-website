@@ -637,6 +637,20 @@ a:hover { color: var(--ink); }
   .hero__scroll::after { animation: none; }
 }
 
+/* Failsafe. Entrances start hidden and are revealed by js/reveal.js, so
+   without scripting every one of them would stay invisible, including
+   Jennifer's photograph. This renders them in their resting state instead.
+   Cheaper and flash free compared with tagging the html element from JS, and
+   it needs no inline script, which the CSP in netlify.toml forbids. */
+@media (scripting: none) {
+  .reveal,
+  .reveal--mask,
+  .reveal--scale,
+  .reveal--rule { opacity: 1; transform: none; clip-path: none; transition: none; }
+  .reveal--lines .lines__line > span { transform: none; }
+  .scroll-progress { display: none; }
+}
+
 /* ============================================================ pathways === */
 
 /* The three card Start Here row. Buy, Sell, Relocate. */

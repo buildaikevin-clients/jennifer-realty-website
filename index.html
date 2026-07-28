@@ -296,11 +296,15 @@
   <section class="section section--dark" id="about">
     <div class="wrap">
       <div class="about__grid">
+        <!-- No onerror hide and no lazy loading here. The hide was a guard for
+             when the file did not exist yet, and it is now a footgun: any
+             transient failure would permanently remove her photo. Lazy loading
+             is dropped because this sits inside a clip-path masked container,
+             which browsers can treat as never visible and defer forever. -->
         <div class="about__photo reveal reveal--mask">
-          <img src="assets/jennifer-headshot.jpg" width="800" height="1000"
-               loading="lazy"
-               alt="Jennifer Barragan, a real estate agent in Bradenton, Florida."
-               onerror="this.closest('.about__photo').style.display='none'" />
+          <img src="assets/jennifer-headshot.jpg" width="1600" height="2000"
+               decoding="async"
+               alt="Jennifer Barragan, a REALTOR at Preferred SHORE Real Estate, photographed in her Sarasota office." />
         </div>
 
         <div>
