@@ -722,14 +722,49 @@ a:hover { color: var(--ink); }
 .workwith .section__lede  { color: rgba(239, 238, 236, .88); }
 .workwith .eyebrow        { color: var(--gulf); }
 
-/* Cards read as light panels lifted off the photograph. */
+/* Cards follow the reference: a warm taupe panel under a photo band, with a
+   large white serif question and small centred body copy beneath it.
+
+   The taupe is #7b736d rather than the --sand token (#817872) it is derived
+   from. --sand against white measures 4.38:1, which passes for the heading
+   because that is large text, but fails the 4.5:1 floor for the body copy.
+   #7b736d measures 4.65:1 and carries both. */
 .workwith .path {
-  background: var(--bone);
+  background: #7b736d;
   border-color: transparent;
+  border-radius: 0;
+  text-align: center;
   box-shadow: var(--shadow-lg);
 }
 .workwith .path:hover { border-color: transparent; }
-.workwith .path__text { color: var(--ink-2); }
+.workwith .path__body {
+  padding: clamp(2rem, 3.4vw, 3rem) clamp(1.4rem, 2.4vw, 2.2rem)
+           clamp(3rem, 6vw, 5.5rem);
+}
+.workwith .path__title {
+  color: var(--paper);
+  font-size: clamp(1.6rem, 2.5vw, 2.15rem);
+  font-weight: 600;
+  line-height: 1.14;
+  margin-bottom: 1.5rem;
+  max-width: 15ch;
+  margin-inline: auto;
+}
+.workwith .path__text {
+  color: rgba(255, 255, 255, .92);
+  font-size: .89rem;
+  line-height: 1.72;
+  max-width: 34ch;
+  margin-inline: auto;
+  flex: 0 1 auto;   /* the reference leaves air below the copy, not stretched */
+}
+.workwith .path__num { display: none; }
+.workwith .path__link {
+  color: var(--paper);
+  margin-top: 1.6rem;
+  justify-content: center;
+}
+.workwith .path__media { aspect-ratio: 4 / 3; }
 
 @media (max-width: 860px) {
   /* Less card height to cross, so the photo band shrinks with it. */
