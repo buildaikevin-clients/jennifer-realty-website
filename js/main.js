@@ -61,9 +61,9 @@
       // On the scrubbed hero, hold the over-hero treatment until the exit fade
       // has actually turned the backdrop light, or the nav switches to dark
       // text while the footage behind it is still dark. Kept in step with
-      // EXIT_START in js/hero-scrub.js, which begins the dissolve at 0.965.
+      // EXIT_START in js/hero-scrub.js, which begins the dissolve at 0.98.
       const scrub = hero && hero.classList.contains('hero--scrub')
-        ? (hero.offsetHeight - window.innerHeight) * 0.985
+        ? (hero.offsetHeight - window.innerHeight) * 0.99
         : null;
       nav.classList.toggle('is-scrolled', y > (scrub !== null ? scrub : 40));
       const heroBottom = hero

@@ -112,11 +112,15 @@
      of hard cutting. See .hero__fade in styles.css.
 
      EXIT_START is late on purpose. The track is 320vh with 100vh pinned, so
-     every percent of progress is over 2vh of scrolling. At 0.92 the dissolve
-     ran for roughly 18vh, which reads as a long blank white hold at the end of
-     the video rather than as a transition. Starting at 0.965 cuts that to
-     about 8vh, so the fade lands just as the section releases. */
-  const EXIT_START = 0.965;
+     every percent of progress is over 2vh of scrolling. It began at 0.92,
+     which ran the dissolve for roughly 18vh and read as a blank white hold
+     rather than a transition. 0.98 brings it to about 4vh.
+
+     This is close to the floor. Much past 0.99 and there is not enough scroll
+     left to cross fade at all, so it becomes a hard cut from footage to page.
+     If the hero still feels long, shorten .hero--scrub in styles.css instead:
+     that is total scroll distance, which is a different problem from this. */
+  const EXIT_START = 0.98;
 
   function updateExit() {
     const v = Math.min(1, Math.max(0,
