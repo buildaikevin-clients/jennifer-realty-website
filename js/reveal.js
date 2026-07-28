@@ -57,11 +57,14 @@
   /* Elements are tagged rather than hard coded so this stays additive: nothing
      here hides anything, so a JS failure costs motion and never content.
      `range` is how far the inner layer travels across the full pass, in px. */
+  /* Every target here is deliberately oversized in CSS so the drift has room to
+     travel without exposing an edge. Do not add a selector whose image is cut
+     to exactly its container: the translate would crop the frame.
+     .about__photo is the example, and it is why it is not in this list. */
   const PARALLAX_TARGETS = [
-    { sel: '.page-hero__img',   range: 90 },
-    { sel: '.path__media img',  range: 26 },
-    { sel: '.card__media img',  range: 20 },
-    { sel: '.about__photo img', range: 34 },
+    { sel: '.page-hero__img',  range: 90 },
+    { sel: '.path__media img', range: 26 },
+    { sel: '.card__media img', range: 20 },
   ];
 
   const layers = [];
