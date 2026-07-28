@@ -657,6 +657,72 @@ a:hover { color: var(--ink); }
   .scroll-progress { display: none; }
 }
 
+/* ====================================================== ways to work ===== */
+
+/* Modeled on the "Ways You Can Work With Us" band on schranerrealty.com.
+
+   The move that makes it work is the seam: a photograph runs across the top,
+   the section ground underneath is solid dark, and the cards straddle the
+   boundary. Their images sit on the photo and their bodies land on the dark,
+   which ties the two halves together instead of stacking them.
+
+   The reference does this with Wix BackgroundParallax. Here .workwith__img is
+   oversized and registered in PARALLAX_TARGETS, so the house drifts against
+   the scroll the same way. */
+.workwith {
+  position: relative;
+  background: var(--deep);
+  color: var(--bone);
+  overflow: hidden;
+}
+.workwith__inner { position: relative; z-index: 1; }
+
+/* Where the photo stops. The cards are pulled up so they cross it. */
+.workwith__bg {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 58%;
+  overflow: hidden;
+}
+.workwith__img {
+  width: 100%;
+  height: calc(100% + 80px);   /* headroom for the drift */
+  margin-top: -40px;
+  object-fit: cover;
+  object-position: center 42%;
+}
+/* Scrim. Darkest at the bottom so the seam into the solid ground is a fade
+   rather than a hard edge, and heavy enough at the top for white type. */
+.workwith__bg::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(31, 36, 34, .58) 0%,
+    rgba(31, 36, 34, .34) 38%,
+    rgba(31, 36, 34, .78) 82%,
+    var(--deep) 100%
+  );
+}
+
+.workwith .section__title { color: var(--bone); }
+.workwith .section__lede  { color: rgba(239, 238, 236, .88); }
+.workwith .eyebrow        { color: var(--gulf); }
+
+/* Cards read as light panels lifted off the photograph. */
+.workwith .path {
+  background: var(--bone);
+  border-color: transparent;
+  box-shadow: var(--shadow-lg);
+}
+.workwith .path:hover { border-color: transparent; }
+.workwith .path__text { color: var(--ink-2); }
+
+@media (max-width: 860px) {
+  /* Less card height to cross, so the photo band shrinks with it. */
+  .workwith__bg { height: 46%; }
+}
+
 /* ============================================================ pathways === */
 
 /* The three card Start Here row. Buy, Sell, Relocate. */
@@ -695,12 +761,6 @@ a:hover { color: var(--ink); }
 }
 .path:hover .path__media img { --pz: 1.05; }
 .path__body { padding: 1.9rem 1.7rem 2.1rem; display: flex; flex-direction: column; flex: 1; }
-.path__num {
-  font-family: var(--label);
-  font-size: .64rem; font-weight: 600; letter-spacing: .28em;
-  color: var(--gulf-d);
-  margin-bottom: .9rem;
-}
 .path__title { font-size: 1.65rem; margin-bottom: .7rem; }
 .path__text { font-size: .93rem; color: var(--ink-2); flex: 1; }
 .path__link {

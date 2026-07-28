@@ -63,6 +63,7 @@
      .about__photo is the example, and it is why it is not in this list. */
   const PARALLAX_TARGETS = [
     { sel: '.page-hero__img',  range: 90 },
+    { sel: '.workwith__img',   range: 70 },
     { sel: '.path__media img', range: 26 },
     { sel: '.card__media img', range: 20 },
   ];
