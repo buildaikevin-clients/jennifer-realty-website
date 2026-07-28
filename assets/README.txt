@@ -128,6 +128,14 @@ about-interior.webp       Background behind the long biography in the About
                           look. See .story__bg::after in css/styles.css before
                           lightening it further.
 
+journey-prepare.webp      The three photographs in the buying steps on
+journey-shop.webp         buyers.html, 800x1000 to suit the tall figures in
+journey-offer.webp        that layout. Pexels, free for commercial use, no
+                          attribution required.
+                            prepare  photo 14598479, dining room
+                            shop     photo 12558961, Florida home exterior
+                            offer    photo 27359993, modern bathroom
+
 card-buy.webp             The three service cards in the Ways To Work band.
                           Pexels, free for commercial use, no attribution
                           required, so no credit line is needed on the page.
