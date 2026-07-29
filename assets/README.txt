@@ -189,22 +189,6 @@ sellers-how-it-shows.webp sellers.html, 800x1000 to match the journey figures
                           the picture. If it is ever swapped for a street view,
                           the copy can go back to the drive up framing.
 
-                          A REAL ESTATE SIGN WAS WANTED HERE AND DELIBERATELY
-                          NOT USED. Roughly a dozen free ones were checked and
-                          every one failed for a reason worth recording:
-                          handmade FSBO boards on dead grass, which signal the
-                          opposite of professional representation; signs
-                          carrying a real brokerage brand such as Savills,
-                          which would imply an affiliation Jennifer does not
-                          have; stock models posed as the listing agent, which
-                          on a solo female agent's site reads as Jennifer
-                          herself; and settings with conifers and overcast sky
-                          that are plainly not Florida. The right image is a
-                          photograph of her own Preferred SHORE sign in a
-                          Manatee County yard. It costs her one minute with a
-                          phone and it is the only version that is both
-                          truthful and on brand.
-
 card-buy.webp             The three service cards in the Ways To Work band.
                           Pexels, free for commercial use, no attribution
                           required, so no credit line is needed on the page.
