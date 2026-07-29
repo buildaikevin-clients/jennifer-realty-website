@@ -32,12 +32,19 @@ rather than retyped:
 
 ### Still outstanding
 
-Two tokens remain, deliberately visible rather than guessed:
+One token remains, deliberately visible rather than guessed:
 
 | Token | Why it is blocking |
 |---|---|
 | `[[DOMAIN]]` | Canonical URLs, Open Graph, `sitemap.xml`, `robots.txt` |
-| `[[STAT_CLOSED]]` | The homes closed counter on the home page |
+
+`[[STAT_CLOSED]]` is gone. The stats band it fed was removed on 2026-07-29,
+because an unfilled counter was rendering a literal **0 homes closed** on the
+home page, which is worse than showing nothing. The band also claimed twenty
+years on the Gulf Coast, which her own record does not support: she has been
+licensed since 2006, but in Georgia, then Alabama, and only recently Florida.
+If a stats band is ever wanted again, take the numbers from her actual
+production and label the tenure honestly.
 
 One `[[FILL IN]]` also remains in the credentials list on the home page, for
 professional designations, which can simply be deleted if she has none.
@@ -236,7 +243,7 @@ keyboard handling for little gain. If a showing request form is wanted later,
 
 **Blocking launch:**
 
-- The nine tokens above
+- The remaining token above
 - Broker's written permission for listing display
 - `assets/jennifer-headshot.jpg`, 4:5, about 1600x2000
 - `assets/guides/moving-to-bradenton.pdf`, the gated lead magnet

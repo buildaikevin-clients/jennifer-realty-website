@@ -888,29 +888,6 @@ a:hover { color: var(--ink); }
 
 /* ============================================================ stats ====== */
 
-.stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 2.5rem 1.5rem;
-  border-top: 1px solid rgba(239, 238, 236, .16);
-  border-bottom: 1px solid rgba(239, 238, 236, .16);
-  padding: clamp(2.4rem, 5vw, 3.6rem) 0;
-}
-.stat { text-align: center; }
-.stat__num {
-  font-family: var(--display);
-  font-size: clamp(2.6rem, 5vw, 3.7rem);
-  line-height: 1;
-  color: var(--gulf);
-  display: block;
-}
-.stat__label {
-  font-size: .68rem; font-weight: 500;
-  letter-spacing: .21em; text-transform: uppercase;
-  color: var(--sand-l);
-  margin-top: .9rem;
-}
-
 /* ============================================================ about ====== */
 
 /* ---- pointer orb ------------------------------------------------------- */
