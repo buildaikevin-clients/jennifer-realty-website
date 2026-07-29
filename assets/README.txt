@@ -172,6 +172,39 @@ journey-offer.webp        that layout. Both licences below are free for
                             python -c "from PIL import Image; im=Image.open('src.jpg'); W,H=im.size; cw=int(H*4/5); im.crop((W-cw,0,W,H)).resize((800,1000),Image.LANCZOS).save('journey-offer.webp',quality=85,method=6)"
                           where src.jpg is the CDN original at q=90&w=2400.
 
+sellers-photography.webp  The two photographs in the listing bands on
+sellers-how-it-shows.webp sellers.html, 800x1000 to match the journey figures
+                          on the buying page, which is the same component.
+                          Both Pexels, free for commercial use, no attribution
+                          required, so no credit line is needed.
+                            photography   photo 6721107, coastal living room
+                                          styled for listing photographs
+                            how it shows  photo 15368398, waterfront home with
+                                          royal palms, Fort Lauderdale
+
+                          NOTE ON THE SECOND ONE. It is shot from the water,
+                          not from the street, which is why the copy beside it
+                          talks about how a home shows rather than about curb
+                          appeal or the drive up. Those words would contradict
+                          the picture. If it is ever swapped for a street view,
+                          the copy can go back to the drive up framing.
+
+                          A REAL ESTATE SIGN WAS WANTED HERE AND DELIBERATELY
+                          NOT USED. Roughly a dozen free ones were checked and
+                          every one failed for a reason worth recording:
+                          handmade FSBO boards on dead grass, which signal the
+                          opposite of professional representation; signs
+                          carrying a real brokerage brand such as Savills,
+                          which would imply an affiliation Jennifer does not
+                          have; stock models posed as the listing agent, which
+                          on a solo female agent's site reads as Jennifer
+                          herself; and settings with conifers and overcast sky
+                          that are plainly not Florida. The right image is a
+                          photograph of her own Preferred SHORE sign in a
+                          Manatee County yard. It costs her one minute with a
+                          phone and it is the only version that is both
+                          truthful and on brand.
+
 card-buy.webp             The three service cards in the Ways To Work band.
                           Pexels, free for commercial use, no attribution
                           required, so no credit line is needed on the page.

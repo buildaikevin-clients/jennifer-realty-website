@@ -206,6 +206,54 @@
     </div>
   </section>
 
+  <!-- ==================================================== LISTING ======== -->
+  <!-- Two bands on the same component the buying page uses, so this adds no
+       new CSS. Light then dark is deliberate: the process band above is dark
+       and the valuation below is light, so this keeps the alternation intact
+       rather than stacking two light sections together. The figures overhang
+       the band edges by design. Nothing here may carry overflow hidden. -->
+  <section class="journey">
+    <div class="journey__band">
+      <div class="wrap journey__row">
+        <div class="journey__copy reveal">
+          <h3 class="journey__title">What buyers see first</h3>
+          <p class="journey__text">
+            Almost everyone meets your home on a screen before they ever stand
+            in it, which means the photographs decide whether a showing gets
+            booked at all. I have them shot in the right light, and I choose
+            the order they appear in, because the opening frames do most of
+            the work.
+          </p>
+        </div>
+        <figure class="journey__figure reveal reveal--scale" style="--d:.1s">
+          <img src="assets/sellers-photography.webp" width="800" height="1000"
+               loading="lazy" decoding="async"
+               alt="A bright coastal living room styled for listing photographs, with blue armchairs and a seascape hung above the sofa." />
+        </figure>
+      </div>
+    </div>
+
+    <div class="journey__band journey__band--dark">
+      <div class="wrap journey__row journey__row--flip">
+        <div class="journey__copy reveal">
+          <h3 class="journey__title">How it shows</h3>
+          <p class="journey__text">
+            A buyer decides how they feel about a home before they are through
+            the door. Trimmed landscaping, a clean roofline, paint touched up
+            where the sun has taken it, and the water side tidied if you have
+            one. None of that is expensive, and it sets the mood for every
+            showing that follows.
+          </p>
+        </div>
+        <figure class="journey__figure reveal reveal--scale" style="--d:.1s">
+          <img src="assets/sellers-how-it-shows.webp" width="800" height="1000"
+               loading="lazy" decoding="async"
+               alt="A large white waterfront home behind a lawn and tall royal palms, seen from the water." />
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <!-- ==================================================== VALUATION ====== -->
   <section class="section" id="valuation">
     <div class="wrap">
