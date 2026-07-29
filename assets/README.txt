@@ -211,11 +211,26 @@ hero-buyers.webp          Replaced twice on 2026-07-28. 2000x1125, 331 KB.
                           since their compression plus a WebP pass was
                           compounding into visible mush.
 
-                          Source is 3848x2252. The 16:9 crop takes the full
-                          width from y=0, which drops 88px off the bottom and
-                          keeps the house across the visible band with sky
-                          above it. The house number on the mailbox sits below
-                          the band on desktop.
+                          Source is 3848x2252. The 16:9 window is 3100 wide
+                          from x=374, y=440, then scaled to 2000. It is NOT
+                          the full width of the source, and that is the point.
+
+                          At full width the only vertical freedom is 88px,
+                          because 16:9 of 3848 is 2164 of the 2252 available.
+                          That is not enough to lower the framing, so the
+                          window is tightened instead, which both drops it and
+                          lets the house front fill the visible band. Sky is
+                          now a sliver in the top corner rather than a quarter
+                          of the band.
+
+                          A useful side effect: the nav sits over the darker
+                          house rather than bright cloud, so its contrast went
+                          from 2.10:1 to 2.55:1. Still short of the 4.5:1 that
+                          WCAG AA wants for the nav links, which is a veil
+                          problem rather than an image problem.
+
+                          The house number on the mailbox sits below the
+                          visible band on desktop.
 
 hero-neighborhoods.webp   Replaced 2026-07-28. Real photograph, Pexels photo
                           4628202, a Florida barrier island from the air with
