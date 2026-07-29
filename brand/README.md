@@ -78,6 +78,48 @@ attribute.
 
 ---
 
+## The yard sign
+
+`sign-panel.png` is the artwork, 2280x1390. `sign-mockup.jpg` is that artwork
+composited onto a real photograph of a sign so it can be seen in place. Both
+are rebuilt by `build/build_sign.py` and `build/composite.py`.
+
+**None of it is AI generated, and that is the point.** An image model renders
+text unreliably, and one line on this sign is a legal requirement rather than
+decoration: under 61J2-10.025 the brokerage name has to appear next to the
+point of contact, which on a yard sign is the phone number. A generated
+approximation of `Preferred SHORE Real Estate` with a letter wrong would be
+worse than no sign at all. So the monogram is her actual `logo-mark-light.svg`
+rasterized, and every line of type is set from the three fonts the site already
+loads. The spelling is exact because it was never guessed.
+
+The composite replaces only the printed area of the sign in the photograph. The
+white frame, the timber stake and the light are all as photographed. Two things
+that took a second pass and are worth keeping:
+
+- The printed area is **detected**, not eyeballed. It is the connected red
+  region of the original sign, taken to its extreme corners. A hand read
+  coordinate left a rim of the old red along the bottom edge.
+- The photograph's luminance is **blurred hard** before being used as a
+  multiply. Unblurred it carried the old sign's large white lettering, and
+  `HOME FOR SALE` ghosted straight through the new artwork.
+
+### Before this goes anywhere public
+
+**The brokerage is named in type only. Its logo is deliberately not
+reproduced.** Preferred Shore's mark is a third party trademark with its own
+usage rules, and imitating it would misrepresent them. Ask the firm for the
+real asset and their sign specification.
+
+**Brokerages control sign design.** Agents order signs to a house standard from
+approved vendors, so treat this as a proposal to show Jennifer and her broker
+rather than something to send to a sign shop. Her broker signs off, not us.
+
+**The photograph is not Florida.** The house behind the sign has a brown
+veranda and no palms. It is fine as a brand mockup and wrong as a page hero,
+which is why it lives here and not in `assets/`. The right image for the site
+is a photograph of her own real sign in a Manatee County yard.
+
 ## What the mark does not do
 
 It does not satisfy Florida rule
