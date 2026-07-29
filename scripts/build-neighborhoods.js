@@ -1121,7 +1121,7 @@ ${areas.map((a, i) => `        <a class="path reveal reveal--scale" href="neighb
     title, description,
     canonical: 'neighborhoods.html',
     image: 'assets/hero-neighborhoods.webp',
-    imageAlt: 'The Gulf Coast of Florida seen from above, with palms and white sand.',
+    imageAlt: 'A Florida barrier island seen from the air, with rows of homes, pools and palms between the Gulf and the bay.',
     extraLd: ld,
   }).replace(/\.\.\//g, '') + `
 <body>
@@ -1132,7 +1132,7 @@ ${nav('')}
   <section class="page-hero">
     <img class="page-hero__img" src="assets/hero-neighborhoods.webp"
          width="1800" height="1013" fetchpriority="high"
-         alt="The Gulf Coast of Florida seen from above, with palms and white sand." />
+         alt="A Florida barrier island seen from the air, with rows of homes, pools and palms between the Gulf and the bay." />
     <div class="page-hero__veil" aria-hidden="true"></div>
     <div class="page-hero__content">
       <p class="eyebrow reveal">Manatee County</p>

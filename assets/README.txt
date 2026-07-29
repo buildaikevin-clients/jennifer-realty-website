@@ -164,11 +164,84 @@ card-buy.webp             The three service cards in the Ways To Work band.
                           All cropped to 1200x900, matching the 4:3 image band
                           on the cards.
 
-hero-buyers.webp          Page heroes for the interior pages, pulled
-hero-sellers.webp         from the hero footage.
-hero-relocate.webp
-hero-neighborhoods.webp   Still used by the neighborhoods hub page. The 20
-                          individual area pages now have their own photos.
+hero-sellers.webp         Page hero pulled from the hero footage, which is AI
+                          generated. Replace it with a real photograph when the
+                          chance comes, as the two below were.
+
+hero-buyers.webp          Replaced 2026-07-28. Real photograph, Pexels photo
+                          33397572, a large modern waterfront home with glass,
+                          wood cladding and palms along a seawall.
+
+                          The source is 3600x5400 PORTRAIT. The 16:9 crop takes
+                          the full width from y=2120. That offset is deliberate:
+                          it puts the roofline and a little sky inside the
+                          visible band. A lower crop showed only the facade and
+                          stopped reading as a big house.
+
+                          Quality 66. Palm foliage compresses badly and this
+                          sits under .page-hero__veil, so the weight is visible
+                          and the quality is not. Same reasoning as
+                          workwith-bg.webp above.
+
+hero-neighborhoods.webp   Replaced 2026-07-28. Real photograph, Pexels photo
+                          4628202, a Florida barrier island from the air with
+                          rows of homes, pools and palms between open water and
+                          a canal. Used by the neighborhoods hub page. The 20
+                          individual area pages have their own photos.
+
+                          Source 3600x2400, 16:9 crop from y=144, which keeps
+                          the dense housing across the whole visible band.
+
+                          Quality 34, far lower than anything else here and
+                          deliberate. An aerial is wall to wall high frequency
+                          detail: it was 523 KB at quality 68 and 414 KB even
+                          at 46. At 34 it is 346 KB, in line with
+                          hero-relocate, and the artefacts do not survive the
+                          veil. Judge any requality by loading the page.
+
+                          Both new heroes are Pexels, free for commercial use,
+                          no attribution required, so neither needs a credit
+                          line on the page.
+
+hero-relocate.webp        Page hero for relocate.html. 2000x910, 327 KB.
+
+                          No longer from the hero footage. This one is a real
+                          photograph, an aerial of houses along the coastline
+                          with the beach beyond, from Pexels photo 6794823.
+
+                          Chosen over the other aerials considered because it
+                          is the one actually shot in Florida. The rest were
+                          generic coast, and a Gulf Coast agent's relocating
+                          page showing an Atlantic or Caribbean shoreline is a
+                          credibility problem a local would spot. Keep that
+                          test in mind before swapping it.
+
+                          Houses in frame on purpose too. The page is about
+                          moving here, and open sand says holiday.
+
+                          Pexels licence: free for commercial use, no
+                          attribution required, so this page carries no
+                          .page-hero__credit line. The neighborhood heroes do,
+                          because those are Wikimedia CC BY and CC BY-SA.
+
+                          Fetched already cropped and encoded from the Pexels
+                          CDN: fm=webp, fit=crop, w=2000, h=910. Crop at the
+                          source on purpose. The native file is 4:3 and this
+                          hero box is wide and short, so shipping the full
+                          frame would have sent about twice the bytes for
+                          pixels that cover crops away anyway.
+
+                          The q parameter does nothing on that CDN, auto
+                          compress overrides it, so size is controlled only by
+                          dimensions. 2000 wide is the compromise: it still
+                          upscales slightly past a 2000px viewport, which the
+                          hero veil at .62 to .7 hides. Going wider for
+                          sharpness costs real weight on an image that is the
+                          largest contentful paint and marked fetchpriority
+                          high.
+
+                          It is a generic coastline, not a named Florida
+                          beach, and it is not one of Jennifer's listings.
 
 neighborhoods/            One hero per neighborhood page, 1800x1013 WebP.
                           Real photographs from Wikimedia Commons, freely
