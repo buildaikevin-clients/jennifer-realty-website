@@ -134,9 +134,26 @@ journey-offer.webp        that layout. Both licences below are free for
                           commercial use with no attribution required, so no
                           credit line is needed on the page.
                             prepare  Pexels photo 14598479, dining room
-                            shop     Pexels photo 12558961, Florida home
+                            shop     Pexels photo 13752348, contemporary villa
+                                     facade lit at dusk
                             offer    Unsplash photo 1638799869566-b17fa794c4de,
                                      modern bathroom, by Lotus Design N Print
+
+                          The shop image was replaced on 2026-07-28. The
+                          original Pexels 12558961 was a daylit Florida house
+                          that read like a listing photo. The replacement is
+                          deliberately dark and architectural.
+
+                          Note what that does to the row. Prepare above it and
+                          offer below it are both bright and airy, so this one
+                          is now the odd mood in the sequence. That is a choice
+                          rather than an oversight. If it ever looks wrong, the
+                          fix is to take the other two darker, not to put a
+                          bright house back here.
+
+                          Fetched already cropped from the Pexels CDN at
+                          fm=webp, fit=crop, w=800, h=1000, so no local recut
+                          was needed.
 
                           The offer image was replaced on 2026-07-28. The
                           original Pexels 27359993 was a beige tiled bathroom
@@ -168,20 +185,37 @@ hero-sellers.webp         Page hero pulled from the hero footage, which is AI
                           generated. Replace it with a real photograph when the
                           chance comes, as the two below were.
 
-hero-buyers.webp          Replaced 2026-07-28. Real photograph, Pexels photo
-                          33397572, a large modern waterfront home with glass,
-                          wood cladding and palms along a seawall.
+hero-buyers.webp          Replaced twice on 2026-07-28. 2000x1125, 331 KB.
+                          Real photograph, Pexels photo 12558958, a large
+                          modern Florida home in stone and wood cladding with
+                          royal palms. Free for commercial use, no attribution.
 
-                          The source is 3600x5400 PORTRAIT. The 16:9 crop takes
-                          the full width from y=2120. That offset is deliberate:
-                          it puts the roofline and a little sky inside the
-                          visible band. A lower crop showed only the facade and
-                          stopped reading as a big house.
+                          THE FIRST REPLACEMENT WAS REJECTED AS BLURRY and the
+                          reason is worth keeping. It was Pexels 33397572, shot
+                          across open water on a long lens, so the source was
+                          already soft with atmospheric haze before anything
+                          here touched it. Measured as the variance of the
+                          Laplacian at 1800 wide it scored 650. This one scores
+                          2642 through the same pipeline. If a hero ever looks
+                          soft again, measure the candidates before choosing
+                          rather than trusting the thumbnail:
 
-                          Quality 66. Palm foliage compresses badly and this
-                          sits under .page-hero__veil, so the weight is visible
-                          and the quality is not. Same reasoning as
-                          workwith-bg.webp above.
+                            python -c "from PIL import Image; import numpy as                             np; g=np.asarray(Image.open('f.jpg').convert('L')                             .resize((1800,1013)),float); print(((-4*g[1:-1,1:-1]                             +g[:-2,1:-1]+g[2:,1:-1]+g[1:-1,:-2]+g[1:-1,2:])).var())"
+
+                          Two other things were changed to fix the softness.
+                          The file is now 2000 wide rather than 1800, because
+                          the hero is full bleed and 1800 was being upscaled on
+                          any viewport wider than that. And the source is
+                          fetched WITHOUT Pexels auto=compress, straight from
+                          images.pexels.com/photos/12558958/pexels-photo-12558958.jpeg,
+                          since their compression plus a WebP pass was
+                          compounding into visible mush.
+
+                          Source is 3848x2252. The 16:9 crop takes the full
+                          width from y=0, which drops 88px off the bottom and
+                          keeps the house across the visible band with sky
+                          above it. The house number on the mailbox sits below
+                          the band on desktop.
 
 hero-neighborhoods.webp   Replaced 2026-07-28. Real photograph, Pexels photo
                           4628202, a Florida barrier island from the air with
