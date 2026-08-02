@@ -29,9 +29,32 @@ The site publishes a DMCA takedown procedure and a contact address,
 for exactly the thing scraping would have done, and the exposure would land on
 Jennifer's license and on her broker, not on the website.
 
-Broker permission would not have solved this. Preferred Shore does not own the
-redistribution right either. Stellar MLS does, and MLS Grid administers it, so
-the brokerage cannot grant what it does not hold.
+Broker permission would not have solved **this particular route**. Preferred
+Shore does not own redistribution of the MLS Grid feed. Stellar MLS does, and
+MLS Grid administers it, so the brokerage cannot grant what it does not hold.
+
+**Read that narrowly.** It is about the pipe, not about the listings. It does
+not mean Jennifer can never show Preferred Shore inventory, and it was being
+read that way on 2026-08-02, which is why this paragraph was rewritten.
+
+The test is provenance, not ownership:
+
+- **Data taken out of the IDX display** is governed by the MLS Grid licence,
+  whoever the listings belong to. That is what the scraper does, and it is the
+  problem.
+- **The same listings supplied by the brokerage from its own records** are the
+  brokerage's own content to authorise. This is why brokerages syndicate their
+  listings to Zillow and Realtor.com every day. Identical content, different
+  source, different rules.
+
+So the route Kevin actually wants is open, it just cannot start at the scraper:
+the broker authorises display in writing and supplies the data, it is entered
+in `data/listings.seed.js`, and `listingBroker` carries attribution on every
+listing that is not hers. The machinery for that is already built.
+
+None of this is legal advice and nobody here is her attorney. Her broker or
+counsel signs off on whether the brokerage will hand over that data and
+authorise the display, and the site follows whatever comes back.
 
 **3. There was nothing of hers to show anyway.**
 Her agent record on their system lists `mylistings: []`. Every one of the 25

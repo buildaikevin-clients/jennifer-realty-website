@@ -193,10 +193,49 @@ card-buy.webp             The three service cards in the Ways To Work band.
                           Pexels, free for commercial use, no attribution
                           required, so no credit line is needed on the page.
                             card-buy       photo 10855269, open plan luxury kitchen
-                            card-sell      photo 12558848, large Florida home
+                            card-sell      photo 12558933, white stucco Florida
+                                           home, dark tile roof, royal palms
                             card-relocate  photo 17329322, white sand aerial
-                          All cropped to 1200x900, matching the 4:3 image band
-                          on the cards.
+
+                          card-sell was replaced on 2026-08-01. The original was
+                          photo 12558848, from the same Christopher Moon set. It
+                          was shot from far enough back that the house read as a
+                          small pale shape behind a pole and a palm, and it
+                          measured 1670 on the Laplacian sharpness check that
+                          hero-buyers documents below. The replacement measures
+                          4811 on the uncompressed original.
+
+                          Three others from that set were considered and
+                          rejected, which is worth keeping so they do not get
+                          proposed again:
+                            12558900  tan Mediterranean, heavy orange ixora
+                                      planting that fights the palette
+                            12558962  street number 856 legible on the house,
+                                      so it could be read as one of her listings
+                            12559018  house mostly hidden behind palm trunks
+                          12558961 was not considered. It was already rejected
+                          from journey-shop, see that entry above.
+                          12558958 was not considered. It is hero-buyers.
+
+                          MIND THE ASPECT RATIO HERE, IT IS NOT WHAT IT LOOKS
+                          LIKE. The base .path__media band is 4:3, which is what
+                          the other two files are cut to, but the Ways To Work
+                          band overrides it to 3:2 in .workwith .path__media.
+                          object-fit: cover then eats roughly 11 percent off the
+                          top and bottom of card-buy and card-relocate, sight
+                          unseen. card-sell is now cut natively to 1200x800, so
+                          its framing is the framing that ships. The other two
+                          are still 1200x900 and still being cropped. Recutting
+                          them to 3:2 is a real improvement waiting to be made.
+
+                          The crop is box (288, 362, 3120, 2251) from the 3408
+                          x2252 original, then LANCZOS to 1200x800, quality 86.
+                          The top is cut past 362 on purpose: a power line runs
+                          across the top right of the full frame and that is
+                          where it goes. Fetched from the CDN with NO query
+                          string at all, per the hero-buyers lesson about Pexels
+                          compression plus a WebP pass compounding into mush.
+                            python -c "from PIL import Image; im=Image.open('src.jpg'); im.crop((288,362,3120,2251)).resize((1200,800),Image.LANCZOS).save('card-sell.webp',quality=86,method=6)"
 
 hero-sellers.webp         Page hero pulled from the hero footage, which is AI
                           generated. Replace it with a real photograph when the

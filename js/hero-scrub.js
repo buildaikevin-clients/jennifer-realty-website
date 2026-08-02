@@ -111,24 +111,41 @@
   /* Ramp --scrub-exit from 0 to 1 so the hero dissolves into the page instead
      of hard cutting. See .hero__fade in styles.css.
 
-     EXIT_START is late on purpose. The track is 320vh with 100vh pinned, so
-     every percent of progress is over 2vh of scrolling. It began at 0.92,
-     which ran the dissolve for roughly 18vh and read as a blank white hold
-     rather than a transition. 0.98 brings it to about 4vh.
+     The dissolve is authored as a DISTANCE, --hero-exit-vh on .hero--scrub,
+     and converted to a progress fraction here. It used to be the fraction
+     itself, a flat 0.98, which was correct only for the 320vh track it was
+     tuned against: the fraction is over a span of (track - 100vh), so shorten
+     the track and the same 0.98 silently buys a shorter dissolve. At 240vh it
+     would have been 2.8vh rather than the 4vh it was set to be. Deriving it
+     means the speed dial in styles.css cannot quietly break the transition.
 
-     This is close to the floor. Much past 0.99 and there is not enough scroll
-     left to cross fade at all, so it becomes a hard cut from footage to page.
-     If the hero still feels long, shorten .hero--scrub in styles.css instead:
-     that is total scroll distance, which is a different problem from this. */
-  const EXIT_START = 0.98;
+     Both ends are clamped. Too early and the dissolve reads as a blank white
+     hold instead of a transition, which is what 0.92 did. Too late and there
+     is not enough scroll left to cross fade at all and it becomes a hard cut
+     from footage to page. */
+  const EXIT_VH_FALLBACK = 4;
+  let exitStart = 0.98;
+
+  function measureExit() {
+    const span = section.getBoundingClientRect().height - window.innerHeight;
+    const authored = parseFloat(
+      getComputedStyle(section).getPropertyValue('--hero-exit-vh'));
+    const vh = isFinite(authored) && authored > 0 ? authored : EXIT_VH_FALLBACK;
+    exitStart = span > 0
+      ? Math.min(0.995, Math.max(0.90, 1 - (vh / 100) * window.innerHeight / span))
+      : 0.98;
+  }
 
   function updateExit() {
     const v = Math.min(1, Math.max(0,
-      (progress() - EXIT_START) / (1 - EXIT_START)));
+      (progress() - exitStart) / (1 - exitStart)));
     section.style.setProperty('--scrub-exit', v.toFixed(3));
   }
 
   function resize() {
+    // The exit is derived from the viewport height, so it is remeasured here
+    // rather than only at startup.
+    measureExit();
     // Capping DPR at 1 keeps the backing store near source resolution instead
     // of compositing into a 2x buffer on every scroll tick. At this size and
     // behind a scrim, the difference is not visible and the cost is large.

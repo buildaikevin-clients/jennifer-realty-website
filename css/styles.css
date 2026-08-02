@@ -404,7 +404,25 @@ a:hover { color: var(--ink); }
   background: var(--deep);
   color: var(--bone);
 }
-.hero--scrub { height: 320vh; }
+/* Total scroll distance for the scrubbed hero, and the one dial that sets how
+   fast the footage plays. 100vh of this is pinned, so the scrub span is this
+   height minus 100vh, and 145 frames are spread across it. Lower is faster.
+
+     320vh  220vh span, 1.52vh per frame   the original, felt slow
+     240vh  140vh span, 0.97vh per frame   current
+     200vh  100vh span, 0.69vh per frame   brisk
+     180vh   80vh span, 0.55vh per frame   about the floor, frames start to
+                                           skip on a trackpad flick
+
+   --hero-exit-vh is how much scrolling the closing dissolve gets, in vh. It
+   lives here rather than in the JS because it only means anything relative to
+   the height above: js/hero-scrub.js and js/main.js both read it and convert
+   it into a progress fraction against whatever the span currently is. Change
+   the height on its own and the dissolve keeps its physical length. */
+.hero--scrub {
+  height: 240vh;
+  --hero-exit-vh: 4;
+}
 
 /* js/hero-scrub.js swaps to this on phones and under reduced motion: the tall
    scroll track collapses and the hero becomes an ordinary full height section
@@ -776,15 +794,21 @@ a:hover { color: var(--ink); }
 .workwith .section__lede  { color: rgba(239, 238, 236, .88); }
 .workwith .eyebrow        { color: var(--gulf); }
 
-/* Cards follow the reference: a warm taupe panel under a photo band, with a
-   large white serif question and small centred body copy beneath it.
+/* Cards follow the reference layout: a solid panel under a photo band, with a
+   large white serif question and small centred body copy beneath it. The
+   reference's warm taupe is not this site's color, so the panel is --gulf-d,
+   the deep half of the single accent.
 
-   The taupe is #7b736d rather than the --sand token (#817872) it is derived
-   from. --sand against white measures 4.38:1, which passes for the heading
-   because that is large text, but fails the 4.5:1 floor for the body copy.
-   #7b736d measures 4.65:1 and carries both. */
+   This stays inside the one accent, one region rule: the band already carries
+   gulf on its eyebrows, so the accent is not gaining a new region here, and it
+   still never touches nav or a button.
+
+   --gulf-d against white measures 7.2:1, so unlike the taupe it had before
+   (4.65:1, a hair over the floor) the body copy has real headroom. At 92%
+   white the copy still measures 6.3:1. Against the --deep ground the panel
+   separates 2.2:1, which the photo band and the card edge carry the rest of. */
 .workwith .path {
-  background: #7b736d;
+  background: var(--gulf-d);
   border-color: transparent;
   border-radius: 0;
   text-align: center;
@@ -1724,8 +1748,9 @@ input:focus, select:focus, textarea:focus {
   font-size: .96rem;
 }
 /* Solid taupe, as on the reference, rather than the ghost outline used
-   elsewhere on the site. The same #7b736d as the service cards, which reads on
-   both the dark and the light bands without needing a variant for each. */
+   elsewhere on the site. Taupe rather than the accent because this is a
+   button, and the accent never appears on one. #7b736d reads on both the dark
+   and the light bands without needing a variant for each. */
 .journey__cta {
   margin-top: 2rem;
   align-self: flex-start;

@@ -56,14 +56,27 @@
   const burger = $('#burger');
 
   if (nav) {
+    // How much scroll the hero's exit dissolve gets, in vh. Authored on
+    // .hero--scrub in styles.css and read here so this stays in step with
+    // js/hero-scrub.js when the hero's speed is retuned. Read once: it is a
+    // constant per breakpoint and getComputedStyle is too expensive to call
+    // on every scroll tick.
+    const exitVh = hero
+      ? (parseFloat(getComputedStyle(hero).getPropertyValue('--hero-exit-vh')) || 4)
+      : 4;
+
     function onScroll() {
       const y = window.scrollY;
       // On the scrubbed hero, hold the over-hero treatment until the exit fade
       // has actually turned the backdrop light, or the nav switches to dark
-      // text while the footage behind it is still dark. Kept in step with
-      // EXIT_START in js/hero-scrub.js, which begins the dissolve at 0.98.
+      // text while the footage behind it is still dark. Flip at the midpoint
+      // of the dissolve, which is where the backdrop crosses over.
       const scrub = hero && hero.classList.contains('hero--scrub')
-        ? (hero.offsetHeight - window.innerHeight) * 0.99
+        ? (() => {
+            const span = hero.offsetHeight - window.innerHeight;
+            const d = (exitVh / 100) * window.innerHeight;
+            return span > 0 ? span - d / 2 : 0;
+          })()
         : null;
       nav.classList.toggle('is-scrolled', y > (scrub !== null ? scrub : 40));
       const heroBottom = hero

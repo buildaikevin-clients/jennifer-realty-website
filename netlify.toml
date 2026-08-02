@@ -21,6 +21,106 @@
   status = 301
   force = true
 
+# ----------------------------------------------------------- private paths ---
+# publish = "." ships the whole repository, so every internal file is reachable
+# at its own URL unless it is blocked here. These are working files: project
+# documentation, the build scripts, the scraper, the brand kit. None of them is
+# referenced by any page, confirmed with scripts/check-links.js.
+#
+# BROKER-PERMISSION.md is the one that matters most. It records how listing
+# data is obtained and what was decided about the risk, which is exactly the
+# document that should not be served next to the listings it describes.
+#
+# force = true is load bearing on every rule below. Without it a real file on
+# disk wins over the redirect and the document is served anyway.
+#
+# The target does not exist. Netlify returns its own 404 body with the correct
+# status, which is fine. A site 404.html would be better and is worth adding,
+# but per COMPLIANCE.md every page carries the Equal Housing Opportunity
+# footer, so it is a real page rather than a stub. Left as a follow up.
+#
+# THIS IS A DENY LIST, SO IT GOES STALE. Anything added to the repo later is
+# public by default until someone remembers to add it here. The permanent fix
+# is a build step that copies only shippable files into a dist directory and
+# pointing publish at that. That trades away the no build step property this
+# site is deliberately built around, which is why it is not done today.
+
+[[redirects]]
+  from = "/README.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/COMPLIANCE.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/BROKER-PERMISSION.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/assets/README.txt"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/assets/neighborhoods/CREDITS.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# The raw scraper output. data/listings.js is the file the page actually loads
+# and stays reachable; this is the same data in a form nothing requests.
+[[redirects]]
+  from = "/data/listings.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.gitignore"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/netlify.toml"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Directories, splat at the end. Node build tooling, the scraper source, the
+# logo build kit, and the original bio draft.
+[[redirects]]
+  from = "/scripts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/scraper/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/brand/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/content/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # ---------------------------------------------------------------- headers ---
 # Security headers first. None of these need a build step and all of them are
 # things a real estate site should have had from day one.
