@@ -244,9 +244,9 @@ a:hover { color: var(--ink); }
 
 /* The J and B monogram. Loaded as a background rather than inline markup so
    the outlines are fetched and cached once instead of being repeated in all 27
-   pages, and as a background rather than an <img> so the state swap below is a
-   one line CSS change. Two files rather than a mask, because a mask would
-   flatten the gulf rule to a single color and that hairline is the whole
+   pages, and as a background rather than an image element so the state swap
+   below is a one line CSS change. Two files rather than a mask, because a mask
+   would flatten the gulf rule to a single color and that hairline is the whole
    character of the mark. Aspect ratio is fixed to the artwork: 1.2 to 1. */
 .nav__brand-mark {
   flex: none;
@@ -437,6 +437,10 @@ a:hover { color: var(--ink); }
   overflow: hidden;
   display: grid;
   place-items: center;
+  /* The nav is fixed and 76px tall. Without this the centered content block
+     can ride up under the logo on shorter viewports; interior .page-hero
+     carries the same allowance for the same reason. */
+  padding-top: 84px;
 }
 
 .hero__media { position: absolute; inset: 0; }
@@ -904,11 +908,14 @@ a:hover { color: var(--ink); }
   text-transform: uppercase; color: var(--ink);
   display: inline-flex; align-items: center; gap: .5rem;
 }
+/* The line stretches with scaleX rather than width so hover never reflows:
+   the box is 40px from the start and only the paint scales. */
 .path__link::after {
-  content: ""; width: 26px; height: 1px; background: currentColor;
-  transition: width .4s var(--ease);
+  content: ""; width: 40px; height: 1px; background: currentColor;
+  transform: scaleX(.65); transform-origin: left center;
+  transition: transform .4s var(--ease);
 }
-.path:hover .path__link::after { width: 40px; }
+.path:hover .path__link::after { transform: scaleX(1); }
 
 /* ============================================================ stats ====== */
 
@@ -1315,10 +1322,14 @@ input:focus, select:focus, textarea:focus {
   background: var(--line);
   border-radius: 2px; overflow: hidden;
 }
+/* Full width fill scaled down with scaleX rather than an animated width, so
+   advancing a step repaints without reflow. js/main.js sets the scale; the
+   .33 here is only the pre-init state for a three step form. */
 .vform__bar i {
-  display: block; height: 100%; width: 33%;
+  display: block; height: 100%; width: 100%;
   background: var(--gulf-d);
-  transition: width .55s var(--ease);
+  transform: scaleX(.33); transform-origin: left center;
+  transition: transform .55s var(--ease);
 }
 .vform__stepmeta {
   display: flex; justify-content: space-between; align-items: baseline;

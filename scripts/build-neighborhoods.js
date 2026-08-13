@@ -68,15 +68,15 @@ const PRICES_AS_OF = '[[FILL IN: month and year these ranges were pulled]]';
 
 const GROUPS = [
   { key: 'islands', title: 'The Islands and the Coast',
-    intro: 'Anna Maria Sound on one side, the Gulf on the other. Higher prices, higher carrying costs, and rules about short term rentals that change from street to street.' },
+    intro: 'Anna Maria Sound sits on one side and the Gulf on the other. Expect higher prices, higher carrying costs, and short term rental rules that change from street to street.' },
   { key: 'west',    title: 'West Bradenton',
-    intro: 'Between the city and the bridges. Older Florida housing stock, mature landscaping, and the shortest drive to the sand without paying island prices.' },
+    intro: 'These neighborhoods sit between the city and the bridges, with older Florida housing stock, mature landscaping, and the shortest drive to the sand without paying island prices.' },
   { key: 'east',    title: 'East County and Lakewood Ranch',
-    intro: 'Master planned communities built mostly after 1995. Newer construction, amenity centers, and CDD assessments on top of HOA dues.' },
+    intro: 'These are master planned communities built mostly after 1995, with newer construction, amenity centers, and CDD assessments on top of HOA dues.' },
   { key: 'north',   title: 'North of the River',
-    intro: 'Across the Manatee River. The fastest growing part of the county and where most of the new construction inventory is.' },
+    intro: 'Across the Manatee River is the fastest growing part of the county, and it is where most of the new construction inventory sits.' },
   { key: 'central', title: 'Central Bradenton',
-    intro: 'The original city. Historic housing along the river, a working downtown, and the arts district.' },
+    intro: 'This is the original city, with historic housing along the river, a working downtown, and the arts district.' },
 ];
 
 /* Hero photograph per area. `alt` describes the picture, never the people who
@@ -374,7 +374,7 @@ const DATA = [
     ],
     faq: [
       ['Why do people choose Palma Sola over the island?',
-       'Cost, mostly. You are close to the beach without island pricing, island insurance, or island rental rules, and you get larger lots than most island inventory. The tradeoff is that you drive to the sand rather than walk to it.'],
+       'For most buyers it comes down to cost. You are close to the beach without island pricing, island insurance, or island rental rules, and you get larger lots than most island inventory. The tradeoff is that you drive to the sand rather than walk to it.'],
       ['What is the waterfront situation here?',
        'Palma Sola Bay is shallow in places, so water depth and access matter as much as the fact of being on the water. If a boat is part of the plan, we check depth at low tide, bridge clearances on the route out, and the condition and permitting of any existing dock and lift before you commit.'],
       ['Are homes here being torn down and rebuilt?',
@@ -650,7 +650,7 @@ const DATA = [
       ['What should I know about buying from a builder here?',
        'That the builder contract is not the standard Florida contract and it is written to favor the builder. Completion dates are often not firm, the deposit terms differ, and the ability to walk away is more limited than in a resale. Having representation at the model home matters, and in most cases the builder pays for it, but you generally have to register me on your first visit rather than after.'],
       ['Why are prices lower here than closer to the water?',
-       'Distance, mostly. Parrish is forty to fifty minutes from the Gulf beaches, and that drive is the tradeoff for newer construction at a lower price per square foot. For buyers who work from home or commute north toward Tampa, it can be the right trade. For buyers who came for the beach, it often is not.'],
+       'The main reason is distance. Parrish is forty to fifty minutes from the Gulf beaches, and that drive is the tradeoff for newer construction at a lower price per square foot. For buyers who work from home or commute north toward Tampa, it can be the right trade. For buyers who came for the beach, it often is not.'],
       ['Is the growth here a problem?',
        'It is a real consideration rather than a problem exactly. Road capacity, school capacity, and construction traffic are all following rather than leading the housing. If you buy into an early phase of a community you should expect construction around you for years. I would rather you know that going in.'],
     ],
@@ -1140,8 +1140,8 @@ ${nav('')}
         Bradenton is not one market.
       </h1>
       <p class="page-hero__lede reveal" style="--d:.18s">
-        It is about twenty of them, and they behave differently. Here is what
-        each one actually is.
+        It is about twenty of them, and they each behave differently. These
+        pages are here to help you understand what each one actually is.
       </p>
     </div>
   </section>

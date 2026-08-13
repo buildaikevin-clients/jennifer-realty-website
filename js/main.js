@@ -196,7 +196,9 @@
     function showStep(n) {
       cur = Math.min(Math.max(n, 1), total);
       steps.forEach((s) => s.classList.toggle('is-active', +s.dataset.step === cur));
-      barFill.style.width = ((cur / total) * 100) + '%';
+      // scaleX, not width: the fill is full width and scaled, so the bar
+      // animates without reflow. Matches .vform__bar i in styles.css.
+      barFill.style.transform = 'scaleX(' + (cur / total) + ')';
       curEl.textContent = cur;
       titleEl.textContent = titles[cur - 1];
       backBtn.hidden = cur === 1;
@@ -527,7 +529,7 @@
       'goes stale. Searching there tells me what you are looking for.</p>' +
       '<a class="btn btn--solid" href="' + BROKER_SEARCH + '" target="_blank" rel="noopener">' +
       'Search Every Listing</a>' +
-      '<p class="handoff__note">Opens in a new tab on her brokerage site.</p>' +
+      '<p class="handoff__note">Opens in a new tab on my brokerage site.</p>' +
       '</div>';
   }
 
