@@ -37,16 +37,31 @@ plan.
 2. Move this repository into it: repository **Settings > General > Transfer
    ownership**, destination the organization. History, branches, and privacy
    all carry over.
-3. Invite Jennifer to the organization, then give her **Read** access on this
-   repository only. Read is deliberate. She never needs to change anything,
-   and read access means she cannot break the site by accident.
+3. Add Jennifer as an **outside collaborator** on this repository, with the
+   **Read** role. Repository **Settings > Collaborators and teams > Add
+   people**, entering her email address. Inviting by email works whether or
+   not she already has a GitHub account.
+
+   **Outside collaborator, not organization member.** An org member can see
+   the organization's repository list, so once Carlos's and Roy's sites live
+   here too, each client would be able to see that the others exist. An
+   outside collaborator sees only the one repository shared with them. Same
+   access, real isolation between clients.
+
+   Read is also deliberate. She never needs to change anything, and read
+   access means she cannot break the site by accident.
 4. Install the **Netlify GitHub App** on the organization, scoped to this
    repository. Do this as the organization owner. This is the step that is
    impossible while the repo is under a personal account.
 5. Send her Part 2.
 
-If Netlify refuses to list the repository for her in step 3 of Part 2, raise
-her to **Write** on this repository alone and try again. Do not grant Admin.
+If Netlify refuses to list the repository for her in Part 2, raise her to
+**Write** on this repository alone and try again. Do not grant Admin.
+
+Done on 2026-08-16: organization `buildaikevin-clients` created, this
+repository transferred into it, and the Netlify GitHub App installed on the
+organization scoped to this repository. The local clone's remote was
+repointed and a push verified the same day.
 
 ---
 
