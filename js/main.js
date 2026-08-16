@@ -114,8 +114,8 @@
   }
 
   /* ------------------------------------------------- single step form init */
-  // Contact and the relocation guide share this. `onDone` lets the guide form
-  // reveal its download link once the lead is captured.
+  // The contact form. The guide forms used to share this; they now go through
+  // initGateForm below, which captures and then redirects to the guide.
   function initSimpleForm({ formId, doneId, errorId, onDone }) {
     const form = $(formId);
     if (!form) return;
@@ -165,11 +165,91 @@
     errorId: '#contact-error',
   });
 
-  initSimpleForm({
-    formId: '#guide-form',
-    doneId: '#guide-done',
-    errorId: '#guide-error',
-  });
+  /* -------------------------------------------------- gated guide capture */
+  // The g/ landing pages and the relocate.html guide form. Two legs run in
+  // parallel on submit: Netlify Forms (the backup record that also emails
+  // Jennifer) and the delivery function at /.netlify/functions/lead (emails
+  // the guide to the lead and forwards the lead to the CRM). Same origin, so
+  // the CSP needs no change.
+  //
+  // The visitor is redirected to the guide as soon as EITHER leg lands, with
+  // a hard ceiling so a hung request cannot strand them on a spinner. The
+  // reward is never blocked on the email: if the function is down, Netlify
+  // still has the lead and the visitor still gets the guide.
+  function postFunction(payload) {
+    return fetch('/.netlify/functions/lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      // Survives the navigation that follows. Without this, redirecting
+      // aborts the in flight request and the lead email silently never sends.
+      keepalive: true,
+    }).then((res) => {
+      if (!res.ok) throw new Error('lead fn ' + res.status);
+      return res;
+    });
+  }
+
+  function initGateForm(form) {
+    const errorEl = $('#gate-error') || $('#guide-error');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const label = submitBtn ? submitBtn.textContent : '';
+    const guideUrl = form.dataset.guideUrl;
+
+    form.addEventListener('invalid', (e) => {
+      const wrap = e.target.closest('.field');
+      if (wrap) wrap.classList.add('is-invalid');
+      e.target.setAttribute('aria-invalid', 'true');
+    }, true);
+
+    form.addEventListener('input', (e) => {
+      const wrap = e.target.closest('.field.is-invalid');
+      if (wrap && e.target.checkValidity()) {
+        wrap.classList.remove('is-invalid');
+        e.target.removeAttribute('aria-invalid');
+      }
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      if (errorEl) errorEl.hidden = true;
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending'; }
+
+      const d = new FormData(form);
+      const payload = {
+        name: String(d.get('name') || '').trim(),
+        email: String(d.get('email') || '').trim(),
+        phone: String(d.get('phone') || '').trim(),
+        'bot-field': String(d.get('bot-field') || ''),
+        guide: form.dataset.guide || String(d.get('guide') || ''),
+        guideTitle: String(d.get('guideTitle') || ''),
+        source: String(d.get('source') || location.pathname),
+        page: location.pathname + location.search,
+        ref: document.referrer || '',
+      };
+
+      let done = false;
+      const go = () => {
+        if (done || !guideUrl) return;
+        done = true;
+        location.assign(guideUrl + '?from=' + encodeURIComponent(payload.guide));
+      };
+      // Ceiling, not a race: a hung leg must not strand the visitor.
+      const cap = setTimeout(go, 6000);
+
+      const legs = [postForm(form), postFunction(payload)].map((p) =>
+        p.then(() => true, () => false));
+      Promise.all(legs).then((ok) => {
+        clearTimeout(cap);
+        if (ok.some(Boolean)) { go(); return; }
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = label; }
+        if (errorEl) errorEl.hidden = false;
+      });
+    });
+  }
+
+  $$('form[data-gate]').forEach(initGateForm);
 
   /* --------------------------------------- multi step lead forms (shared) */
   // Buyers and Sellers are both 3 step .vform cards with the same skeleton.

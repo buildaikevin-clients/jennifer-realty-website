@@ -21,6 +21,32 @@
   status = 301
   force = true
 
+# ------------------------------------------------------------ DM keywords ---
+# Short links Jennifer pastes into a DM after someone comments a keyword on a
+# video. Each 200 rewrites to the real landing page file so the extensionless
+# form always works, whether or not Pretty URLs is on. Landing pages are
+# noindex and stay out of the sitemap; the guides they gate are public.
+# Generated pages live in g/, one per guide, by scripts/build-guides.js.
+[[redirects]]
+  from = "/g/relocate"
+  to = "/g/relocate.html"
+  status = 200
+
+[[redirects]]
+  from = "/g/invest"
+  to = "/g/invest.html"
+  status = 200
+
+[[redirects]]
+  from = "/g/buyer"
+  to = "/g/buyer.html"
+  status = 200
+
+[[redirects]]
+  from = "/g/sell"
+  to = "/g/sell.html"
+  status = 200
+
 # ----------------------------------------------------------- private paths ---
 # publish = "." ships the whole repository, so every internal file is reachable
 # at its own URL unless it is blocked here. These are working files: project
@@ -89,6 +115,13 @@
   status = 404
   force = true
 
+# Stamp written by scripts/set-domain.js recording the current host.
+[[redirects]]
+  from = "/.domain"
+  to = "/404.html"
+  status = 404
+  force = true
+
 [[redirects]]
   from = "/netlify.toml"
   to = "/404.html"
@@ -99,6 +132,31 @@
 # logo build kit, and the original bio draft.
 [[redirects]]
   from = "/scripts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Internal strategy docs: Google profile setup, review templates, the funnel
+# runbook. Client facing working files, never web content.
+[[redirects]]
+  from = "/seo/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Function SOURCE. The endpoint itself is served at /.netlify/functions/lead,
+# but publish = "." also exposes the raw file at /netlify/functions/lead.mjs
+# as a static asset unless it is blocked here.
+[[redirects]]
+  from = "/netlify/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Apps Script source for the lead sheet. Server side code, has no business
+# being downloadable.
+[[redirects]]
+  from = "/apps-script/*"
   to = "/404.html"
   status = 404
   force = true

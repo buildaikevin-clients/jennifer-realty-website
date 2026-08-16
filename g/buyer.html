@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The First Time Buyer Guide | Jennifer Barragan, Preferred SHORE Real Estate</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+  <meta name="description" content="Buying your first home in Bradenton or Manatee County: what you really need saved, the process step by step, and the Florida specifics nobody warns you about." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body class="lp">
+
+  <header class="lp__head">
+    <a href="../index.html" class="nav__brand" style="justify-content:center">
+      <span class="nav__brand-text" style="text-align:center">
+        <span class="nav__brand-name">Jennifer Barragan</span>
+        <span class="nav__brand-sub">Preferred SHORE Real Estate</span>
+      </span>
+    </a>
+  </header>
+
+  <main id="main">
+  <section class="section section--dark" style="min-height:calc(100vh - 90px);display:flex;align-items:center">
+    <div class="wrap">
+      <div class="guide__grid">
+        <div>
+          <p class="eyebrow reveal">Free Guide</p>
+          <h1 class="section__title reveal" style="--d:.08s">The First Time Buyer Guide</h1>
+          <p class="section__lede reveal" style="--d:.16s">The whole process in plain language, including the parts about Florida that surprise people. Tell me where to send it. The full guide opens immediately and a copy lands in your email.</p>
+          <ul class="guide__list reveal" style="--d:.24s">
+            <li>What you actually need for a down payment, versus what people assume</li>
+            <li>Every piece of the real monthly payment: loan, taxes, insurance, and fees</li>
+            <li>The Florida specifics: flood zones, insurance quotes, and the homestead exemption</li>
+            <li>What happens between offer and keys, step by step, with no jargon</li>
+          </ul>
+        </div>
+
+        <div class="guide__card reveal reveal--scale" style="--d:.12s">
+          <h2 class="guide__card-title">Where should I send it?</h2>
+          <p class="guide__card-sub">
+            The guide opens the moment you hit the button, and a copy arrives
+            by email. I follow up personally, once, to ask if you have
+            questions. No drip campaigns, no list you cannot escape.
+          </p>
+
+          <form id="gate-form" name="guide-request" method="POST" action="../guides/first-time-home-buyer-florida.html"
+                data-netlify="true" netlify-honeypot="bot-field"
+                data-gate data-guide="buyer" data-guide-url="../guides/first-time-home-buyer-florida.html">
+            <input type="hidden" name="form-name" value="guide-request" />
+            <input type="hidden" name="guide" value="buyer" />
+            <input type="hidden" name="guideTitle" value="Your First Home, Start to Finish" />
+            <input type="hidden" name="source" value="/g/buyer" />
+            <p class="hp-field" aria-hidden="true">
+              <label>Leave this field empty:
+                <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+            </p>
+
+            <label class="field">
+              <span>Your name</span>
+              <input type="text" name="name" autocomplete="name" required />
+            </label>
+            <label class="field">
+              <span>Email</span>
+              <input type="email" name="email" autocomplete="email" required />
+            </label>
+            <label class="field">
+              <span>Phone</span>
+              <input type="tel" name="phone" autocomplete="tel" required />
+            </label>
+
+            <button type="submit" class="btn btn--solid" style="width:100%">
+              Send Me The Guide
+            </button>
+            <p class="form__note">
+              Sending this gives me permission to contact you about your plans
+              by phone, text, or email. Your details stay with me at Preferred
+              SHORE Real Estate and are never sold or shared.
+            </p>
+            <p class="form__error" id="gate-error" hidden>
+              Something went wrong sending that. Please try again, or text me
+              directly at <a href="tel:+12057907560">(205) 790-7560</a> at
+              Preferred SHORE Real Estate and I will send it myself.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="lp__foot" style="padding:2rem 1.5rem;text-align:center;background:var(--deep)">
+    <p style="font-size:.8rem;color:var(--muted);max-width:60ch;margin:0 auto">
+      Jennifer Barragan, REALTOR&reg; &middot; Preferred SHORE Real Estate &middot;
+      <a href="tel:+12057907560" style="color:inherit">(205) 790-7560</a><br />
+      Florida License SL3586445 &middot; 50 S. Lemon Ave. Ste 302, Sarasota, FL 34236<br />
+      Equal Housing Opportunity
+    </p>
+  </footer>
+
+  <script src="../js/reveal.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

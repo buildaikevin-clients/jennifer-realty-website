@@ -44,6 +44,31 @@ about page.
 - **Neighborhoods** (/neighborhoods.html). Twenty area guides covering Manatee
   County, each with local specifics rather than generic description.
 
+## Guides
+
+Long form guides written by Jennifer, free to read, each with a question and
+answer section:
+
+- **Relocating to the Bradenton Area** (/guides/relocating-to-bradenton.html).
+  Choosing among the roughly twenty distinct areas, the real cost of owning
+  here, the lender then insurance then house sequence, buying from out of
+  state, and the homestead exemption.
+- **Buying a Gulf Coast Investment Property**
+  (/guides/gulf-coast-investment-property.html). Rental math with real local
+  inputs, short term rental ordinances that change street by street,
+  condominium milestone inspection and reserve rules, and why insurance and
+  flood are where deals die. Written from her own experience as an investor.
+- **Your First Home, Start to Finish**
+  (/guides/first-time-home-buyer-florida.html). Down payment realities,
+  preapproval, the five parts of a Florida monthly payment, the offer to
+  closing sequence, and mistakes to avoid.
+- **Getting Your Home Ready to Sell**
+  (/guides/preparing-your-home-to-list.html). Pricing from closed comparable
+  sales, preparation with real return, marketing, seasonality, offer
+  negotiation, and what selling costs.
+
+The hub is /guides.html.
+
 ## Areas covered
 
 Anna Maria Island, Holmes Beach, Bradenton Beach, Longboat Key, Cortez, Perico

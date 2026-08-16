@@ -17,13 +17,18 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const DOMAIN = '[[DOMAIN]]';
+const DOMAIN = 'jenniferbarragan.com';
 
 // Pages that should never appear in search results. brand/ holds the logo
 // concept sheet, which is internal working material rather than site content.
 // It already carries a noindex, and listing a noindex page in the sitemap sends
 // Google two contradictory instructions, so it is excluded here as well.
 const EXCLUDE = new Set(['404.html', 'brand/logo-concepts.html']);
+
+// Directory prefixes that never enter the sitemap. g/ holds the noindex
+// landing pages the video funnel DMs out; listing a noindex page in the
+// sitemap sends Google contradictory instructions, same reasoning as above.
+const EXCLUDE_PREFIX = ['g/'];
 
 // Explicit priority and change frequency. Anything not listed falls back to
 // the depth based default below.
@@ -48,7 +53,7 @@ function walk(dir, out = []) {
 
 const files = walk(ROOT)
   .map((f) => path.relative(ROOT, f).replace(/\\/g, '/'))
-  .filter((f) => !EXCLUDE.has(f))
+  .filter((f) => !EXCLUDE.has(f) && !EXCLUDE_PREFIX.some((p) => f.startsWith(p)))
   .sort((a, b) => {
     // index first, then top level pages, then nested
     if (a === 'index.html') return -1;

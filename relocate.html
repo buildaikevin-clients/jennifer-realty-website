@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <meta name="description" content="Relocating to Bradenton or Anna Maria Island from out of state. What it costs to carry a home in Florida, how flood zones and insurance work, and the order to do things in. Free guide." />
 
-  <link rel="canonical" href="https://[[DOMAIN]]/relocate.html" />
+  <link rel="canonical" href="https://jenniferbarragan.com/relocate.html" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
   <meta name="author" content="Jennifer Barragan" />
   <meta name="geo.region" content="US-FL" />
@@ -20,14 +20,14 @@
   <meta property="og:title" content="Moving to Bradenton, Florida" />
   <meta property="og:description" content="What it costs to carry a home here, how flood zones and insurance work, and the order to do things in." />
   <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://[[DOMAIN]]/relocate.html" />
+  <meta property="og:url" content="https://jenniferbarragan.com/relocate.html" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:image" content="https://[[DOMAIN]]/assets/hero-relocate.webp" />
+  <meta property="og:image" content="https://jenniferbarragan.com/assets/hero-relocate.webp" />
   <meta property="og:image:alt" content="Houses along a stretch of Florida coastline, seen from the air." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Moving to Bradenton, Florida" />
   <meta name="twitter:description" content="What it costs to carry a home here, how flood zones and insurance work, and the order to do things in." />
-  <meta name="twitter:image" content="https://[[DOMAIN]]/assets/hero-relocate.webp" />
+  <meta name="twitter:image" content="https://jenniferbarragan.com/assets/hero-relocate.webp" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -41,8 +41,8 @@
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://[[DOMAIN]]/" },
-          { "@type": "ListItem", "position": 2, "name": "Relocating", "item": "https://[[DOMAIN]]/relocate.html" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jenniferbarragan.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Relocating", "item": "https://jenniferbarragan.com/relocate.html" }
         ]
       },
       {
@@ -247,13 +247,20 @@
         <div class="guide__card reveal reveal--scale" style="--d:.12s">
           <h3 class="guide__card-title">Send it to me</h3>
           <p class="guide__card-sub">
-            You will receive one email with the guide attached. There is no
-            sequence, no drip campaign, and no calls you did not ask for.
+            The guide opens the moment you hit the button, and a copy arrives
+            by email. I follow up personally, once, to ask if you have
+            questions. No drip campaigns, no list you cannot escape.
           </p>
 
-          <form id="guide-form" name="relocation-guide" method="POST"
-                data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="relocation-guide" />
+          <form id="guide-form" name="guide-request" method="POST"
+                action="guides/relocating-to-bradenton.html"
+                data-netlify="true" netlify-honeypot="bot-field"
+                data-gate data-guide="relocate"
+                data-guide-url="guides/relocating-to-bradenton.html">
+            <input type="hidden" name="form-name" value="guide-request" />
+            <input type="hidden" name="guide" value="relocate" />
+            <input type="hidden" name="guideTitle" value="Relocating to the Bradenton Area" />
+            <input type="hidden" name="source" value="/relocate.html" />
             <p class="hp-field" aria-hidden="true">
               <label>Leave this field empty:
                 <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
@@ -269,8 +276,8 @@
                 <input type="email" name="email" autocomplete="email" required />
               </label>
               <label class="field">
-                <span>Phone <em>(optional)</em></span>
-                <input type="tel" name="phone" autocomplete="tel" />
+                <span>Phone</span>
+                <input type="tel" name="phone" autocomplete="tel" required />
               </label>
             </div>
             <label class="field">
@@ -293,22 +300,14 @@
               Send Me The Guide
             </button>
             <p class="form__note">
-              Your details come to me and stay with me. They are not sold or
-              shared.
+              Sending this gives me permission to contact you about your move
+              by phone, text, or email. Your details stay with me at Preferred
+              SHORE Real Estate and are never sold or shared.
             </p>
             <p class="form__error" id="guide-error" hidden>
               Something went wrong sending that. Please try again, or reach me directly at <a href="tel:+12057907560">(205) 790-7560</a> at Preferred SHORE Real Estate.
             </p>
           </form>
-
-          <div class="form__done" id="guide-done" hidden tabindex="-1">
-            <span class="form__done-mark" aria-hidden="true">&#10003;</span>
-            <h3>On its way.</h3>
-            <p>
-              Check your email in the next few minutes. You can also
-              <a href="assets/guides/moving-to-bradenton.pdf" download>download it here</a>.
-            </p>
-          </div>
         </div>
       </div>
     </div>
@@ -391,6 +390,27 @@
       </p>
     </div>
   </section>
+
+  <!-- guide-cards:start (generated by scripts/build-guides.js. Do not edit by hand.) -->
+  <section class="section section--bone2">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="eyebrow reveal">Go Deeper</p>
+        <h2 class="section__title reveal" style="--d:.08s">The long answers, written down.</h2>
+      </div>
+      <div class="paths__grid" style="grid-template-columns:1fr;max-width:520px;margin:2rem auto 0">
+        <a class="path reveal reveal--scale" href="guides/relocating-to-bradenton.html" style="--d:.0s">
+          <div class="path__body">
+            <p class="eyebrow" style="margin-bottom:.6rem">For people moving here &middot; 6 minute read</p>
+            <h3 class="path__title">Relocating to the Bradenton Area</h3>
+            <p class="path__text">Where to look, what owning here really costs, and the order to do everything in when you are moving from out of state.</p>
+            <span class="path__link">Read the guide</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- guide-cards:end -->
 
   </main>
 

@@ -39,7 +39,9 @@ function walk(dir, out = []) {
 const PENDING = new Set([
   'assets/jennifer-headshot.jpg',
   'assets/jennifer-working.jpg',
-  'assets/guides/moving-to-bradenton.pdf',
+  // moving-to-bradenton.pdf was removed 2026-08-16: the relocation guide is a
+  // real page now (guides/relocating-to-bradenton.html) and nothing links a
+  // PDF anymore. If a print version ever exists, generate it from the page.
 ]);
 
 const files = walk(ROOT);

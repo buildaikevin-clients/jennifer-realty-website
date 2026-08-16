@@ -32,11 +32,11 @@ rather than retyped:
 
 ### Still outstanding
 
-One token remains, deliberately visible rather than guessed:
-
-| Token | Why it is blocking |
-|---|---|
-| `[[DOMAIN]]` | Canonical URLs, Open Graph, `sitemap.xml`, `robots.txt` |
+The `[[DOMAIN]]` token was resolved on 2026-08-16: the site's host is
+**jenniferbarragan.com** (GoDaddy), written into every canonical, OG URL,
+`sitemap.xml`, and `robots.txt` by `scripts/set-domain.js`. If the host ever
+changes, run that script again with the new host and regenerate; never edit
+the URLs by hand. The current host is recorded in `.domain`.
 
 `[[STAT_CLOSED]]` is gone. The stats band it fed was removed on 2026-07-29,
 because an unfilled counter was rendering a literal **0 homes closed** on the
@@ -227,10 +227,14 @@ that do not exist is a compliance problem, not a placeholder.
    Forms > Settings > Form notifications. This is the single easiest thing to
    forget and it silently loses every lead.
 
-Four forms are wired: `contact`, `buyer-search`, `home-valuation`, and
-`relocation-guide`. Each uses a honeypot rather than a captcha. Both wizard
-forms compose a readable `summary` field so the notification email is legible
-instead of a wall of field names.
+Forms wired: `contact`, `buyer-search`, `home-valuation`, and `guide-request`
+(the guide gate, shared by relocate.html and every `g/` landing page; hidden
+`guide` and `source` fields say which guide and which entry point). Each uses
+a honeypot rather than a captcha. Both wizard forms compose a readable
+`summary` field so the notification email is legible instead of a wall of
+field names. Guide forms also POST to `/.netlify/functions/lead`, which
+emails the guide to the lead and forwards the lead to the CRM; see
+`seo/funnel-runbook.md` for the whole funnel.
 
 The listing modal uses a prefilled `mailto:` CTA rather than a fifth form,
 because putting a form inside an already focus trapped dialog complicates the
@@ -243,11 +247,16 @@ keyboard handling for little gain. If a showing request form is wanted later,
 
 **Blocking launch:**
 
-- The remaining token above
+- Hosting: connect the repo to Netlify and point the GoDaddy DNS at it
 - Broker's written permission for listing display
 - `assets/jennifer-headshot.jpg`, 4:5, about 1600x2000
-- `assets/guides/moving-to-bradenton.pdf`, the gated lead magnet
 - Netlify form notifications enabled
+- Delivery function env vars set in Netlify (see the header of
+  `netlify/functions/lead.mjs`), or leads get captured but nobody is emailed
+
+The gated PDF (`assets/guides/moving-to-bradenton.pdf`) is no longer needed:
+the relocation guide is a real page now, `guides/relocating-to-bradenton.html`,
+generated with three siblings by `scripts/build-guides.js`.
 
 **Should have, not blocking:**
 
