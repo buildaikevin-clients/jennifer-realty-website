@@ -91,8 +91,47 @@ Suggested first text:
 2. Netlify > Forms > enable notifications to Jennifer's email.
 3. Resend account: verify the sending domain, create an API key.
 4. Netlify env vars: RESEND_API_KEY, MAIL_FROM, JENNIFER_EMAIL,
-   CRM_INTAKE_EMAIL (from the brokerage), ALERT_EMAIL, SITE_URL,
-   SHEET_WEBHOOK_URL, SHEET_TOKEN. See netlify/functions/lead.mjs header.
+   CRM_INTAKE_EMAIL, ALERT_EMAIL, SITE_URL, SHEET_WEBHOOK_URL,
+   SHEET_TOKEN. See netlify/functions/lead.mjs header.
+
+## The CRM leg: BoldTrail, and why it is email rather than API
+
+Her brokerage runs BoldTrail, which is kvCORE rebranded, by Inside Real
+Estate. Leads reach it through the **Lead Dropbox**: a per account parsing
+address found under Lead Engine > Lead Dropbox. Anything emailed to it
+becomes a contact, labeled source "Other Dropbox". That address is what
+CRM_INTAKE_EMAIL holds.
+
+**The address is a write endpoint into the brokerage's CRM.** Anyone who
+has it can create contacts. It lives in Netlify environment variables and
+in the Obsidian vault, and it is never committed here. Obtained from
+Jennifer 2026-08-16.
+
+The API was researched and rejected on 2026-08-16, for reasons worth
+keeping:
+
+- The account belongs to Preferred SHORE, not to Jennifer. A full scope
+  token exposes the brokerage's contact database, which is a conversation
+  with her broker rather than a setting she can flip.
+- Inside Real Estate's own token documentation says "Inside Real Estate
+  cannot assist with this" and directs you to your vendor. Here, we are
+  the vendor.
+- Tokens cap at three per account and expire after a year.
+- It buys nothing for this job. The funnel pushes one direction. The API
+  earns its complexity only for reading contacts back or syncing state.
+
+Same conclusion generalizes: email intake works at every brokerage on
+every CRM without anyone's permission. An API integration has to be
+renegotiated per client.
+
+**Open question, answered only by testing:** the dropbox is built to parse
+known vendors like Realtor.com and Zillow. Whether it parses our format
+into real fields or into a notes blob is undocumented. Send a test lead and
+look at the resulting contact record before trusting this leg. If parsing
+is poor, reshape the plain text body in lead.mjs to match a format it
+recognizes. Confirm three things on the test contact: fields landed
+correctly, source reads as expected, and it is assigned to Jennifer rather
+than to the office.
 5. Google Sheet + Apps Script: follow the header of apps-script/Code.gs.
 6. Test end to end BEFORE the first video, per the checklist below.
 
