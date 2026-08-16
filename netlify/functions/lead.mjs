@@ -127,7 +127,21 @@ questions, and you can call or text me anytime at (205) 790-7560.
 ${signature}`;
 
   /* Email 2: the CRM. Plain text, one field per line, the guide in the
-     subject, Reply-To set to the lead so replying reaches them. */
+     subject, Reply-To set to the lead so replying reaches them.
+
+     NO SIGNATURE HERE, DELIBERATELY, and do not add one back.
+
+     This body is read by a machine: the BoldTrail Lead Dropbox parses it into
+     a contact record. Jennifer's signature block carries her own phone number
+     and email address, and a parser that scans a body for contact patterns
+     rather than trusting the labels, or one that takes the last match it
+     finds, would store HER details as the lead's. She would call herself and
+     the real lead would be unreachable. It could also name the contact after
+     her. The lead's own copy above keeps the signature, because a person
+     reads that one.
+
+     Same reason the field labels come first and the metadata last: the
+     identity fields should be the first three patterns in the body. */
   const crmText =
 `Name: ${name}
 Email: ${email}
@@ -137,9 +151,7 @@ Guide: ${guide.title}
 Landing page: ${String(d.source || '').slice(0, 200)}
 Page: ${String(d.page || '').slice(0, 300)}
 Referrer: ${String(d.ref || '').slice(0, 300)}
-Received: ${received} US Eastern
-
-${signature}`;
+Received: ${received} US Eastern`;
 
   const legs = {
     leadEmail: sendEmail(env, {
