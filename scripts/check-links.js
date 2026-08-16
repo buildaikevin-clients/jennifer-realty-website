@@ -37,8 +37,10 @@ function walk(dir, out = []) {
    than as failures. A checker that always exits nonzero gets ignored, and then
    it catches nothing. Delete entries here as the files arrive. */
 const PENDING = new Set([
-  'assets/jennifer-headshot.jpg',
-  'assets/jennifer-working.jpg',
+  // Empty, and that is the goal state. Both photographs arrived and are in
+  // assets/ (verified 2026-08-16), so listing them here only taught the next
+  // reader that the site was still missing them.
+  //
   // moving-to-bradenton.pdf was removed 2026-08-16: the relocation guide is a
   // real page now (guides/relocating-to-bradenton.html) and nothing links a
   // PDF anymore. If a print version ever exists, generate it from the page.
@@ -78,7 +80,15 @@ for (const file of files) {
       continue;
     }
 
-    const target = path.resolve(dir, rawPath);
+    /* A leading slash is site absolute, so it resolves from the publish root
+       and NOT from the page's own directory. path.resolve would otherwise send
+       "/css/styles.css" to the filesystem root and report every such link as
+       broken. 404.html is the page that needs this: Netlify serves it at the
+       address that was requested, so it is the one page here that cannot use
+       relative paths. */
+    const target = rawPath.startsWith('/')
+      ? path.resolve(ROOT, '.' + rawPath)
+      : path.resolve(dir, rawPath);
     if (!fs.existsSync(target)) {
       const fromRoot = path.relative(ROOT, target).replace(/\\/g, '/');
       if (PENDING.has(fromRoot)) pending.add(fromRoot);

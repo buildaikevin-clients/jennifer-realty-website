@@ -46,8 +46,23 @@ licensed since 2006, but in Georgia, then Alabama, and only recently Florida.
 If a stats band is ever wanted again, take the numbers from her actual
 production and label the tenure honestly.
 
-One `[[FILL IN]]` also remains in the credentials list on the home page, for
-professional designations, which can simply be deleted if she has none.
+**No `[[FILL IN]]` token reaches a rendered page any more**, verified
+2026-08-16 across all 37 pages. Thirty of them were still shipping on that
+date, and they are worth knowing about because of how they hid:
+
+- **The social links** in the footer of `index`, `buyers` and `sellers` were
+  `href="[[FILL IN: instagram url]]"`. They rendered as ordinary working links
+  that navigated to a 404. Removed until Jennifer supplies real URLs.
+- **`accessibility.html`** printed three developer instructions as body copy,
+  on a page that is legally sensitive and set to `index, follow`.
+- **All twenty neighborhood pages** printed
+  `[[FILL IN: pull from Stellar MLS]]` as the Typical Range figure, in display
+  type. The generator now omits that stat instead.
+
+The trap: a search for `[[FILL IN]]` finds none of these, because every one of
+them carries an explanatory note before the closing brackets. **Search for
+`[[` alone.** `node scripts/check-links.js` also skipped them by design, since
+line 69 deliberately ignores any href beginning with `[[`.
 
 ### Two things to verify before launch
 
@@ -90,6 +105,7 @@ relocate.html            for out of state buyers, gated guide, 4 FAQs
 neighborhoods.html       generated hub
 neighborhoods/           20 generated area pages
 accessibility.html       WCAG statement and barrier reporting route
+404.html                 not found. THE ONE PAGE USING ROOT RELATIVE PATHS
 css/styles.css           the entire site. tokens at :root
 js/reveal.js             scroll animation system, exposes window.JR.observeReveals
 js/hero-scrub.js         canvas frame scrub on desktop, video on mobile
@@ -247,25 +263,56 @@ keyboard handling for little gain. If a showing request form is wanted later,
 
 **Blocking launch:**
 
-- Hosting: connect the repo to Netlify and point the GoDaddy DNS at it
-- Broker's written permission for listing display
-- `assets/jennifer-headshot.jpg`, 4:5, about 1600x2000
-- Netlify form notifications enabled
-- Delivery function env vars set in Netlify (see the header of
-  `netlify/functions/lead.mjs`), or leads get captured but nobody is emailed
+- Hosting: connect the repo to Netlify and point the GoDaddy DNS at it.
+  `jenniferbarragan.com` is registered and its nameservers are GoDaddy's
+  (`ns17`/`ns18.domaincontrol.com`), currently serving a parking page
+- Netlify form notifications enabled. Off by default, and off means every
+  lead is captured silently and nobody is ever told
+
+That is the whole blocking list. Both photographs arrived, and the funnel
+does not need Resend to work; see below.
+
+**Not blocking, despite how the funnel reads:**
+
+The delivery function degrades safely with **no environment variables set at
+all**. It fails every email leg, logs, and still returns ok, because the
+visitor's redirect to the guide rides on Netlify's capture and never on this
+function. So the site can go live and gain email later:
+
+| Leg | Without any env vars | Needs |
+|---|---|---|
+| Lead captured | Works, Netlify Forms | nothing |
+| Jennifer notified | Works, form notification | notifications on |
+| Visitor gets the guide | Works, browser redirect | nothing |
+| Emailed copy to the lead | Skipped | Resend |
+| Lead into the brokerage CRM | Skipped | Resend and the intake address |
+| Row in the lead sheet | Skipped | Apps Script deploy |
+
+Setting `JENNIFER_EMAIL` or `SITE_URL` without `RESEND_API_KEY` accomplishes
+nothing, because every send throws without the key. Set all of them or none.
+
+**Should have, not blocking:**
+
+- Broker's written permission for listing display. Only needed before the
+  scraper's `--agency` flag is ever used. Her own listing array is empty and
+  the page falls back to the brokerage search handoff, so nothing today
+  depends on it. Read `BROKER-PERMISSION.md` first
+- **Her social profile URLs.** This moved up: the footer links were removed
+  2026-08-16 because they were unresolved tokens pointing at a 404. Real URLs
+  restore the links and fill the `sameAs` array, which is the strongest signal
+  tying this site to her presence elsewhere for both Google and answer
+  engines. Do not leave it empty forever
+- Price ranges for all 20 neighborhood pages, pulled from Stellar MLS, plus
+  `PRICES_AS_OF` in the generator. The Typical Range stat is omitted entirely
+  until a confirmed figure exists, so nothing broken shows in the meantime
+- An accessibility pass over the eight pages added 2026-08-16, the four guides
+  and four landing pages. `accessibility.html` states its last review as
+  2026-07-26 on purpose, because that is the last one that actually happened.
+  Do the pass, then move the date
 
 The gated PDF (`assets/guides/moving-to-bradenton.pdf`) is no longer needed:
 the relocation guide is a real page now, `guides/relocating-to-bradenton.html`,
 generated with three siblings by `scripts/build-guides.js`.
-
-**Should have, not blocking:**
-
-- `assets/jennifer-working.jpg` for the second About photo, 4:3
-- Price ranges for the 17 neighborhood pages currently showing `[[FILL IN]]`,
-  pulled from Stellar MLS, plus `PRICES_AS_OF` in the generator
-- Her social profile URLs, for the `sameAs` array in the JSON-LD and the footer
-- The `sameAs` array is the strongest signal tying this site to her presence
-  elsewhere for both Google and answer engines. Do not leave it empty forever.
 
 ---
 

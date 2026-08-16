@@ -29,9 +29,17 @@
    ---------------------------------------------------------------------------
 
    PRICES: `priceRange` is left null wherever a real figure was not on hand.
-   A null renders a visible [[FILL IN]] rather than a guess, because inventing
-   market data on a licensed agent's site is not a placeholder, it is a false
-   statement. Fill these from Stellar MLS and update `PRICES_AS_OF`.
+   Inventing market data on a licensed agent's site is not a placeholder, it
+   is a false statement, so nothing is ever guessed here.
+
+   The Typical Range stat is therefore OMITTED entirely when the figure is
+   missing or unconfirmed, rather than rendering an editorial token. Until
+   2026-08-16 it printed a visible [[FILL IN]], which put a note meant for the
+   developer on twenty public pages. Saying nothing about price is honest.
+   Printing your own to do list to a client is not. Set `priceRange` to a real
+   confirmed string and the stat comes back on its own.
+
+   Fill these from Stellar MLS and update `PRICES_AS_OF`.
 
    ---------------------------------------------------------------------------
    HERO PHOTOS, READ BEFORE SWAPPING ONE
@@ -751,6 +759,13 @@ const DATA = [
    must produce byte identical output; see the contract note in that file. */
 const { esc, jsonEsc, head, nav, footer } = require('./lib/chrome')({ DOMAIN });
 
+/* A price range counts as real only if it is a string carrying no editorial
+   token. Both forms of unfilled are caught: a plain null, and a string like
+   "[[FILL IN: verify, research suggested...]]" where a figure was researched
+   but never confirmed against Stellar MLS. An unconfirmed number is not a
+   number, so it is treated exactly like a missing one. */
+const hasPrice = (v) => typeof v === 'string' && v.trim() !== '' && !v.includes('[[');
+
 function areaPage(a) {
   const group = GROUPS.find((g) => g.key === a.group);
   const title = `${a.name} Homes for Sale | Bradenton Area | Jennifer Barragan`;
@@ -858,11 +873,11 @@ ${a.intro.slice(1).map((p, i) => `        <p class="reveal" style="--d:.${12 + i
           <dt class="stat__label" style="color:var(--muted);margin:0 0 .6rem">To the Beach</dt>
           <dd style="margin:0;font-family:var(--display);font-size:1.5rem">${esc(a.toBeach)}</dd>
         </div>
-        <div class="stat">
+${hasPrice(a.priceRange) ? `        <div class="stat">
           <dt class="stat__label" style="color:var(--muted);margin:0 0 .6rem">Typical Range</dt>
-          <dd style="margin:0;font-family:var(--display);font-size:1.5rem">${esc(a.priceRange || '[[FILL IN: pull from Stellar MLS]]')}</dd>
+          <dd style="margin:0;font-family:var(--display);font-size:1.5rem">${esc(a.priceRange)}</dd>
         </div>
-        <div class="stat">
+` : ''}        <div class="stat">
           <dt class="stat__label" style="color:var(--muted);margin:0 0 .6rem">What Was Built Here</dt>
           <dd style="margin:0;font-size:.95rem;line-height:1.6">${esc(a.styles)}</dd>
         </div>
@@ -1049,13 +1064,14 @@ for (const area of DATA) {
 }
 fs.writeFileSync(path.join(ROOT, 'neighborhoods.html'), hubPage(), 'utf8');
 
-const missingPrices = DATA.filter((a) => !a.priceRange).length;
+const missingPrices = DATA.filter((a) => !hasPrice(a.priceRange)).length;
 
 console.log(`build-neighborhoods: wrote ${n} area pages plus the hub.`);
 if (missingPrices) {
   console.log(
-    `  ${missingPrices} of ${DATA.length} areas still have no price range and will ` +
-    `render a visible [[FILL IN]].\n` +
-    `  Fill them from Stellar MLS and set PRICES_AS_OF (currently: ${PRICES_AS_OF}).`
+    `  ${missingPrices} of ${DATA.length} areas have no confirmed price range, so ` +
+    `the Typical Range stat is omitted on those pages.\n` +
+    `  Nothing broken is shown to a visitor. Fill them from Stellar MLS and set ` +
+    `PRICES_AS_OF (currently: ${PRICES_AS_OF}).`
   );
 }
