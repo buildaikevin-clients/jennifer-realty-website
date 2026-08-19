@@ -249,8 +249,11 @@ Forms wired: `contact`, `buyer-search`, `home-valuation`, and `guide-request`
 a honeypot rather than a captcha. Both wizard forms compose a readable
 `summary` field so the notification email is legible instead of a wall of
 field names. Guide forms also POST to `/.netlify/functions/lead`, which
-emails the guide to the lead and forwards the lead to the CRM; see
-`seo/funnel-runbook.md` for the whole funnel.
+emails the guide to the lead and forwards the lead to the CRM. The funnel
+runbook and the rest of the strategy docs moved out of this repository on
+2026-08-19 (the repo went public for Netlify hosting, and those are internal
+working files); they live in the workspace at
+`shared/clients/jennifer-realty-website-internal/seo/`.
 
 The listing modal uses a prefilled `mailto:` CTA rather than a fifth form,
 because putting a form inside an already focus trapped dialog complicates the
