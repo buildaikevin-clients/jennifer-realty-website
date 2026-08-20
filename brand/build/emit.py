@@ -71,11 +71,12 @@ write("favicon.svg",
 # ---------------------------------------------------------------- the lockup --
 L = initials(size=72, gap=28, cx=210, baseline=72)
 name, name_w = centered(CINZ, "JENNIFER BARRAGAN", 15, 6.5, 210, 106)
-# Three words instead of two as of 2026-08-19, when the market line moved to
-# Lakewood Ranch first. At the old 9.5/4.8 the line measured 244 units against
-# the name line's 267, close enough to read as a second title rather than a
-# subordinate line. 8.8/3.8 puts it back near the proportion it used to hold.
-loc, loc_w = centered(MONT, "LAKEWOOD RANCH FLORIDA", 8.8, 3.8, 210, 130)
+# The brokerage, not the market, as of 2026-08-19 (Kevin's call): the lockup's
+# second line now matches the nav, where Preferred SHORE Real Estate sits under
+# her name. At the market line's 8.8/3.8 this longer string measured 249.6
+# units against the name line's 267, reading as a second title. 7.6/3.2 lands
+# it at 213.5, the subordinate proportion the mark held originally.
+loc, loc_w = centered(MONT, "PREFERRED SHORE REAL ESTATE", 7.6, 3.2, 210, 130)
 
 # The Cinzel name line is the widest element, so it sets the box. Six units of
 # clear space all round, which is the minimum the mark should ever be given.
@@ -101,7 +102,7 @@ def lockup(letter, rule, quiet, label):
         '</svg>\n')
 
 
-ALT = "Jennifer Barragan, Lakewood Ranch Florida"
+ALT = "Jennifer Barragan, Preferred SHORE Real Estate"
 write("logo.svg", lockup(INK, GULF_D, MUTED, ALT))
 write("logo-reversed.svg", lockup(BONE, GULF, SAND_L, ALT))
 

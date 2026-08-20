@@ -93,9 +93,10 @@ Note the office address is her brokerage's, not a place she is marketed from.
 Getting that wrong is a 61J2-10.025 problem rather than a typo.
 
 **Market order, set 2026-08-19.** Lakewood Ranch first, then Sarasota, then
-Bradenton, then the barrier islands. That order drives the logo's second line,
-the footer tagline, every page title and meta description, and the JSON-LD
-areaServed. It replaced a Bradenton first site. Two things did not move with it
+Bradenton, then the barrier islands. That order drives the footer tagline,
+every page title and meta description, and the JSON-LD areaServed. (The logo's
+second line stopped following the market later the same day: it now reads
+PREFERRED SHORE REAL ESTATE, matching the nav, at Kevin's request.) It replaced a Bradenton first site. Two things did not move with it
 and are still Manatee County specific: the payment estimator on Buyers, which
 uses Manatee tax and insurance ballparks, and the relocation guide, whose body
 is written around Manatee County. The twenty neighborhood pages are Manatee

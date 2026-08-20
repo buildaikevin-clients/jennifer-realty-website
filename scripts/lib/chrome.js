@@ -142,7 +142,7 @@ ${extraLd}
         <div class="reveal" style="--d:0s">
           <img class="footer__logo" src="${prefix}assets/logo-reversed.svg"
                width="280" height="116" loading="lazy"
-               alt="Jennifer Barragan, Lakewood Ranch Florida" />
+               alt="Jennifer Barragan, Preferred SHORE Real Estate" />
           <p class="footer__tagline">
             Buying and selling across Lakewood&nbsp;Ranch, Sarasota, Bradenton,
             and the barrier islands.

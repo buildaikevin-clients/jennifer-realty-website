@@ -6,9 +6,10 @@ rejected. Open that file in a browser if the question "why this one" ever comes
 up again.
 
 A Cormorant Garamond `J` and `B` set large, separated by a gulf colored
-hairline, with the full name in Cinzel below and the market in Montserrat below
-that. Editorial rather than corporate, which is the register the rest of the
-site is already written in.
+hairline, with the full name in Cinzel below and the brokerage, Preferred SHORE
+Real Estate, in Montserrat below that (the market name until 2026-08-19, when
+Kevin had the line match the nav). Editorial rather than corporate, which is
+the register the rest of the site is already written in.
 
 ---
 
