@@ -21,6 +21,23 @@
   status = 301
   force = true
 
+# The relocation guide was renamed on 2026-08-19, when the site moved to a
+# Lakewood Ranch first market order. The old path was live, it is in the
+# sitemap Google already crawled, and Jennifer has pasted it into DMs, so it
+# gets a permanent redirect rather than a 404. force = true because a stale
+# copy of the old file must never win over this rule.
+[[redirects]]
+  from = "/guides/relocating-to-bradenton.html"
+  to = "/guides/relocating-to-lakewood-ranch.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/guides/relocating-to-bradenton"
+  to = "/guides/relocating-to-lakewood-ranch.html"
+  status = 301
+  force = true
+
 # ------------------------------------------------------------ DM keywords ---
 # Short links Jennifer pastes into a DM after someone comments a keyword on a
 # video. Each 200 rewrites to the real landing page file so the extensionless
@@ -45,6 +62,37 @@
 [[redirects]]
   from = "/g/sell"
   to = "/g/sell.html"
+  status = 200
+
+# ------------------------------------------------------------- espanol ---
+# The Spanish pages. Extensionless forms so a URL Jennifer reads out loud or
+# writes in a post works whether or not Pretty URLs is on, same reasoning as
+# the /g/ links above. 200 rewrites, not redirects: the canonical tag on each
+# page already names the .html form, so there is one indexable URL either way.
+#
+# There is deliberately NO automatic redirect from / to /es/ based on
+# Accept-Language. It would trap every bilingual reader who wanted the English
+# page and hand a shared or borrowed computer the wrong language. js/lang.js
+# offers instead, once, and remembers the answer.
+
+[[redirects]]
+  from = "/es/comprar"
+  to = "/es/comprar.html"
+  status = 200
+
+[[redirects]]
+  from = "/es/vender"
+  to = "/es/vender.html"
+  status = 200
+
+[[redirects]]
+  from = "/es/mudarse"
+  to = "/es/mudarse.html"
+  status = 200
+
+[[redirects]]
+  from = "/es/vecindarios"
+  to = "/es/vecindarios.html"
   status = 200
 
 # ----------------------------------------------------------- private paths ---

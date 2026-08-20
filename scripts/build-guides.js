@@ -69,36 +69,36 @@ const GUIDES = [
 
   /* ----------------------------------------------------- RELOCATE ------- */
   {
-    slug: 'relocating-to-bradenton',
+    slug: 'relocating-to-lakewood-ranch',
     keyword: 'relocate',
-    title: 'Relocating to Bradenton and the Gulf Coast | The Full Guide | Jennifer Barragan',
-    desc: 'How to move to Bradenton, Lakewood Ranch, or the islands from out of state: choosing an area, what ownership really costs, and the order to do everything in.',
-    h1: 'Relocating to the Bradenton Area',
+    title: 'Relocating to Lakewood Ranch, Sarasota and Bradenton | The Full Guide | Jennifer Barragan',
+    desc: 'How to move to Lakewood Ranch, Sarasota, Bradenton, or the islands from out of state: choosing an area, what ownership really costs, and the order to do everything in.',
+    h1: 'Relocating to Lakewood Ranch, Sarasota and Bradenton',
     lede: 'Everything I explain on relocation calls, written down. Where to look, what it costs to own here, and the order to do things in so nothing expensive surprises you.',
-    crumbLast: 'Relocating to Bradenton',
-    headline: 'Relocating to Bradenton and the Florida Gulf Coast',
-    schemaDesc: 'A relocation guide to Bradenton, Lakewood Ranch, and the Manatee County Gulf Coast: choosing an area, insurance and flood costs, CDD fees, and the sequence of a move from out of state.',
-    areaServed: 'Bradenton, Lakewood Ranch, Anna Maria Island, Manatee County, Florida',
+    crumbLast: 'Relocating',
+    headline: 'Relocating to Lakewood Ranch, Sarasota and the Florida Gulf Coast',
+    schemaDesc: 'A relocation guide to Lakewood Ranch, Sarasota, Bradenton, and the Gulf Coast: choosing an area, insurance and flood costs, CDD fees, and the sequence of a move from out of state.',
+    areaServed: 'Lakewood Ranch, Sarasota, Bradenton, Anna Maria Island, Manatee County, Sarasota County, Florida',
     cardKicker: 'For people moving here',
     cardBlurb: 'Where to look, what owning here really costs, and the order to do everything in when you are moving from out of state.',
     promoteOn: 'relocate.html',
     parent: { label: 'Relocating', href: '../relocate.html' },
-    landingH1: 'The Bradenton Relocation Guide',
+    landingH1: 'The Lakewood Ranch and Sarasota Relocation Guide',
     landingLede: 'You asked for it, here it is. Tell me where to send it and it is yours. You will land on the full guide the moment you hit the button, and a copy arrives by email so you can find it again later.',
     landingBullets: [
-      'Every area from Anna Maria Island to Parrish and what homes run in each',
+      'Every area from Lakewood Ranch to the barrier islands and what homes run in each',
       'What insurance, flood zones, and CDD fees really add to a monthly payment',
       'The exact order to do things in so you never fall in love with a house you cannot insure',
       'The paperwork side: driver license, registration, and the homestead exemption',
     ],
-    summary: '**The short version:** Bradenton is about twenty different markets sharing one name, and the right one for you depends on how you actually live. Ownership costs more than the mortgage here, because insurance, flood risk, and CDD fees ride along with it. Do things in this order: talk to a lender, get an insurance quote on any serious candidate, then buy the house. This guide covers all of it.',
+    summary: '**The short version:** This stretch of the Gulf Coast is a couple of dozen different markets sharing a handful of names, and the right one for you depends on how you actually live. Ownership costs more than the mortgage here, because insurance, flood risk, and CDD fees ride along with it. Do things in this order: talk to a lender, get an insurance quote on any serious candidate, then buy the house. This guide covers all of it.',
     sections: [
       { id: 'areas', toc: 'Choosing an area',
-        h2: 'One county, about twenty different markets',
+        h2: 'Two counties, a couple of dozen different markets',
         blocks: [
-          { p: 'People tell me they are moving to Bradenton, and my first question is always the same: which Bradenton? Anna Maria Island and Parrish share a county and almost nothing else. The island is coastal flood zones, older cottages next to elevated new builds, and rental rules that change block by block. Parrish is new construction on former farmland, builder contracts, and CDD assessments. They are forty minutes apart and they behave like different states.' },
-          { p: 'The broad strokes: the islands and the coast carry the highest prices and the highest carrying costs. West Bradenton is older Florida housing between the city and the bridges, closest to the sand without island pricing. East County and Lakewood Ranch are where most relocations land, with newer homes, planned communities, and the amenities that come with them. North of the river, Palmetto, Parrish, and Ellenton hold the most house per dollar and the longest drives to a beach.' },
-          { p: 'I keep a full page on every one of these areas on this site, with what was built there, what it runs, and what to check before buying. Start with [the neighborhoods hub](../neighborhoods.html) once you have read this.' },
+          { p: 'People tell me they are moving to the Sarasota area, and my first question is always the same: which part of it? Lakewood Ranch and Anna Maria Island sit forty minutes apart and behave like different states. One is master planned villages east of the interstate, builder contracts, and CDD assessments on the tax bill. The other is coastal flood zones, older cottages beside elevated new builds, and rental rules that change block by block. Picking between them is most of the work, and it is the part a listing site cannot do for you.' },
+          { p: 'The broad strokes, in the order people usually ask me about them. **Lakewood Ranch** is where most relocations land: master planned villages straddling the Manatee and Sarasota county line, newer homes, amenities built in, and a CDD line on almost every tax bill. **Sarasota** is the cultural end of the market, downtown and the arts, with the shortest reach to Siesta Key and Longboat Key and prices that climb sharply as you approach the water. **Bradenton** is older mainland Florida housing between the city and the bridges, the closest you get to the sand without paying island prices. The **barrier islands**, Anna Maria, Holmes Beach, Bradenton Beach and Longboat Key, carry the highest prices and the highest carrying costs of anywhere on this list. North of the river, Palmetto, Parrish, and Ellenton hold the most house per dollar and the longest drives to a beach.' },
+          { p: 'I keep a full page on most of these areas on this site, with what was built there, what it runs, and what to check before buying. Start with [the neighborhoods hub](../neighborhoods.html) once you have read this, and ask me directly about anything it does not cover yet.' },
         ] },
       { id: 'costs', toc: 'The real cost of owning',
         h2: 'What owning here actually costs',
@@ -129,7 +129,7 @@ const GUIDES = [
         h2: 'Licenses, registration, and homestead',
         blocks: [
           { p: 'Once you are here, Florida gives you 30 days to get a Florida driver license and register your vehicles. Bring more identification than you think you need, and check the current list before you go.' },
-          { p: 'The one with real money attached is the homestead exemption. If the home is your permanent residence on January 1, you can apply for an exemption that reduces the assessed value and caps how fast it can rise. File with the Manatee County Property Appraiser by March 1. It is one form, it is free, and skipping it costs you every year until you notice.' },
+          { p: 'The one with real money attached is the homestead exemption. If the home is your permanent residence on January 1, you can apply for an exemption that reduces the assessed value and caps how fast it can rise. File with the property appraiser for the county the home sits in, Manatee or Sarasota, by March 1. Lakewood Ranch spans the line between the two, so check which side your address falls on rather than assuming. It is one form, it is free, and skipping it costs you every year until you notice.' },
         ] },
       { id: 'timing', toc: 'Timing the move',
         h2: 'When to move, and what season changes',
@@ -167,7 +167,7 @@ const GUIDES = [
       { label: 'The buyer process', href: '../buyers.html' },
       { label: 'First time buyer guide', href: 'first-time-home-buyer-florida.html' },
     ],
-    legal: 'This guide is general information for people relocating to Manatee County, Florida, not legal, tax, lending, or insurance advice. Costs and rules change; verify current figures with the relevant provider or agency.',
+    legal: 'This guide is general information for people relocating to Manatee and Sarasota counties, Florida, not legal, tax, lending, or insurance advice. Costs and rules change; verify current figures with the relevant provider or agency.',
   },
 
   /* ------------------------------------------------------- INVEST ------- */
@@ -175,13 +175,13 @@ const GUIDES = [
     slug: 'gulf-coast-investment-property',
     keyword: 'invest',
     title: 'Buying an Investment Property on the Gulf Coast | Jennifer Barragan',
-    desc: 'How to evaluate a rental or flip in Bradenton, Lakewood Ranch, and Manatee County, from an agent who owns and manages rental property herself.',
+    desc: 'How to evaluate a rental or flip in Lakewood Ranch, Sarasota, and Bradenton, from an agent who owns and manages rental property herself.',
     h1: 'Buying a Gulf Coast Investment Property',
     lede: 'I own rentals, I have done the flips, and I still manage property I bought years ago. This is how I evaluate an investment here, written the way I would explain it to a friend.',
     crumbLast: 'Investment Property',
     headline: 'Buying an Investment Property on the Florida Gulf Coast',
-    schemaDesc: 'A guide to evaluating investment property in Bradenton, Lakewood Ranch, and Manatee County: rental math, short term rental rules, insurance and flood costs, condominium caveats, and building a local team.',
-    areaServed: 'Bradenton, Lakewood Ranch, Anna Maria Island, Manatee County, Florida',
+    schemaDesc: 'A guide to evaluating investment property in Lakewood Ranch, Sarasota, and Bradenton: rental math, short term rental rules, insurance and flood costs, condominium caveats, and building a local team.',
+    areaServed: 'Lakewood Ranch, Sarasota, Bradenton, Anna Maria Island, Manatee County, Sarasota County, Florida',
     cardKicker: 'For investors',
     cardBlurb: 'Rental math, the rules that change street by street, and the line items that kill deals here, from an agent who invests herself.',
     promoteOn: 'buyers.html',
@@ -273,7 +273,7 @@ const GUIDES = [
     },
     related: [
       { label: 'Every neighborhood, explained', href: '../neighborhoods.html' },
-      { label: 'The relocation guide', href: 'relocating-to-bradenton.html' },
+      { label: 'The relocation guide', href: 'relocating-to-lakewood-ranch.html' },
       { label: 'Preparing a home to list', href: 'preparing-your-home-to-list.html' },
     ],
     legal: 'This guide is general information about investment property in Manatee County, Florida, not investment, legal, tax, lending, or insurance advice. Rental ordinances, condominium law, and insurance markets change; verify every figure and rule for a specific property before acting.',
@@ -284,13 +284,13 @@ const GUIDES = [
     slug: 'first-time-home-buyer-florida',
     keyword: 'buyer',
     title: 'First Time Home Buyer Guide for Florida | Jennifer Barragan',
-    desc: 'Buying your first home in Bradenton or Manatee County: what you really need saved, the process step by step, and the Florida specifics nobody warns you about.',
+    desc: 'Buying your first home in Lakewood Ranch, Sarasota, or Bradenton: what you really need saved, the process step by step, and the Florida specifics nobody warns you about.',
     h1: 'Your First Home, Start to Finish',
     lede: 'Nobody is born knowing how this works. This is the whole process in plain language, including the Florida parts that surprise people, written so you can walk in prepared.',
     crumbLast: 'First Time Buyers',
     headline: 'The First Time Home Buyer Guide for the Bradenton Area',
-    schemaDesc: 'A step by step guide for first time home buyers in Bradenton and Manatee County, Florida: down payment realities, preapproval, the true monthly payment, inspections, insurance, and closing.',
-    areaServed: 'Bradenton, Lakewood Ranch, Palmetto, Manatee County, Florida',
+    schemaDesc: 'A step by step guide for first time home buyers in Lakewood Ranch, Sarasota, and Bradenton, Florida: down payment realities, preapproval, the true monthly payment, inspections, insurance, and closing.',
+    areaServed: 'Lakewood Ranch, Sarasota, Bradenton, Palmetto, Manatee County, Sarasota County, Florida',
     cardKicker: 'For first time buyers',
     cardBlurb: 'What you really need saved, the process step by step, and the Florida costs nobody warns first time buyers about.',
     promoteOn: 'buyers.html',
@@ -380,7 +380,7 @@ const GUIDES = [
     related: [
       { label: 'The buyer process and estimator', href: '../buyers.html' },
       { label: 'Every neighborhood, explained', href: '../neighborhoods.html' },
-      { label: 'The relocation guide', href: 'relocating-to-bradenton.html' },
+      { label: 'The relocation guide', href: 'relocating-to-lakewood-ranch.html' },
     ],
     legal: 'This guide is general information for home buyers in Manatee County, Florida, not legal, tax, lending, or insurance advice. Loan programs, credit requirements, and assistance funds change; verify current terms with a licensed lender.',
   },
@@ -390,13 +390,13 @@ const GUIDES = [
     slug: 'preparing-your-home-to-list',
     keyword: 'sell',
     title: 'Preparing Your Home to List | Seller Guide | Jennifer Barragan',
-    desc: 'How to get a Bradenton area home ready to sell: pricing from real comparable sales, the preparation that pays, and what happens from listing day to closing.',
+    desc: 'How to get a Lakewood Ranch, Sarasota, or Bradenton area home ready to sell: pricing from real comparable sales, the preparation that pays, and what happens from listing day to closing.',
     h1: 'Getting Your Home Ready to Sell',
     lede: 'What to fix, what to skip, how the price actually gets set, and what happens after the sign goes up. The whole listing process, before you commit to anything.',
     crumbLast: 'Seller Guide',
     headline: 'Preparing a Bradenton Area Home to List',
-    schemaDesc: 'A seller’s guide for Bradenton and Manatee County: pricing from closed comparable sales, preparation with real return, listing marketing, offer negotiation, and the costs of selling.',
-    areaServed: 'Bradenton, Lakewood Ranch, Anna Maria Island, Manatee County, Florida',
+    schemaDesc: 'A seller’s guide for Lakewood Ranch, Sarasota, and Bradenton: pricing from closed comparable sales, preparation with real return, listing marketing, offer negotiation, and the costs of selling.',
+    areaServed: 'Lakewood Ranch, Sarasota, Bradenton, Anna Maria Island, Manatee County, Sarasota County, Florida',
     cardKicker: 'For sellers',
     cardBlurb: 'What to fix, what to skip, how the price really gets set, and what selling actually costs. Read it before you list with anyone.',
     promoteOn: 'sellers.html',
@@ -700,8 +700,8 @@ function guideCard(g, pre, i) {
 
 function buildHub() {
   const canonical = 'guides.html';
-  const title = 'Buying, Selling and Relocation Guides | Bradenton FL | Jennifer Barragan';
-  const desc = 'Free guides to relocating, buying a first home, investing, and selling in Bradenton, Lakewood Ranch, and Manatee County, written by Jennifer Barragan of Preferred SHORE Real Estate.';
+  const title = 'Buying, Selling and Relocation Guides | Lakewood Ranch FL | Jennifer Barragan';
+  const desc = 'Free guides to relocating, buying a first home, investing, and selling in Lakewood Ranch, Sarasota, and Bradenton, written by Jennifer Barragan of Preferred SHORE Real Estate.';
 
   const jsonld = `  <script type="application/ld+json">
 ${JSON.stringify({

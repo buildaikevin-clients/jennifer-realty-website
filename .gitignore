@@ -53,3 +53,6 @@ scripts/.hero-cache/
 # Logo build input: the three Google fonts, fetched on demand. Large, and
 # Google serves them at a stable URL. See brand/README.md.
 brand/build/*.ttf
+
+# Python byte code from the brand logo build
+brand/build/__pycache__/

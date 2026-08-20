@@ -71,7 +71,11 @@ write("favicon.svg",
 # ---------------------------------------------------------------- the lockup --
 L = initials(size=72, gap=28, cx=210, baseline=72)
 name, name_w = centered(CINZ, "JENNIFER BARRAGAN", 15, 6.5, 210, 106)
-loc, loc_w = centered(MONT, "BRADENTON FLORIDA", 9.5, 4.8, 210, 130)
+# Three words instead of two as of 2026-08-19, when the market line moved to
+# Lakewood Ranch first. At the old 9.5/4.8 the line measured 244 units against
+# the name line's 267, close enough to read as a second title rather than a
+# subordinate line. 8.8/3.8 puts it back near the proportion it used to hold.
+loc, loc_w = centered(MONT, "LAKEWOOD RANCH FLORIDA", 8.8, 3.8, 210, 130)
 
 # The Cinzel name line is the widest element, so it sets the box. Six units of
 # clear space all round, which is the minimum the mark should ever be given.
@@ -97,7 +101,7 @@ def lockup(letter, rule, quiet, label):
         '</svg>\n')
 
 
-ALT = "Jennifer Barragan, Bradenton Florida"
+ALT = "Jennifer Barragan, Lakewood Ranch Florida"
 write("logo.svg", lockup(INK, GULF_D, MUTED, ALT))
 write("logo-reversed.svg", lockup(BONE, GULF, SAND_L, ALT))
 

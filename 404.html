@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Page Not Found | Jennifer Barragan, Bradenton Real Estate</title>
+  <title>Page Not Found | Jennifer Barragan, Lakewood Ranch Real Estate</title>
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <meta name="description" content="That page could not be found. Links back to listings, buyers, sellers, neighborhoods, and the free guides." />
@@ -23,6 +23,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/styles.css" />
+
+  <!-- The Spanish offer bar. Head, not deferred: it has to settle before
+       the header paints. It only ever offers, it never redirects. -->
+  <script src="/js/lang.js"></script>
 </head>
 <body>
 
@@ -46,6 +50,11 @@
         <a href="/index.html#about">About</a>
         <a href="/index.html#contact">Contact</a>
       </nav>
+      <a class="nav__lang" href="/es/" lang="es" hreflang="es"
+         data-lang-switch="es" aria-label="Ver esta página en español">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>
+        <span>Español</span>
+      </a>
       <a href="tel:+12057907560" class="nav__cta">
         <span class="nav__cta-num">(205) 790-7560</span>
         <span class="nav__cta-firm">Preferred SHORE Real Estate</span>
@@ -73,13 +82,13 @@
         <h2 class="reveal">Where you were probably headed</h2>
         <ul class="reveal">
           <li><a href="/index.html#listings">Current listings</a>, and a search of
-            everything on the market in Manatee County</li>
+            everything on the market in Manatee and Sarasota counties</li>
           <li><a href="/buyers.html">Buying a home</a>, including what the monthly
             payment actually works out to</li>
           <li><a href="/sellers.html">Selling a home</a>, and what your property is
             worth right now</li>
           <li><a href="/neighborhoods.html">Neighborhoods</a>, twenty areas across
-            Bradenton, the barrier islands, and east county</li>
+            Lakewood Ranch, Bradenton, and the barrier islands</li>
           <li><a href="/guides.html">The free guides</a>, written for relocating,
             investing, buying a first home, and getting a house ready to list</li>
           <li><a href="/relocate.html">Moving to the area from out of state</a></li>
@@ -113,10 +122,10 @@
         <div class="reveal" style="--d:0s">
           <img class="footer__logo" src="/assets/logo-reversed.svg"
                width="280" height="116" loading="lazy"
-               alt="Jennifer Barragan, Bradenton Florida" />
+               alt="Jennifer Barragan, Lakewood Ranch Florida" />
           <p class="footer__tagline">
-            Buying and selling across Bradenton, the barrier islands, and
-            Lakewood Ranch.
+            Buying and selling across Lakewood&nbsp;Ranch, Sarasota, Bradenton,
+            and the barrier islands.
           </p>
         </div>
         <div class="reveal" style="--d:.08s">

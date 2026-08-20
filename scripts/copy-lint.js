@@ -30,6 +30,14 @@
 
    Escape hatch: put  <!-- copy-lint-allow: term -->  anywhere in a file to
    whitelist one term for that file. Use it rarely and say why next to it.
+
+   SPANISH.  The pages under es/ are checked by the same three rules, against
+   Spanish word lists chosen from the page's own lang attribute. This is not
+   optional politeness: fair housing law does not care which language the ad
+   was written in, and an English only word list would have let every one of
+   these phrases through on a page nobody on the English side reads. The
+   Spanish lists are ADDITIONAL, so a stray English phrase on a Spanish page
+   is still caught.
    ========================================================================== */
 
 'use strict';
@@ -47,8 +55,11 @@ const DASHES = [
   { re: /--/g, name: 'double hyphen', hint: 'Reads as an em dash. Rewrite the sentence.' },
   // Letter to letter, letter to digit, and digit to letter. Digit to digit is
   // deliberately absent so 555-0142 passes.
+  // The letter classes include the accented characters Spanish uses. Without
+  // them "informacion-general" would pass on a Spanish page purely because
+  // the character before the hyphen was outside A to Z.
   {
-    re: /(?<=[A-Za-z])-(?=[A-Za-z0-9])|(?<=[0-9])-(?=[A-Za-z])/g,
+    re: /(?<=[A-Za-z\u00C0-\u024F])-(?=[A-Za-z0-9\u00C0-\u024F])|(?<=[0-9])-(?=[A-Za-z\u00C0-\u024F])/g,
     name: 'hyphen',
     hint: 'Separate the words, or pick one that does not need joining.',
   },
@@ -97,6 +108,72 @@ const FAIR_HOUSING = [
   'quiet neighborhood', 'quiet community', 'exclusive area',
   'prestigious', 'up and coming', 'transitional neighborhood',
   'right kind of', 'people like you',
+];
+
+/* ------------------------------------------------------------- espanol ---
+   The Spanish equivalents, applied on top of the English lists to any page
+   whose html lang starts with es.
+
+   FAIR HOUSING FIRST, and read this before deleting anything from it. The
+   protected classes are the same in Spanish: raza, color, religion, sexo,
+   origen nacional, estado familiar, discapacidad. What changes is that the
+   coded phrases are ordinary, friendly sounding Spanish, which is exactly
+   what makes them easy to write by accident. "Zona tranquila" and "buenas
+   escuelas" read as helpful description and are read by HUD as statements
+   about who lives somewhere. Describe the place: what was built when, how
+   far the drive is, where the water goes.
+
+   Some of these are common in Latin American real estate writing. That they
+   are common is not a defense. Use the allow comment if a specific line is
+   genuinely about the property and say why next to it.
+   ------------------------------------------------------------------------- */
+const FAIR_HOUSING_ES = [
+  // estado familiar
+  'ideal para familias', 'perfecto para familias', 'perfecta para familias',
+  'solo para familias', 'apto para familias', 'ambiente familiar',
+  'sin ninos', 'sin ninos pequenos', 'no se aceptan ninos',
+  'solo adultos', 'comunidad de adultos', 'comunidad para adultos',
+  'ideal para jovenes', 'para profesionales jovenes', 'jovenes profesionales',
+  'ideal para jubilados', 'perfecto para jubilados', 'para personas mayores',
+  'ideal para recien casados',
+  // raza, color, origen nacional
+  'vecindario exclusivo', 'zona exclusiva', 'comunidad exclusiva',
+  'area exclusiva', 'barrio exclusivo', 'gente como tu', 'el tipo de gente',
+  'zona en ascenso', 'barrio en transicion',
+  // religion
+  'cerca de la iglesia', 'cerca de iglesias', 'comunidad cristiana',
+  'cerca del templo', 'a pasos de la iglesia',
+  // discapacidad
+  'no apto para discapacitados', 'debe poder caminar', 'ideal para gente activa',
+  // lenguaje codificado sobre las personas
+  'vecindario seguro', 'zona segura', 'area segura', 'barrio seguro',
+  'comunidad segura', 'sin delincuencia', 'libre de delincuencia',
+  'buenas escuelas', 'las mejores escuelas', 'mejores escuelas',
+  'escuelas de calidad', 'buenos colegios',
+  'vecindario tranquilo', 'zona tranquila', 'barrio tranquilo',
+  'comunidad tranquila', 'prestigioso', 'prestigiosa',
+];
+
+/* The Spanish AI tells. Machine translation has its own accent, separate from
+   machine writing: it reaches for the same handful of elevated words and for
+   English sentence shapes carried over whole. Everything here is replaceable
+   with something concrete. */
+const AI_TELLS_ES = [
+  'enclavado', 'enclavada', 'ubicado en el corazon', 'en el corazon de',
+  'no busques mas', 'no busque mas', 'sumergete en', 'sumergirse en',
+  'sin igual', 'inigualable', 'incomparable', 'insuperable',
+  'de clase mundial', 'de primer nivel', 'de vanguardia', 'a la vanguardia',
+  'un sinfin de', 'sinnumero de', 'una amplia gama de', 'sinfin de opciones',
+  'joya escondida', 'joya oculta', 'tesoro escondido',
+  'la tranquilidad de saber', 'ten la seguridad', 'tenga la seguridad',
+  'ya sea que estes buscando', 'ya sea que este buscando',
+  'embarcate en', 'embarcarse en', 'emprende el viaje',
+  'no es solo una casa', 'mas que solo una casa', 'no es solo un hogar',
+  'testimonio de', 'un verdadero testimonio',
+  'combinacion perfecta', 'mezcla perfecta', 'equilibrio perfecto',
+  'al final del dia', 'en el mercado actual', 'en la actualidad del mercado',
+  'navegar por las complejidades', 'el mundo de los bienes raices',
+  'experiencia unica', 'oportunidad unica', 'vibrante',
 ];
 
 /* --------------------------------------------------------------- helpers */
@@ -150,6 +227,32 @@ function jsonLdText(html) {
   return s;
 }
 
+/* The Spanish lists are written without accents on purpose, and the haystack
+   is folded to match. Two reasons. Accents are the first thing a hurried
+   writer drops, so "zona tranquila" and "zona tranquíla" both have to be
+   caught, and a rule that only fires on perfectly accented text would miss
+   exactly the sloppy copy it exists to catch. Folding also sidesteps the word
+   boundary problem below.
+
+   Offsets are preserved: every character maps to exactly one character, so a
+   match still reports the right line. */
+const FOLD = {
+  'á':'a','é':'e','í':'i','ó':'o','ú':'u','ü':'u','ñ':'n',
+  'Á':'A','É':'E','Í':'I','Ó':'O','Ú':'U','Ü':'U','Ñ':'N',
+  'à':'a','è':'e','ì':'i','ò':'o','ù':'u','â':'a','ê':'e','î':'i','ô':'o','û':'u',
+};
+function fold(str) {
+  return str.replace(/[\u00C0-\u024F]/g, (c) => FOLD[c] || c);
+}
+
+/* Which language a page is written in, from its own html lang attribute.
+   Read from the markup rather than from the file path, so a Spanish page that
+   ever moves out of es/ is still checked as Spanish. */
+function langOf(html) {
+  const m = /<html[^>]*\blang\s*=\s*["']([^"']+)["']/i.exec(html);
+  return m ? m[1].slice(0, 2).toLowerCase() : 'en';
+}
+
 function lineOf(text, index) {
   return text.slice(0, index).split('\n').length;
 }
@@ -178,6 +281,7 @@ for (const file of files) {
 
   const prose = visibleText(raw);
   const ld = jsonLdText(raw);
+  const isEs = langOf(raw) === 'es';
 
   const scan = (haystack, where) => {
     for (const d of DASHES) {
@@ -218,6 +322,37 @@ for (const file of files) {
       'Describe the property or the place, never who lives there.');
     check(AI_TELLS, 'AI-TELL',
       'Replace with something specific. A street, a number, a real detail.');
+
+    /* The Spanish pass. Separate from check() above because it folds accents
+       off the haystack first, and because it cannot use \b as a boundary:
+       in a JavaScript regex an accented letter is not a word character, so
+       \b never fires beside one and a term like "area segura" would be
+       missed. Unicode property escapes give a boundary that is correct in
+       both alphabets. */
+    if (isEs) {
+      const folded = fold(haystack);
+      const checkEs = (list, sev, hint) => {
+        for (const term of list) {
+          if (allowed.has(term.toLowerCase())) continue;
+          const pattern = term
+            .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+            .replace(/ /g, '[\\s-]+');
+          const re = new RegExp(
+            '(?<![\\p{L}\\p{N}])' + pattern + '(?![\\p{L}\\p{N}])', 'giu');
+          let m;
+          while ((m = re.exec(folded))) {
+            findings.push({
+              file: rel, line: lineOf(folded, m.index), sev, term, where,
+              text: snippet(haystack, m.index, m[0].length), hint,
+            });
+          }
+        }
+      };
+      checkEs(FAIR_HOUSING_ES, 'FAIR-HOUSING',
+        'Describe la propiedad o el lugar, nunca a quien vive ahi.');
+      checkEs(AI_TELLS_ES, 'AI-TELL',
+        'Cambialo por algo concreto: una calle, un numero, un dato real.');
+    }
   };
 
   scan(prose, 'page text');

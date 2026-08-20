@@ -42,7 +42,7 @@ const PENDING = new Set([
   // reader that the site was still missing them.
   //
   // moving-to-bradenton.pdf was removed 2026-08-16: the relocation guide is a
-  // real page now (guides/relocating-to-bradenton.html) and nothing links a
+  // real page now (guides/relocating-to-lakewood-ranch.html) and nothing links a
   // PDF anymore. If a print version ever exists, generate it from the page.
 ]);
 

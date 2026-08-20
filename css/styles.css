@@ -291,8 +291,19 @@ a:hover { color: var(--ink); }
    gap instead: the firm name has to sit with the phone number under
    61J2-10.025, and a wrapped one reads as detached from it. Desktop nav only,
    since below 1040 the links become the stacked panel. */
-@media (min-width: 1041px) and (max-width: 1400px) {
+@media (min-width: 1281px) and (max-width: 1560px) {
   .nav__links { gap: 1.35rem; }
+}
+/* The language pill costs the bar roughly another 130px, on top of what the
+   monogram already took. Below this the Spanish labels, which are the longest
+   set the nav has to carry, need the gap tightened further still. Measured
+   against the Spanish nav, which is the binding case: PROPIEDADES, COMPRAR,
+   VENDER, ZONAS, MUDARSE, SOBRE MI, CONTACTO. */
+@media (min-width: 1281px) and (max-width: 1340px) {
+  .nav__links { gap: .95rem; }
+  .nav__links a { font-size: .7rem; letter-spacing: .1em; }
+  .nav__lang { padding: .42rem .62rem; }
+  .nav__lang span { letter-spacing: .08em; }
 }
 .nav__links a {
   font-size: .74rem;
@@ -304,6 +315,10 @@ a:hover { color: var(--ink); }
   position: relative;
   padding: .5rem 0;
   transition: color .3s var(--ease);
+  /* A nav label is a label. Spanish runs about a fifth longer than English,
+     and SOBRE MI was breaking across two lines inside its own link, which
+     dragged the whole bar to two rows. */
+  white-space: nowrap;
 }
 .nav__links a::after {
   content: ""; position: absolute; left: 0; bottom: 0;
@@ -334,6 +349,11 @@ a:hover { color: var(--ink); }
 .nav__cta-firm {
   font-size: .55rem; font-weight: 500; letter-spacing: .16em;
   text-transform: uppercase; color: var(--muted);
+  /* Never wraps. 61J2-10.025 wants the brokerage name adjacent to the point
+     of contact, and a firm name broken across two lines under a phone number
+     reads as detached from it rather than attached. Same reasoning, and the
+     same rule, as .nav__brand-sub above. */
+  white-space: nowrap;
 }
 .nav__cta:hover .nav__cta-num { color: var(--gulf-d); }
 .nav.is-top .nav__cta-num { color: var(--bone); }
@@ -358,7 +378,25 @@ a:hover { color: var(--ink); }
 .nav.is-open .nav__burger span:nth-child(2) { opacity: 0; }
 .nav.is-open .nav__burger span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
 
-@media (max-width: 1040px) {
+/* The bar collapses into the burger here.
+
+   This was 1040px until 2026-08-19, when the language pill was added. The
+   pill costs the bar about 130px, and below roughly 1280 that was enough to
+   push the phone block clean off the right edge: on English at 1100px the
+   number and the brokerage line disappeared entirely, and on Spanish, whose
+   seven labels are the longest set the nav carries, the links themselves
+   collided and the block was clipped mid word at 1210.
+
+   1280 was measured, not guessed. Spanish renders cleanly at 1280 and breaks
+   by 1210, so the seam sits at the top of that band. Spanish is the binding
+   case at every width, which is why the number is set against it and not
+   against the shorter English labels.
+
+   Losing the phone number off the edge is not a cosmetic problem. 61J2-10.025
+   wants the brokerage name adjacent to the point of contact, and neither is
+   adjacent to anything once it is outside the viewport. The burger keeps both
+   reachable, so the seam moves rather than the compliance. */
+@media (max-width: 1280px) {
   .nav__burger { display: flex; }
   .nav__cta { display: none; }
   .nav__links {
@@ -2142,3 +2180,164 @@ input:focus, select:focus, textarea:focus {
 }
 .lp__head .nav__brand-name,
 .lp__head .nav__brand-sub { color: var(--bone); }
+
+/* ========================================================= language ======
+   The English and Spanish sides of the site are separate static pages, so
+   this is a plain link, not a toggle that swaps text in place. It always
+   names the language you would GET, written in that language: a visitor who
+   reads little English still recognises the word Espanol.
+
+   No flags anywhere. A flag names a country, not a language, and any single
+   flag excludes most of the people this is for.
+
+   It lives in .nav__inner beside the phone block rather than inside
+   .nav__links, and that placement is the whole point: below 1040 the links
+   collapse into the burger panel and .nav__cta is hidden entirely, so a
+   switch inside either one would be invisible on a phone. This stays in the
+   bar at every width.
+   ========================================================================= */
+.nav__lang {
+  flex: none;
+  display: inline-flex; align-items: center; gap: .42rem;
+  padding: .46rem .78rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--ui);
+  font-size: .68rem; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-2);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .3s var(--ease), border-color .3s var(--ease),
+              background .3s var(--ease);
+}
+.nav__lang svg { width: 14px; height: 14px; flex: none; }
+.nav__lang:hover {
+  color: var(--paper);
+  background: var(--deep);
+  border-color: var(--deep);
+}
+/* Over the dark hero the nav shell is transparent, so the pill has to carry
+   its own contrast the way .nav__cta-num does. */
+.nav.is-top .nav__lang {
+  color: var(--bone);
+  border-color: rgba(239, 238, 236, .45);
+}
+.nav.is-top .nav__lang:hover {
+  color: var(--deep);
+  background: var(--bone);
+  border-color: var(--bone);
+}
+/* The burger panel drops a bone ground behind a header that may still be
+   flagged is-top. Same reasoning as .nav.is-open .nav__brand-mark above. */
+.nav.is-open .nav__lang { color: var(--ink-2); border-color: var(--line); }
+
+@media (max-width: 1280px) {
+  .nav__inner { gap: .75rem; }
+  .nav__lang { padding: .42rem .66rem; font-size: .64rem; }
+}
+/* Narrow phones: the globe carries it and the word steps aside, the same
+   trade the brand monogram makes at this width. aria-label on the link is
+   what keeps it announced once the text is gone. */
+@media (max-width: 380px) {
+  .nav__lang span { display: none; }
+  .nav__lang { padding: .42rem .5rem; }
+}
+
+/* ---------------------------------------------------------- language bar --
+   Shown only when the browser asks for Spanish and the visitor is on an
+   English page, and only until they answer it once. It offers, it never
+   redirects: a forced redirect traps bilingual readers and Google advises
+   against it.
+
+   It is fixed above the nav rather than in the document flow, so the nav and
+   the burger panel are pushed down by --langbar-h instead of being covered.
+   ------------------------------------------------------------------------ */
+body { --langbar-h: 0px; }
+body.has-langbar { --langbar-h: 46px; }
+.nav { top: var(--langbar-h); }
+/* The anchor offset has to grow with the bar too, or a jump to #contact comes
+   to rest under a header that is now 46px lower. 92px is the value authored
+   at the top of this file. */
+body.has-langbar { scroll-padding-top: calc(92px + var(--langbar-h)); }
+
+.langbar {
+  position: fixed; inset: 0 0 auto 0; z-index: 110;
+  min-height: 46px;
+  display: flex; align-items: center; justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: .5rem 1.1rem;
+  background: var(--deep);
+  color: var(--bone);
+  font-family: var(--ui);
+  font-size: .82rem;
+}
+.langbar__text { margin: 0; }
+.langbar__go {
+  display: inline-block;
+  padding: .32rem .85rem;
+  border: 1px solid var(--gulf);
+  border-radius: 999px;
+  color: var(--bone);
+  text-decoration: none;
+  font-size: .72rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  transition: background .3s var(--ease), color .3s var(--ease);
+}
+.langbar__go:hover { background: var(--gulf); color: var(--deep); }
+.langbar__close {
+  position: absolute; right: .5rem; top: 50%; transform: translateY(-50%);
+  width: 34px; height: 34px;
+  background: none; border: 0; cursor: pointer;
+  color: rgba(239, 238, 236, .7);
+  font-size: 1.3rem; line-height: 1;
+}
+.langbar__close:hover { color: var(--bone); }
+
+@media (max-width: 1280px) {
+  body.has-langbar { --langbar-h: 54px; }
+  /* The burger panel is pinned under the header, so it has to clear the bar
+     as well. 76px is .nav__inner min-height, authored in the nav block. */
+  .nav__links {
+    inset: calc(76px + var(--langbar-h)) 0 auto 0;
+    max-height: calc(100dvh - 76px - var(--langbar-h));
+  }
+  .langbar { font-size: .76rem; padding-right: 2.4rem; }
+}
+
+/* ------------------------------------------------------------ hablo -------
+   "Hablo espanol" next to her photograph and beside the contact details.
+   This is the part the language switch cannot do on its own: a switch proves
+   the PAGE is translated, and what a Spanish speaking client is actually
+   deciding is whether the AGENT can take them through an inspection and a
+   closing in Spanish. Jennifer can, so the site says so, in Spanish, where
+   her face is.
+   -------------------------------------------------------------------------- */
+.hablo {
+  display: flex; align-items: flex-start; gap: .8rem;
+  margin: 1.6rem 0 0;
+  padding: .95rem 1.15rem;
+  border-left: 2px solid var(--gulf-d);
+  background: rgba(111, 158, 163, .09);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-family: var(--ui);
+  font-size: .92rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.hablo svg { width: 18px; height: 18px; flex: none; margin-top: .18rem; color: var(--gulf-d); }
+.hablo b { color: var(--ink); font-weight: 600; }
+.hablo a { color: var(--gulf-d); text-decoration: none; border-bottom: 1px solid var(--line); }
+.hablo a:hover { border-bottom-color: var(--gulf-d); }
+
+/* On the dark About band the tinted ground and the ink colors both invert. */
+.section--dark .hablo {
+  background: rgba(111, 158, 163, .13);
+  border-left-color: var(--gulf);
+  color: rgba(239, 238, 236, .86);
+}
+.section--dark .hablo svg { color: var(--gulf); }
+.section--dark .hablo b { color: var(--bone); }
+.section--dark .hablo a { color: var(--gulf); border-bottom-color: rgba(111, 158, 163, .45); }
+.section--dark .hablo a:hover { border-bottom-color: var(--gulf); }

@@ -1,4 +1,4 @@
-# Jennifer Barragan — Bradenton, Florida Real Estate
+# Jennifer Barragan, Lakewood Ranch Florida Real Estate
 
 A static website for a licensed Florida real estate agent working Manatee County
 and the barrier islands. Hand written HTML, one stylesheet, three JavaScript
@@ -89,9 +89,17 @@ number in the nav, under the address block in the footer, and beside the contact
 details on Home, Buyers, Sellers and Accessibility. Those pairings are marked
 with comments in the markup. **Do not separate them.**
 
-Note the office is in **Sarasota**, not Bradenton. The site covers the Bradenton
-market, but the address that appears next to her contact details is her
-brokerage's, and getting that wrong is a 61J2-10.025 problem rather than a typo.
+Note the office address is her brokerage's, not a place she is marketed from.
+Getting that wrong is a 61J2-10.025 problem rather than a typo.
+
+**Market order, set 2026-08-19.** Lakewood Ranch first, then Sarasota, then
+Bradenton, then the barrier islands. That order drives the logo's second line,
+the footer tagline, every page title and meta description, and the JSON-LD
+areaServed. It replaced a Bradenton first site. Two things did not move with it
+and are still Manatee County specific: the payment estimator on Buyers, which
+uses Manatee tax and insurance ballparks, and the relocation guide, whose body
+is written around Manatee County. The twenty neighborhood pages are Manatee
+areas too. Anything claiming Sarasota depth needs that content written first.
 
 ---
 
@@ -104,14 +112,16 @@ sellers.html             3 step valuation form, process, 5 FAQs
 relocate.html            for out of state buyers, gated guide, 4 FAQs
 neighborhoods.html       generated hub
 neighborhoods/           20 generated area pages
+es/                      the Spanish site. five pages, hand written, see below
 accessibility.html       WCAG statement and barrier reporting route
 404.html                 not found. THE ONE PAGE USING ROOT RELATIVE PATHS
 css/styles.css           the entire site. tokens at :root
 js/reveal.js             scroll animation system, exposes window.JR.observeReveals
 js/hero-scrub.js         canvas frame scrub on desktop, video on mobile
-js/main.js               nav, forms, listings, modal, calculator
+js/main.js               nav, forms, listings, modal, calculator. holds the STR table
+js/lang.js               the Spanish offer bar. head, not deferred
 data/listings.seed.js    hand maintained fallback. edit this one
-scripts/                 the four build and check scripts
+scripts/                 the build and check scripts
 assets/hero-frames/      145 WebP frames. generated, but committed
 brand/                   the logo: concepts, generator, and why. see its README
 ```
@@ -137,6 +147,7 @@ Plain Node, no dependencies, run from the repo root.
 
 ```bash
 node scripts/copy-lint.js            # the guardrail. run before every commit
+node scripts/check-i18n.js           # the other guardrail. English and Spanish in step
 node scripts/build-neighborhoods.js  # regenerate the 20 area pages + hub
 node scripts/build-sitemap.js        # regenerate sitemap.xml. run after the above
 node scripts/build-hero-frames.js    # regenerate hero frames from the source video
@@ -175,6 +186,127 @@ Escape hatch, to be used rarely and with a reason next to it:
 ```html
 <!-- copy-lint-allow: some term -->
 ```
+
+---
+
+## Spanish, and the switch that leads to it
+
+Added 2026-08-19. Jennifer is fully bilingual and the site never said so, which
+was the actual gap. A translated page proves the PAGE is translated. What a
+Spanish speaking client is deciding is whether the AGENT can take them through
+an inspection and a closing in Spanish, so the site now answers that first and
+switches language second.
+
+### What exists
+
+Five pages, at real URLs, indexable, working with JavaScript switched off:
+
+| English | Spanish |
+|---|---|
+| `/` | `/es/` |
+| `buyers.html` | `es/comprar.html` |
+| `sellers.html` | `es/vender.html` |
+| `relocate.html` | `es/mudarse.html` |
+| `neighborhoods.html` | `es/vecindarios.html` |
+
+Not yet translated: the 20 neighborhood detail pages, the 4 guides, and the
+`g/` landing pages. `es/vecindarios.html` says so in Spanish, on the page,
+rather than letting a reader discover it by clicking into English.
+
+### The three parts
+
+**The switch** is `.nav__lang` in every page's nav. It is a plain link, because
+the two languages are separate files rather than one page that swaps text. Three
+rules it follows, all deliberate:
+
+- **It is labelled in the language it leads to.** `Español` on the English side,
+  `English` on the Spanish side. Someone who reads little English still
+  recognises the word `Español`. `Spanish` would be useless to them.
+- **No flags, ever.** A flag names a country, not a language. Mexico, Colombia,
+  Spain, Puerto Rico: any single choice excludes most of the people this is for.
+- **It sits in the bar, not in the burger panel.** Below 1040px `.nav__links`
+  collapses and `.nav__cta` is hidden entirely, so a switch inside either would
+  be invisible on a phone. Below 380px the word drops and the globe carries it,
+  with the `aria-label` keeping it announced.
+
+**The offer bar** is `js/lang.js`. If `navigator.languages[0]` starts with `es`
+and the visitor is on an English page, a slim bar offers the Spanish version in
+Spanish. It **offers and never redirects**: a forced language redirect traps
+every bilingual reader who wanted the English page, and hands a borrowed or
+shared computer the wrong language. It asks once, stores the answer, and never
+raises it again. It is loaded **in the head and not deferred**, so it settles
+before the header paints instead of shoving the nav down under the reader.
+
+**The trust signal** is the `.hablo` block: `Hablo español` beside her
+photograph in the About band and again beside the contact form, written in
+Spanish on the English page. That is the part the switch cannot do.
+
+### Rules for editing
+
+1. **`js/main.js` injects text, and all of it lives in the `STR` table** at the
+   top of the file, keyed off the page's `lang` attribute. Listing cards, the
+   modal, tab labels, form step titles, the Sending button. A string written
+   inline anywhere below that table is a bug: it renders English on a Spanish
+   page. Money is deliberately NOT localised, because these are US dollar
+   prices on US listings and they keep US grouping.
+
+2. **Translate the label, never the `id`.** `js/main.js` finds the payment
+   estimator and both multi step forms by literal id. Translating one returns
+   null from `querySelector` and the feature silently stops, with no error.
+   `check-i18n.js` catches this.
+
+3. **Legal text is not free translation.** `Igualdad de Oportunidad en la
+   Vivienda` and `Ley de Vivienda Justa` are HUD's own Spanish terms and are
+   not paraphrased. The brokerage name, the REALTOR mark and licence SL3586445
+   stay exactly as they are, in both languages, adjacent to every point of
+   contact, per 61J2-10.025.
+
+4. **Every form is tagged with its language.** `postForm` in `js/main.js` sets a
+   `lang` field on every submission and `netlify/functions/lead.mjs` prints it
+   in the CRM email. Answering a Spanish lead in English on the first reply
+   undoes the whole exercise.
+
+5. **`copy-lint.js` now has Spanish word lists** and picks them from the page's
+   `lang` attribute. Fair housing law does not care what language the ad was
+   written in, and `zona tranquila` and `buenas escuelas` are the same coded
+   language as `quiet neighborhood` and `good schools`. They are ADDITIONAL to
+   the English lists, so stray English on a Spanish page is still caught. The
+   Spanish terms are written without accents and the page text is folded to
+   match, because a hurried writer drops accents first and a rule that only
+   fires on perfect Spanish would miss exactly the copy it exists to catch.
+
+### The register, and the one open question
+
+Neutral Latin American Spanish, warm rather than notarial. Explicitly not
+Spain: no *vosotros*, no *piso*, no *vale*. `Bienes raíces`, not `sector
+inmobiliario`. `HOA`, `CDD`, `MLS` and `escrow` stay in English with a gloss,
+because every Spanish speaker who has closed in Florida already uses them that
+way and translating them reads as someone who has never done a deal here.
+
+The copy **writes around the tú and usted choice** wherever a sentence allows
+it. This audience spans countries that disagree about which a professional
+should use on first contact: *usted* reads cold to a Venezuelan or Argentine
+reader, *tú* reads too casual to a Mexican or Guatemalan one on a first
+approach. Spanish drops subject pronouns freely, so most marketing copy never
+has to choose. Where the copy has to be direct, the calls to action and the
+forms, it uses *tú*.
+
+**Open question for Jennifer: where is her own Spanish from?** Her clients hear
+her on the phone right after reading this copy and the two should match. The
+neutral register above is the safe default until she says otherwise, and it was
+written without guessing.
+
+### Phase 2 and 3
+
+- **Phase 2, the 20 neighborhood pages.** These are generated from the `DATA`
+  array in `scripts/build-neighborhoods.js`, so translating them is a data edit
+  rather than 20 new files: add an `es` field beside each existing text field.
+  This is where the local search value is (`casas en venta en Bradenton`).
+  `chrome.js` `head()` already takes an `altEs` option for the hreflang.
+- **Phase 3, the guides.** Same mechanism in `scripts/build-guides.js`. Until
+  then `es/mudarse.html` deliberately asks for a conversation instead of gating
+  an English PDF behind a Spanish form, and `check-i18n.js` records that
+  exception by name.
 
 ---
 
@@ -314,7 +446,7 @@ nothing, because every send throws without the key. Set all of them or none.
   Do the pass, then move the date
 
 The gated PDF (`assets/guides/moving-to-bradenton.pdf`) is no longer needed:
-the relocation guide is a real page now, `guides/relocating-to-bradenton.html`,
+the relocation guide is a real page now, `guides/relocating-to-lakewood-ranch.html`,
 generated with three siblings by `scripts/build-guides.js`.
 
 ---

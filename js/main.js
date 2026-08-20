@@ -26,6 +26,126 @@
      MLS Grid data. See BROKER-PERMISSION.md. */
   const BROKER_SEARCH = 'https://jenniferbarragan.preferredshore.com';
 
+  /* ------------------------------------------------------------- language */
+  /* Every string this file injects into the page lives here, keyed by the
+     page's own lang attribute, because the same main.js serves the English
+     pages at the root and the Spanish pages under /es/. A string written
+     inline anywhere below this point is a bug: it would render in English on
+     a Spanish page.
+
+     The Spanish is neutral Latin American and deliberately writes around the
+     tu and usted choice wherever a sentence allows it, since this audience
+     spans countries that disagree about which one a professional should use
+     on first contact. Where the copy has to be direct it uses tu, which is
+     the warmer read across most of the region.
+
+     Money is NOT localised. These are US dollar prices on US listings, so
+     they keep US grouping: $575,000, never $575.000. See num() below. */
+  const LANG = (document.documentElement.lang || 'en')
+    .slice(0, 2).toLowerCase() === 'es' ? 'es' : 'en';
+
+  const STR = {
+    en: {
+      sending: 'Sending',
+      bd: 'bd', ba: 'ba', sqft: 'sq ft',
+      inquire: 'Inquire',
+      listingPhoto: 'Listing photo',
+      propertyPhoto: 'Property photo',
+      addressOnRequest: 'Address on request',
+      viewLabel: 'View', listingWord: 'listing',
+      viewDetails: 'View Details',
+      forSale: 'For Sale',
+      tabActive: 'Active',
+      tabSold: 'Recently Sold',
+      handoffKicker: 'Full MLS Search',
+      handoffTitle: 'Every listing in Manatee and Sarasota counties.',
+      handoffText: (firm) => 'My search runs on a live MLS feed through ' + firm +
+        ', so it is current and complete rather than a copy that goes stale. ' +
+        'Searching there tells me what you are looking for.',
+      handoffBtn: 'Search Every Listing',
+      handoffNote: 'Opens in a new tab on my brokerage site.',
+      close: 'Close',
+      prevPhoto: 'Previous photo',
+      nextPhoto: 'Next photo',
+      photo: 'Photo',
+      askAbout: 'Ask About This Home',
+      fullDetails: 'Full details and photos',
+      nudgeQ: 'Want more photos, the full details, or a private showing? ',
+      nudgeA: 'Send me a note and I will walk you through it.',
+      interestedIn: 'Interested in',
+      aListing: 'a listing',
+      descFallback: (beds, city) =>
+        'A ' + (beds ? beds + ' bedroom ' : '') + 'home in ' + city + '.',
+      defaultCounty: 'Manatee County',
+      courtesy: (broker) => 'Listing courtesy of ' + broker + '. ' +
+        'Information is deemed reliable but is not guaranteed and is subject ' +
+        'to change or prior sale. Equal Housing Opportunity.',
+      feedPending: 'Listings will appear here once the feed runs.',
+      myListingsTitle: 'My Listings',
+      myListingsSub: 'Homes I am representing right now across Manatee and Sarasota counties.',
+      featuredTitle: 'Featured Properties',
+      featuredSub: (firm) => 'A selection of what ' + firm + ' has on the market across ' +
+        'Manatee and Sarasota counties. Ask me about any of them, or ' +
+        'about something you have not seen listed.',
+      searchMeta: (firm) => 'Listing search is provided by ' + firm +
+        ' through its licensed MLS feed. Information is deemed reliable but is ' +
+        'not guaranteed, and is subject to change or prior sale. This site is ' +
+        'not intended to solicit properties already listed with another broker.',
+      sellerSteps: ['The property', 'The details', 'You and timeline'],
+      buyerSteps: ['What you are looking for', 'Must haves', 'You and timeline'],
+    },
+    es: {
+      sending: 'Enviando',
+      bd: 'hab', ba: 'baños', sqft: 'pies²',
+      inquire: 'Consultar',
+      listingPhoto: 'Foto de la propiedad',
+      propertyPhoto: 'Foto de la propiedad',
+      addressOnRequest: 'Dirección a solicitud',
+      viewLabel: 'Ver', listingWord: 'la propiedad',
+      viewDetails: 'Ver detalles',
+      forSale: 'En venta',
+      tabActive: 'Disponibles',
+      tabSold: 'Vendidas hace poco',
+      handoffKicker: 'Búsqueda completa del MLS',
+      handoffTitle: 'Todas las propiedades de los condados de Manatee y Sarasota.',
+      handoffText: (firm) => 'Mi buscador corre sobre el feed del MLS en vivo de ' + firm +
+        ', así que está al día y completo, no es una copia que se queda vieja. ' +
+        'Cuando buscas ahí, me dices qué estás buscando.',
+      handoffBtn: 'Ver todas las propiedades',
+      handoffNote: 'Se abre en una pestaña nueva, en el sitio de Preferred SHORE Real Estate.',
+      close: 'Cerrar',
+      prevPhoto: 'Foto anterior',
+      nextPhoto: 'Foto siguiente',
+      photo: 'Foto',
+      askAbout: 'Pregúntame por esta casa',
+      fullDetails: 'Ver todos los detalles y las fotos',
+      nudgeQ: '¿Quieres más fotos, los detalles completos o verla en persona? ',
+      nudgeA: 'Escríbeme y te la explico con calma.',
+      interestedIn: 'Me interesa',
+      aListing: 'una propiedad',
+      descFallback: (beds, city) =>
+        'Una casa' + (beds ? ' de ' + beds + ' habitaciones' : '') + ' en ' + city + '.',
+      defaultCounty: 'el condado de Manatee',
+      courtesy: (broker) => 'Propiedad listada por ' + broker + '. ' +
+        'La información se considera confiable pero no está garantizada, y puede ' +
+        'cambiar o haberse vendido. Igualdad de Oportunidad en la Vivienda.',
+      feedPending: 'Las propiedades aparecerán aquí en cuanto corra el feed.',
+      myListingsTitle: 'Mis propiedades',
+      myListingsSub: 'Las casas que estoy representando ahora mismo en los condados de Manatee y Sarasota.',
+      featuredTitle: 'Propiedades destacadas',
+      featuredSub: (firm) => 'Una selección de lo que ' + firm + ' tiene en el mercado en los ' +
+        'condados de Manatee y Sarasota. Pregúntame por cualquiera de ellas, o por ' +
+        'algo que no hayas visto publicado.',
+      searchMeta: (firm) => 'La búsqueda de propiedades la ofrece ' + firm +
+        ' a través de su feed licenciado del MLS. La información se considera ' +
+        'confiable pero no está garantizada, y puede cambiar o haberse vendido. Este ' +
+        'sitio no busca promocionar propiedades ya listadas con otro corredor.',
+      sellerSteps: ['La propiedad', 'Los detalles', 'Tú y tus tiempos'],
+      buyerSteps: ['Lo que estás buscando', 'Lo indispensable', 'Tú y tus tiempos'],
+    },
+  }[LANG];
+
+
   const reveal = (root) => window.JR && window.JR.observeReveals
     ? window.JR.observeReveals(root) : null;
 
@@ -37,6 +157,11 @@
   function postForm(form, extras) {
     const data = new FormData(form);
     if (extras) Object.keys(extras).forEach((k) => data.set(k, extras[k]));
+    // Which language the visitor filled this in. Set here rather than as a
+    // hidden input on each form, so every form on every page carries it and
+    // no new form can forget to. Jennifer is bilingual, and the first reply
+    // going out in the wrong language undoes the point of the Spanish pages.
+    data.set('lang', LANG === 'es' ? 'Spanish' : 'English');
     return fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -143,7 +268,7 @@
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (errorEl) errorEl.hidden = true;
-      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending'; }
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = STR.sending; }
       postForm(form)
         .then(() => {
           // Inline display rather than the hidden attribute: the form carries
@@ -177,6 +302,9 @@
   // reward is never blocked on the email: if the function is down, Netlify
   // still has the lead and the visitor still gets the guide.
   function postFunction(payload) {
+    // Same reasoning as postForm: the delivery leg has to know which language
+    // to greet the lead in, and which language Jennifer should reply in.
+    payload = Object.assign({ lang: LANG === 'es' ? 'Spanish' : 'English' }, payload);
     return fetch('/.netlify/functions/lead', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -214,7 +342,7 @@
       e.preventDefault();
       if (!form.reportValidity()) return;
       if (errorEl) errorEl.hidden = true;
-      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending'; }
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = STR.sending; }
 
       const d = new FormData(form);
       const payload = {
@@ -325,7 +453,7 @@
 
       if (errorEl) errorEl.hidden = true;
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending';
+      submitBtn.textContent = STR.sending;
 
       postForm(form, { summary: buildSummary(g) })
         .then(() => {
@@ -358,7 +486,7 @@
       barFill: '#vform-bar-fill', cur: '#vform-cur', title: '#vform-title',
       note: '#vform-note', done: '#vform-done', error: '#vform-error',
     },
-    titles: ['The property', 'The details', 'You and timeline'],
+    titles: STR.sellerSteps,
     buildSummary(g) {
       const addr = [g('street'), [g('city'), g('zip')].filter(Boolean).join(' ')]
         .filter(Boolean).join(', ');
@@ -390,7 +518,7 @@
       barFill: '#bform-bar-fill', cur: '#bform-cur', title: '#bform-title',
       note: '#bform-note', done: '#bform-done', error: '#bform-error',
     },
-    titles: ['What you are looking for', 'Must haves', 'You and timeline'],
+    titles: STR.buyerSteps,
     buildSummary(g) {
       const budget = [
         g('budgetMin') && ('$' + num(+g('budgetMin'))),
@@ -552,20 +680,20 @@
 
   function factChips(l, cls) {
     const facts = [];
-    if (l.beds)  facts.push('<span class="' + cls + '__fact"><b>' + l.beds + '</b> bd</span>');
-    if (l.baths) facts.push('<span class="' + cls + '__fact"><b>' + l.baths + '</b> ba</span>');
-    if (l.sqft)  facts.push('<span class="' + cls + '__fact"><b>' + num(l.sqft) + '</b> sq ft</span>');
+    if (l.beds)  facts.push('<span class="' + cls + '__fact"><b>' + l.beds + '</b> ' + STR.bd + '</span>');
+    if (l.baths) facts.push('<span class="' + cls + '__fact"><b>' + l.baths + '</b> ' + STR.ba + '</span>');
+    if (l.sqft)  facts.push('<span class="' + cls + '__fact"><b>' + num(l.sqft) + '</b> ' + STR.sqft + '</span>');
     return facts;
   }
 
   function cardHTML(l, tag, idx) {
     const facts = factChips(l, 'card');
-    const price = l.priceFormatted || (l.price ? '$' + num(l.price) : 'Inquire');
+    const price = l.priceFormatted || (l.price ? '$' + num(l.price) : STR.inquire);
     // Use the full size image, not a thumbnail. Cards render wide, especially
     // on retina, and a 300px source looks soft.
     const photoSrc = l.photoLarge || (l.photos && l.photos[0]) || l.photo;
     const photo = photoSrc
-      ? '<img loading="lazy" src="' + esc(photoSrc) + '" alt="' + esc(l.address || 'Listing photo') +
+      ? '<img loading="lazy" src="' + esc(photoSrc) + '" alt="' + esc(l.address || STR.listingPhoto) +
         '" onerror="this.style.display=\'none\'">'
       : '';
     // href stays as a fallback so ctrl or cmd click still works. A plain click
@@ -574,20 +702,20 @@
     const area = [l.city, l.state].filter(Boolean).join(', ') + (l.zip ? ' ' + l.zip : '');
     return '' +
       '<a class="card reveal reveal--scale" href="' + link + '" data-idx="' + idx + '" rel="noopener"' +
-      '   aria-label="View ' + esc(l.address || 'listing') + (l.city ? ', ' + esc(l.city) : '') + ', ' + esc(price) + '">' +
+      '   aria-label="' + esc(STR.viewLabel) + ' ' + esc(l.address || STR.listingWord) + (l.city ? ', ' + esc(l.city) : '') + ', ' + esc(price) + '">' +
       '  <div class="card__media">' + photo +
       (tag ? '<span class="card__tag">' + esc(tag) + '</span>' : '') +
       '    <span class="card__price">' + esc(price) + '</span>' +
       '  </div>' +
       '  <div class="card__body">' +
-      '    <div class="card__addr">' + esc(l.address || 'Address on request') + '</div>' +
+      '    <div class="card__addr">' + esc(l.address || STR.addressOnRequest) + '</div>' +
       '    <div class="card__city">' + esc(area) + '</div>' +
       (facts.length
         ? '<div class="card__facts">' + facts.join('') + '</div>'
         : '<div class="card__facts" style="border:0"></div>') +
       '    <div class="card__foot">' +
       '      <span class="card__dist">' + esc(l.area || '') + '</span>' +
-      '      <span class="card__link">View Details</span>' +
+      '      <span class="card__link">' + esc(STR.viewDetails) + '</span>' +
       '    </div>' +
       '  </div>' +
       '</a>';
@@ -602,14 +730,12 @@
   function handoffHTML() {
     return '' +
       '<div class="handoff reveal">' +
-      '<p class="handoff__kicker">Full MLS Search</p>' +
-      '<h3 class="handoff__title">Every listing in Manatee and Sarasota counties.</h3>' +
-      '<p class="handoff__text">My search runs on a live MLS feed through ' +
-      esc(CONTACT.firm) + ', so it is current and complete rather than a copy that ' +
-      'goes stale. Searching there tells me what you are looking for.</p>' +
+      '<p class="handoff__kicker">' + esc(STR.handoffKicker) + '</p>' +
+      '<h3 class="handoff__title">' + esc(STR.handoffTitle) + '</h3>' +
+      '<p class="handoff__text">' + esc(STR.handoffText(CONTACT.firm)) + '</p>' +
       '<a class="btn btn--solid" href="' + BROKER_SEARCH + '" target="_blank" rel="noopener">' +
-      'Search Every Listing</a>' +
-      '<p class="handoff__note">Opens in a new tab on my brokerage site.</p>' +
+      esc(STR.handoffBtn) + '</a>' +
+      '<p class="handoff__note">' + esc(STR.handoffNote) + '</p>' +
       '</div>';
   }
 
@@ -665,7 +791,7 @@
     strip.style.display = multi ? '' : 'none';
     strip.innerHTML = multi
       ? gPhotos.map((p, k) =>
-          '<button class="modal__thumb" data-k="' + k + '" aria-label="Photo ' + (k + 1) + '">' +
+          '<button class="modal__thumb" data-k="' + k + '" aria-label="' + esc(STR.photo) + ' ' + (k + 1) + '">' +
           '<img loading="lazy" src="' + esc(p) + '" alt="" ' +
           'onerror="this.parentElement.style.display=\'none\'"></button>'
         ).join('')
@@ -685,14 +811,14 @@
     modal.innerHTML =
       '<div class="modal__backdrop" data-close></div>' +
       '<div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-addr">' +
-      '  <button class="modal__close" data-close aria-label="Close">&times;</button>' +
+      '  <button class="modal__close" data-close aria-label="' + esc(STR.close) + '">&times;</button>' +
       '  <div class="modal__media">' +
       '    <div class="modal__stage">' +
       '      <img id="modal-img" alt="">' +
       '      <span class="modal__tag" id="modal-tag"></span>' +
       '      <span class="modal__price" id="modal-price"></span>' +
-      '      <button class="modal__nav modal__nav--prev" id="modal-prev" aria-label="Previous photo">&#8249;</button>' +
-      '      <button class="modal__nav modal__nav--next" id="modal-next" aria-label="Next photo">&#8250;</button>' +
+      '      <button class="modal__nav modal__nav--prev" id="modal-prev" aria-label="' + esc(STR.prevPhoto) + '">&#8249;</button>' +
+      '      <button class="modal__nav modal__nav--next" id="modal-next" aria-label="' + esc(STR.nextPhoto) + '">&#8250;</button>' +
       '      <span class="modal__counter" id="modal-counter"></span>' +
       '    </div>' +
       '    <div class="modal__thumbs" id="modal-thumbs"></div>' +
@@ -703,8 +829,8 @@
       '    <div class="modal__facts" id="modal-facts"></div>' +
       '    <div class="modal__desc" id="modal-desc"></div>' +
       '    <div class="modal__foot">' +
-      '      <a class="btn btn--solid" id="modal-cta" href="#">Ask About This Home</a>' +
-      '      <a class="modal__source" id="modal-source" target="_blank" rel="noopener">Full details and photos</a>' +
+      '      <a class="btn btn--solid" id="modal-cta" href="#">' + esc(STR.askAbout) + '</a>' +
+      '      <a class="modal__source" id="modal-source" target="_blank" rel="noopener">' + esc(STR.fullDetails) + '</a>' +
       '    </div>' +
       '    <p class="modal__disclaimer" id="modal-disclaimer"></p>' +
       '  </div>' +
@@ -748,32 +874,32 @@
     const photos = (l.photos && l.photos.length)
       ? l.photos.slice()
       : [l.photoLarge || l.photo].filter(Boolean);
-    initGallery(photos, l.address || 'Property photo', l.photo || l.photoLarge);
+    initGallery(photos, l.address || STR.propertyPhoto, l.photo || l.photoLarge);
 
     const tagEl = modal.querySelector('#modal-tag');
     tagEl.textContent = tag || '';
     tagEl.style.display = tag ? '' : 'none';
 
     modal.querySelector('#modal-price').textContent =
-      l.priceFormatted || (l.price ? '$' + num(l.price) : 'Inquire');
-    modal.querySelector('#modal-addr').textContent = l.address || 'Address on request';
+      l.priceFormatted || (l.price ? '$' + num(l.price) : STR.inquire);
+    modal.querySelector('#modal-addr').textContent = l.address || STR.addressOnRequest;
     modal.querySelector('#modal-city').textContent =
       [l.city, l.state].filter(Boolean).join(', ') + (l.zip ? ' ' + l.zip : '');
     modal.querySelector('#modal-facts').innerHTML = factChips(l, 'modal').join('');
 
     const subject = encodeURIComponent(
-      'Interested in ' + (l.address || 'a listing') + (l.city ? ', ' + l.city : '')
+      STR.interestedIn + ' ' + (l.address || STR.aListing) + (l.city ? ', ' + l.city : '')
     );
     const mailto = 'mailto:' + CONTACT.email + '?subject=' + subject;
 
     const descEl = modal.querySelector('#modal-desc');
     const teaser = l.description
       ? shorten(l.description, 520)
-      : 'A ' + (l.beds ? l.beds + ' bedroom ' : '') + 'home in ' + (l.city || 'Manatee County') + '.';
+      : STR.descFallback(l.beds, l.city || STR.defaultCounty);
     descEl.innerHTML =
       splitParas(teaser, 260).map((p) => '<p>' + esc(p) + '</p>').join('') +
-      '<p class="modal__nudge">Want more photos, the full details, or a private showing? ' +
-      '<a href="' + mailto + '">Send me a note and I will walk you through it.</a></p>';
+      '<p class="modal__nudge">' + esc(STR.nudgeQ) +
+      '<a href="' + mailto + '">' + esc(STR.nudgeA) + '</a></p>';
 
     modal.querySelector('#modal-cta').href = mailto;
     const source = modal.querySelector('#modal-source');
@@ -783,9 +909,7 @@
     // Listing attribution. Required by MLS display rules and simply honest.
     const data = window.LISTINGS || {};
     modal.querySelector('#modal-disclaimer').textContent =
-      'Listing courtesy of ' + (l.listingBroker || data.source || CONTACT.firm) + '. ' +
-      'Information is deemed reliable but is not guaranteed and is subject to change or prior sale. ' +
-      'Equal Housing Opportunity.';
+      STR.courtesy(l.listingBroker || data.source || CONTACT.firm);
 
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
@@ -831,7 +955,7 @@
     const data = window.LISTINGS || window.LISTINGS_SEED;
     if (!data) {
       grid.innerHTML =
-        '<p class="listings__empty">Listings will appear here once the feed runs.</p>';
+        '<p class="listings__empty">' + esc(STR.feedPending) + '</p>';
       return;
     }
 
@@ -843,19 +967,16 @@
     let cardTag = null;
 
     if (active.length) {
-      titleEl.textContent = 'My Listings';
-      subEl.textContent = 'Homes I am representing right now across Manatee County.';
-      tabs.push({ key: 'active', label: 'Active', items: active });
-      cardTag = 'For Sale';
+      titleEl.textContent = STR.myListingsTitle;
+      subEl.textContent = STR.myListingsSub;
+      tabs.push({ key: 'active', label: STR.tabActive, items: active });
+      cardTag = STR.forSale;
     } else {
       // No listings of her own yet, so what shows belongs to her brokerage.
       // The wording says so rather than implying these are hers, and the
       // listing agent is named on every card and in the modal.
-      titleEl.textContent = 'Featured Properties';
-      subEl.textContent =
-        'A selection of what ' + CONTACT.firm + ' has on the market across ' +
-        'Manatee and Sarasota counties. Ask me about any of them, or ' +
-        'about something you have not seen listed.';
+      titleEl.textContent = STR.featuredTitle;
+      subEl.textContent = STR.featuredSub(CONTACT.firm);
     }
 
     Object.keys(team).forEach((key) => {
@@ -863,7 +984,7 @@
       if (items.length) tabs.push({ key: key, label: labels[key] || key, items: items });
     });
 
-    if (sold.length) tabs.push({ key: 'sold', label: 'Recently Sold', items: sold });
+    if (sold.length) tabs.push({ key: 'sold', label: STR.tabSold, items: sold });
 
     // Nothing of her own to show. Hand off, and hide the carousel furniture
     // so the section does not look like a broken slider.
@@ -877,11 +998,7 @@
       if (prevBtn) prevBtn.style.display = 'none';
       if (nextBtn) nextBtn.style.display = 'none';
       if (metaEl) {
-        metaEl.textContent =
-          'Listing search is provided by ' + CONTACT.firm + ' through its licensed MLS feed. ' +
-          'Information is deemed reliable but is not guaranteed, and is subject to change or ' +
-          'prior sale. This site is not intended to solicit properties already listed with ' +
-          'another broker.';
+        metaEl.textContent = STR.searchMeta(CONTACT.firm);
       }
       return;
     }

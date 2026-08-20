@@ -44,7 +44,7 @@ const json = (body, status = 200) =>
   });
 
 const GUIDES = {
-  relocate: { title: 'Relocating to the Bradenton Area', path: '/guides/relocating-to-bradenton.html' },
+  relocate: { title: 'Relocating to Lakewood Ranch, Sarasota and Bradenton', path: '/guides/relocating-to-lakewood-ranch.html' },
   invest:   { title: 'Buying a Gulf Coast Investment Property', path: '/guides/gulf-coast-investment-property.html' },
   buyer:    { title: 'Your First Home, Start to Finish', path: '/guides/first-time-home-buyer-florida.html' },
   sell:     { title: 'Getting Your Home Ready to Sell', path: '/guides/preparing-your-home-to-list.html' },
@@ -97,6 +97,9 @@ export default async (req) => {
   const email = String(d.email || '').trim().slice(0, 200);
   const phone = String(d.phone || '').trim().slice(0, 50);
   const guideKey = String(d.guide || '').trim().toLowerCase();
+  // Set by js/main.js from the page's own lang attribute, so a lead who filled
+  // the form in on a /es/ page is flagged before Jennifer opens the email.
+  const lang = String(d.lang || '').trim().slice(0, 20) || 'English';
   const guide = GUIDES[guideKey];
   if (!name || !email || !phone || !guide) return json({ ok: false, error: 'missing fields' }, 400);
 
@@ -151,6 +154,7 @@ Guide: ${guide.title}
 Landing page: ${String(d.source || '').slice(0, 200)}
 Page: ${String(d.page || '').slice(0, 300)}
 Referrer: ${String(d.ref || '').slice(0, 300)}
+Language: ${lang}
 Received: ${received} US Eastern`;
 
   const legs = {
@@ -182,6 +186,7 @@ Received: ${received} US Eastern`;
       source: String(d.source || ''),
       page: String(d.page || ''),
       referrer: String(d.ref || ''),
+      lang,
     }),
   };
 

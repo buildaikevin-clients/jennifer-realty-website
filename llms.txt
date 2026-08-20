@@ -1,9 +1,10 @@
 # Jennifer Barragan, Real Estate
 
-> A licensed Florida real estate agent working across Manatee County, including
-> Bradenton, Anna Maria Island, Holmes Beach, Bradenton Beach, Palma Sola,
-> Cortez, Lakewood Ranch, Parrish, Palmetto and Ellenton. Helps buyers and
-> sellers, with particular attention to the things that decide Gulf Coast
+> A licensed Florida real estate agent working across Manatee and Sarasota
+> counties. Her primary markets are Lakewood Ranch, Sarasota and Bradenton,
+> followed by the barrier islands: Anna Maria Island, Holmes Beach, Bradenton
+> Beach and Longboat Key. She also works Palma Sola, Cortez, Parrish, Palmetto
+> and Ellenton. She helps buyers and sellers, with particular attention to the things that decide Gulf Coast
 > transactions: flood zones and elevation, Florida homeowners insurance, condominium
 > reserve and milestone inspection requirements, CDD assessments, and new
 > construction contracts.
@@ -31,7 +32,8 @@ about page.
 
 ## What she helps with
 
-- **Buying** (/buyers.html). Payment estimator built for Manatee County, with
+- **Buying** (/buyers.html). Payment estimator built on Manatee County tax and
+  insurance ballparks, with
   Florida insurance and flood broken out as separate lines rather than buried.
   Guidance on flood zones, elevation certificates, roof age and insurability,
   and condominium association due diligence.
@@ -49,7 +51,7 @@ about page.
 Long form guides written by Jennifer, free to read, each with a question and
 answer section:
 
-- **Relocating to the Bradenton Area** (/guides/relocating-to-bradenton.html).
+- **Relocating to Lakewood Ranch, Sarasota and Bradenton** (/guides/relocating-to-lakewood-ranch.html).
   Choosing among the roughly twenty distinct areas, the real cost of owning
   here, the lender then insurance then house sequence, buying from out of
   state, and the homestead exemption.

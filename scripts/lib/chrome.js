@@ -38,7 +38,16 @@ module.exports = function chrome({ DOMAIN }) {
 
   const jsonEsc = (s) => JSON.stringify(String(s)).slice(1, -1);
 
-  function head({ title, description, canonical, image, imageAlt, extraLd }) {
+  /* altEs: the path of this page's Spanish twin, relative to the site root,
+     e.g. 'es/vecindarios.html'. Pass it ONLY when the twin actually exists.
+     hreflang naming a page nobody wrote is worse than emitting nothing, which
+     is why this is opt in per page rather than derived from the slug. */
+  function head({ title, description, canonical, image, imageAlt, extraLd, altEs }) {
+    const alternates = altEs ? `
+  <!-- The Spanish twin of this page. Reciprocal: es/ points back here. -->
+  <link rel="alternate" hreflang="en" href="https://${DOMAIN}/${canonical}" />
+  <link rel="alternate" hreflang="es" href="https://${DOMAIN}/${altEs}" />
+  <link rel="alternate" hreflang="x-default" href="https://${DOMAIN}/${canonical}" />` : '';
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +60,7 @@ module.exports = function chrome({ DOMAIN }) {
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
   <meta name="description" content="${esc(description)}" />
 
-  <link rel="canonical" href="https://${DOMAIN}/${canonical}" />
+  <link rel="canonical" href="https://${DOMAIN}/${canonical}" />${alternates}
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
   <meta name="author" content="Jennifer Barragan" />
   <meta name="geo.region" content="US-FL" />
@@ -74,6 +83,14 @@ module.exports = function chrome({ DOMAIN }) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/styles.css" />
+
+  <!-- The Spanish offer bar. Head, not deferred: it has to settle before the
+       header paints, or it shoves the nav down under the reader's eye.
+       NO hreflang pair is emitted for generated pages, because none of them
+       has a Spanish twin yet. lang.js falls back to the nav switch below, so
+       a Spanish speaker still learns the Spanish site exists without the head
+       claiming an alternate that was never written. -->
+  <script src="../js/lang.js"></script>
 ${extraLd}
 </head>`;
   }
@@ -101,6 +118,11 @@ ${extraLd}
         <a href="${prefix}index.html#about">About</a>
         <a href="${prefix}index.html#contact">Contact</a>
       </nav>
+      <a class="nav__lang" href="${prefix}es/index.html" lang="es" hreflang="es"
+         data-lang-switch="es" aria-label="Ver esta página en español">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>
+        <span>Español</span>
+      </a>
       <a href="tel:+12057907560" class="nav__cta">
         <span class="nav__cta-num">(205) 790-7560</span>
         <span class="nav__cta-firm">Preferred SHORE Real Estate</span>
@@ -120,10 +142,10 @@ ${extraLd}
         <div class="reveal" style="--d:0s">
           <img class="footer__logo" src="${prefix}assets/logo-reversed.svg"
                width="280" height="116" loading="lazy"
-               alt="Jennifer Barragan, Bradenton Florida" />
+               alt="Jennifer Barragan, Lakewood Ranch Florida" />
           <p class="footer__tagline">
-            Buying and selling across Bradenton, the barrier islands, and
-            Lakewood Ranch.
+            Buying and selling across Lakewood&nbsp;Ranch, Sarasota, Bradenton,
+            and the barrier islands.
           </p>
         </div>
         <div class="reveal" style="--d:.08s">

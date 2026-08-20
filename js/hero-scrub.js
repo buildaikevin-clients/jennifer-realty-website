@@ -26,8 +26,39 @@
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isMobile = window.matchMedia(`(max-width: ${MOBILE_MAX}px)`).matches;
 
+  /* Where the frames live, RELATIVE TO THIS PAGE.
+
+     This used to be the bare string 'assets/hero-frames/', which is correct
+     from index.html at the root and a 404 from es/index.html one level down.
+     All 145 frames failed there and the canvas stayed blank, with nothing in
+     the console but image errors.
+
+     The prefix is read from the preload link the page already carries for
+     frame 1, because that link is the one place per page that has to name the
+     path correctly anyway: it is the largest contentful paint and it is
+     fetched before this script runs. Deriving from it means a page can never
+     preload one path and scrub another.
+
+     Not root relative ('/assets/...'), deliberately. The README promises the
+     site opens from the filesystem with no server, and a leading slash breaks
+     that everywhere. 404.html is the single documented exception, because it
+     is served at any depth. */
+  const BASE = (() => {
+    const pre = document.querySelector('link[rel="preload"][href*="hero-frames"]');
+    if (pre) {
+      const href = pre.getAttribute('href') || '';
+      const cut = href.lastIndexOf('/');
+      if (cut > -1) return href.slice(0, cut + 1);
+    }
+    // No preload on the page. Fall back to the depth of the stylesheet, which
+    // every page loads and which sits beside assets/ at the site root.
+    const css = document.querySelector('link[rel="stylesheet"][href*="styles.css"]');
+    const m = css && /^(.*?)css\/styles\.css$/.exec(css.getAttribute('href') || '');
+    return (m ? m[1] : '') + 'assets/hero-frames/';
+  })();
+
   const src = (i) =>
-    'assets/hero-frames/frame-' + String(i + 1).padStart(3, '0') + '.webp';
+    BASE + 'frame-' + String(i + 1).padStart(3, '0') + '.webp';
 
   /* ------------------------------------------------------------ mobile --- */
 

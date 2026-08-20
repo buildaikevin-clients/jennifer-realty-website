@@ -3,21 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jennifer Barragan | Bradenton, Anna Maria Island and Lakewood Ranch Real Estate</title>
+  <title>Jennifer Barragan | Lakewood Ranch, Sarasota and Bradenton Real Estate</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <!-- iOS ignores an SVG icon on the home screen, so the touch icon is
        a raster. Both are generated from brand/build/emit.py. -->
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-  <meta name="description" content="Jennifer Barragan helps buyers and sellers across Bradenton, Anna Maria Island, Palma Sola and Lakewood Ranch. Local guidance on flood zones, insurance, new construction and what each area actually costs." />
+  <meta name="description" content="Jennifer Barragan helps buyers and sellers across Lakewood Ranch, Sarasota, Bradenton and the barrier islands. Local guidance on flood zones, insurance, new construction and what each area actually costs." />
 
   <link rel="canonical" href="https://jenniferbarragan.com/" />
+  <!-- The Spanish twin of this page. Reciprocal: es/ points back here.
+       Only the translated pages carry these. -->
+  <link rel="alternate" hreflang="en" href="https://jenniferbarragan.com/" />
+  <link rel="alternate" hreflang="es" href="https://jenniferbarragan.com/es/" />
+  <link rel="alternate" hreflang="x-default" href="https://jenniferbarragan.com/" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="author" content="Jennifer Barragan" />
   <meta name="geo.region" content="US-FL" />
   <meta name="geo.placename" content="Lakewood Ranch, Florida" />
 
   <meta property="og:site_name" content="Jennifer Barragan, Real Estate" />
-  <meta property="og:title" content="Jennifer Barragan | Bradenton and Anna Maria Island Real Estate" />
+  <meta property="og:title" content="Jennifer Barragan | Lakewood Ranch and Sarasota Real Estate" />
   <meta property="og:description" content="Buying or selling on Florida's Gulf Coast. Straight guidance on flood zones, insurance, new construction and what each area actually costs." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://jenniferbarragan.com/" />
@@ -28,7 +33,7 @@
   <meta property="og:image:alt" content="A coastal home on Florida's Gulf Coast at sunrise, with palms and the water beyond." />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Jennifer Barragan | Bradenton and Anna Maria Island Real Estate" />
+  <meta name="twitter:title" content="Jennifer Barragan | Lakewood Ranch and Sarasota Real Estate" />
   <meta name="twitter:description" content="Buying or selling on Florida's Gulf Coast. Straight guidance on flood zones, insurance and what each area actually costs." />
   <meta name="twitter:image" content="https://jenniferbarragan.com/assets/hero-poster.webp" />
 
@@ -39,6 +44,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Italianno&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- The Spanish offer bar. Head, not deferred: it has to settle before
+       the header paints. It only ever offers, it never redirects. -->
+  <script src="js/lang.js"></script>
 
   <!-- First frame of the hero sequence. It is the largest contentful paint on
        this page, so it is fetched at high priority rather than discovered. -->
@@ -64,11 +73,13 @@
         "email": "jenniferbarragan.re@gmail.com",
         "priceRange": "$$",
         "areaServed": [
+          { "@type": "City", "name": "Lakewood Ranch, FL" },
+          { "@type": "City", "name": "Sarasota, FL" },
           { "@type": "City", "name": "Bradenton, FL" },
           { "@type": "City", "name": "Anna Maria Island, FL" },
-          { "@type": "City", "name": "Lakewood Ranch, FL" },
           { "@type": "City", "name": "Palmetto, FL" },
           { "@type": "AdministrativeArea", "name": "Manatee County, FL" },
+          { "@type": "AdministrativeArea", "name": "Sarasota County, FL" },
           { "@type": "Place", "name": "Florida Gulf Coast" }
         ],
         "address": {
@@ -93,7 +104,8 @@
           "Real estate investing", "Fix and flip projects", "Long term rentals",
           "Property management",
           "Lakewood Ranch real estate", "Sarasota real estate",
-          "Manatee County real estate", "Anna Maria Island real estate"
+          "Bradenton real estate", "Anna Maria Island real estate",
+          "Manatee County real estate", "Sarasota County real estate"
         ],
         "sameAs": []
       },
@@ -147,6 +159,11 @@
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
+      <a class="nav__lang" href="es/index.html" lang="es" hreflang="es"
+         data-lang-switch="es" aria-label="Ver esta página en español">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>
+        <span>Español</span>
+      </a>
       <!-- Florida rule 61J2-10.025 requires the brokerage name adjacent to the
            point of contact. That is why the firm sits under the number. -->
       <a href="tel:+12057907560" class="nav__cta">
@@ -179,13 +196,14 @@
       <div class="hero__fade" aria-hidden="true"></div>
 
       <div class="hero__content">
-        <p class="eyebrow reveal">Bradenton, Anna Maria Island, Lakewood Ranch</p>
+        <p class="eyebrow reveal">Lakewood Ranch, Sarasota, Bradenton</p>
         <h1 class="hero__title">
           <span class="reveal" style="--d:.06s">The view is the easy part.</span>
           <span class="reveal" style="--d:.2s"><em>I am here for everything after it.</em></span>
         </h1>
         <p class="hero__lede reveal" style="--d:.34s">
-          I work across Manatee County and the barrier islands, and my role is
+          I work across Manatee and Sarasota counties and the barrier islands,
+          and my role is
           to help you understand the details that matter here: which streets
           sit high, what insurance truly costs on a given address, and which
           builders finish when they say they will.
@@ -207,8 +225,8 @@
         <p class="eyebrow reveal">Available Now</p>
         <h2 class="section__title reveal" id="listings-title" style="--d:.1s">Featured Properties</h2>
         <p class="section__lede reveal" id="listings-sub" style="--d:.18s">
-          A look at what is available across Bradenton, the barrier islands,
-          and Lakewood Ranch.
+          A look at what is available across Lakewood Ranch, Sarasota,
+          Bradenton, and the barrier islands.
         </p>
       </div>
 
@@ -267,7 +285,7 @@
                  alt="An open plan kitchen with a large island under vaulted beams, opening onto a pool." />
           </div>
           <div class="path__body">
-            <h3 class="path__title">Buying a Home in Bradenton or Lakewood Ranch?</h3>
+            <h3 class="path__title">Buying a Home in Lakewood Ranch or Sarasota?</h3>
             <p class="path__text">
               Local guidance from someone who lives here. Flood zone, elevation, roof age, and a real insurance quote are all checked before you write an offer, so you decide with the full picture in front of you.
             </p>
@@ -336,6 +354,20 @@
                and a family full of agents, said what the lede below and the
                story further down both already say. -->
           <h2 class="meet reveal" style="--d:.08s">Meet <em>Jennifer</em></h2>
+          <!-- In Spanish, on the English page, on purpose. A Spanish speaker
+               scanning this page is deciding whether she can take them
+               through an inspection and a closing in their own language, and
+               that question is answered here rather than by the switch in the
+               nav. The switch proves the page is translated. This proves the
+               agent is. -->
+          <p class="hablo reveal" style="--d:.12s" lang="es">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>
+            <span>
+              <b>Hablo español.</b> Te acompaño en todo el proceso en tu idioma,
+              desde la primera llamada hasta el cierre.
+              <a href="es/index.html" hreflang="es" data-lang-switch="es">Ver este sitio en español</a>
+            </span>
+          </p>
           <p class="section__lede reveal" style="--d:.16s">
             I have been a licensed real estate professional since 2006,
             beginning my career in Georgia, continuing in Alabama, and now
@@ -490,6 +522,14 @@
             directly to me, and I answer it myself.
           </p>
 
+          <p class="hablo reveal" style="--d:.2s" lang="es">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>
+            <span>
+              <b>¿Prefieres escribirme en español?</b> Hazlo con confianza.
+              Leo y contesto todos los mensajes yo misma.
+            </span>
+          </p>
+
           <!-- Point of contact block. Florida rule 61J2-10.025 requires the
                brokerage name adjacent to contact details. Keep them together. -->
           <div class="reveal" style="--d:.24s; margin-top:2.5rem">
@@ -568,10 +608,10 @@
         <div class="reveal" style="--d:0s">
           <img class="footer__logo" src="assets/logo-reversed.svg"
                width="280" height="116" loading="lazy"
-               alt="Jennifer Barragan, Bradenton Florida" />
+               alt="Jennifer Barragan, Lakewood Ranch Florida" />
           <p class="footer__tagline">
-            Buying and selling across Bradenton, the barrier islands, and
-            Lakewood Ranch.
+            Buying and selling across Lakewood&nbsp;Ranch, Sarasota, Bradenton,
+            and the barrier islands.
           </p>
         </div>
 

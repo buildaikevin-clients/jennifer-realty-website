@@ -984,6 +984,9 @@ ${areas.map((a, i) => `        <a class="path reveal reveal--scale" href="neighb
     image: 'assets/hero-neighborhoods.webp',
     imageAlt: 'A Florida barrier island seen from the air, with rows of homes, pools and palms between the Gulf and the bay.',
     extraLd: ld,
+    // The hub is translated. The twenty detail pages are not yet, so they
+    // pass no altEs and emit no hreflang.
+    altEs: 'es/vecindarios.html',
   }).replace(/\.\.\//g, '') + `
 <body>
 ${nav('')}
